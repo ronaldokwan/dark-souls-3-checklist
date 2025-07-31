@@ -10,6 +10,14 @@
   font-size: 0.9em;
 }
 .done { color: #009933; }
+.section_header {
+	display: flex;
+  flex-wrap: wrap;
+	gap: 0.4rem;
+}
+.section_btn-group {
+  margin-left: 0.4rem;
+}
 
 @media print {
     body { color: #000; }

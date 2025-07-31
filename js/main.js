@@ -646,3 +646,40 @@ var profilesKey = 'darksouls3_profiles';
 
 // to color the plus symbol in combined item pickups
 $(".p").html('<a style="pointer-events:none">&nbsp;+ </a>');
+
+const ptUl = $('#playthrough_list ul, #item_list ul, #Weapons_col, #Shields_col, #armors_list ul, #Pickle_Pee_Pump-a-Rum_Crow_col')
+
+function sequentialClick(items, filterFn = () => true, delay = 10) {
+    let i = 0;
+    function next() {
+        if (i < items.length) {
+            const item = items[i];
+            if (filterFn(item)) $(item).click();
+            i++;
+            setTimeout(next, delay);
+        }
+    }
+    next();
+}
+
+
+ptUl.each(function () {
+    const ul = $(this);
+    const h3 = ul.prev('h3');
+
+    const btnGroup = $('<div class="btn-group section_btn-group" role="group" aria-label="Section Checklist">');
+    const btnToggle = $('<button class="btn btn-primary">Toggle</button>');
+    const btnDelete = $('<button class="btn btn-primary">Clear</button>');
+    btnGroup.append(btnToggle, btnDelete)
+    h3.append(btnGroup);
+    h3.addClass("section_header")
+
+    btnToggle.click(function () {
+        const items = ul.find('input[type="checkbox"]');
+        sequentialClick(items);
+    });
+    btnDelete.click(function () {
+        const items = ul.find('input[type="checkbox"]');
+        sequentialClick(items, (item) => item.checked);
+    });
+})
