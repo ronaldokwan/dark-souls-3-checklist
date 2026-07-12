@@ -10,14 +10,22 @@ test('migrates legacy jStorage data on first load', async ({ page }) => {
       darksouls3_profiles: {
         'Legacy Hero': {
           checklistData: { playthrough_17_1: true, checklist_1_1: true, weapons_1_1: true },
-          collapsed: {}, current_tab: '#tabPlaythrough', hide_completed: false,
-          journey: 1, hidden_categories: {},
+          collapsed: {},
+          current_tab: '#tabPlaythrough',
+          hide_completed: false,
+          journey: 1,
+          hidden_categories: {},
         },
       },
     };
-    localStorage.setItem('jStorage', JSON.stringify({
-      darksouls3_profiles: profiles, style: 'Darkly', __jstorage_meta: { CRC32: {} },
-    }));
+    localStorage.setItem(
+      'jStorage',
+      JSON.stringify({
+        darksouls3_profiles: profiles,
+        style: 'Darkly',
+        __jstorage_meta: { CRC32: {} },
+      })
+    );
   });
 
   await page.goto('/index.html', { waitUntil: 'networkidle' });

@@ -7,9 +7,12 @@
   "scripts": {
     "validate": "node tools/validate.mjs",
     "serve": "node tests/server.mjs",
-    "test": "playwright test"
+    "test": "playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.61.1",
+    "prettier": "^3.3.3"
   }
 }

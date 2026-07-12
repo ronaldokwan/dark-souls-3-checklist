@@ -1,0 +1,56 @@
+# Contributing
+
+Thanks for helping improve the Dark Souls 3 Cheat Sheet! This is a static site
+with no build step — the browser loads the checklist data directly.
+
+## Editing checklist content
+
+All checklist entries live in [`data/checklist.json`](data/checklist.json).
+Each item looks like:
+
+```json
+{ "id": "playthrough_13_20", "cls": "f_gem f_misc", "html": "Continue left ..." }
+```
+
+- **`id`** — unique, of the form `<key>_<zone>_<n>` (e.g. `playthrough_13_20`).
+  Use the next unused number in ascending order.
+- **`cls`** — space-separated filter/journey classes. The full list of filter
+  classes and the NG+ visibility classes is documented in the
+  [README](README.md#contribution-guide).
+- **`html`** — the entry text; inline HTML such as `<a href="...">` is allowed.
+
+`data/checklist.json` references a JSON Schema
+([`data/checklist.schema.json`](data/checklist.schema.json)), so editors like
+VS Code will flag mistakes as you type.
+
+## Before opening a pull request
+
+```
+npm install          # once
+npm run validate     # data/checklist.json is well-formed & ids are unique
+npm test             # Playwright end-to-end tests
+npm run format       # apply Prettier formatting
+```
+
+CI runs `validate` and `test` on every pull request, so please make sure they
+pass locally first. New behaviour should come with a test in `tests/`.
+
+## Running the site locally
+
+The page fetches `data/checklist.json`, so it must be served over HTTP:
+
+```
+npm run serve        # then open the printed URL
+```
+
+Opening `index.html` from disk will not load the checklist (`fetch` is blocked
+on `file://`).
+
+## Repository setup (maintainers)
+
+The default branch is currently `gh-pages`, which means development happens on
+the same branch that GitHub Pages deploys. A cleaner setup is to develop on
+`main` and configure **Settings → Pages → Build and deployment** to publish from
+`main` (root). That separates "what's deployed" from "where you work" and avoids
+committing straight to the live branch. This is a one-time GitHub settings
+change; the site files themselves do not need to move.

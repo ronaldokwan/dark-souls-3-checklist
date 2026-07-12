@@ -1,277 +1,807 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
-<head>
-  <meta charset="utf-8">
-  <title>Dark Souls 3 Cheat Sheet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico?">
-  <link rel="apple-touch-icon-precomposed" href="img/favicon-152.png">
-  <link rel="mask-icon" href="img/pinned-tab-icon.svg" color="#000000">
-  <meta name="description" content="Cheat sheet for Dark Souls 3. Checklist of things to do, items to get etc.">
-  <meta name="author" content="Zachary Kjellberg">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link href="vendor/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-    <div class="container-fluid">
-      <span class="navbar-brand d-lg-none">DS3 Cheat Sheet</span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-collapse" aria-controls="nav-collapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="nav-collapse">
-        <ul class="navbar-nav nav-pills me-auto" role="tablist">
-          <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabPlaythrough" type="button" role="tab" aria-selected="true">Playthrough</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabChecklists" type="button" role="tab" aria-selected="false">Achievements</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabWeaponsShields" type="button" role="tab" aria-selected="false">Weapons/Shields</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabArmors" type="button" role="tab" aria-selected="false">Armor</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabMisc" type="button" role="tab" aria-selected="false">Misc</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabFAQ" type="button" role="tab" aria-selected="false"><i class="bi bi-question-circle"></i> FAQ</button></li>
-          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabOptions" type="button" role="tab" aria-selected="false"><i class="bi bi-gear"></i> Options</button></li>
-        </ul>
-        <button type="button" id="themeToggle" class="btn btn-outline-secondary btn-sm" title="Toggle light/dark theme" aria-label="Toggle theme">
-          <i class="bi bi-brightness-high theme-icon-light"></i><i class="bi bi-moon-stars theme-icon-dark"></i>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dark Souls 3 Cheat Sheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico?" />
+    <link rel="apple-touch-icon-precomposed" href="img/favicon-152.png" />
+    <link rel="mask-icon" href="img/pinned-tab-icon.svg" color="#000000" />
+    <meta
+      name="description"
+      content="Cheat sheet for Dark Souls 3. Checklist of things to do, items to get etc."
+    />
+    <meta name="author" content="Zachary Kjellberg" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#17110b" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link href="vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+      <div class="container-fluid">
+        <span class="navbar-brand d-lg-none">DS3 Cheat Sheet</span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav-collapse"
+          aria-controls="nav-collapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container">
-    <div class="text-center">
-      <h1>Dark&nbsp;Souls&nbsp;3 Cheat&nbsp;Sheet</h1>
-      <p class="lead">Contribute to the guide at the <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet">GitHub Page</a></p>
-    </div>
-
-    <!-- Hide Completed toggle (shown on checklist tabs only) -->
-    <div id="btnHideCompleted" class="mb-3">
-      <input type="checkbox" class="btn-check" id="toggleHideCompleted" autocomplete="off">
-      <label class="btn btn-outline-secondary" for="toggleHideCompleted">
-        <span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span>
-        Hide Completed
-      </label>
-    </div>
-
-    <div class="tab-content">
-      <!-- PLAYTHROUGH -->
-      <div class="tab-pane fade show active" id="tabPlaythrough" role="tabpanel">
-        <h2 class="d-flex flex-wrap align-items-center gap-2">Filter Checklist
-          <span class="btn-group btn-group-sm" role="group" aria-label="Journey">
-            <input type="radio" class="btn-check" name="journey" id="ng1" data-ng-toggle="1" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="ng1">NG</label>
-            <input type="radio" class="btn-check" name="journey" id="ng2" data-ng-toggle="2" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="ng2">NG+</label>
-            <input type="radio" class="btn-check" name="journey" id="ng3" data-ng-toggle="3" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="ng3">NG++</label>
-          </span>
-        </h2>
-        <div class="btn-toolbar filter-toolbar mb-3" role="group" aria-label="Filter checklist categories">
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_quests" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_quests"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Quests</label>
-            <input type="checkbox" class="btn-check" id="f_boss" data-item-toggle="f_boss" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_boss"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Bosses</label>
-            <input type="checkbox" class="btn-check" id="f_miss" data-item-toggle="f_miss" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_miss"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Missable</label>
-            <input type="checkbox" class="btn-check" id="f_npc" data-item-toggle="f_npc" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_npc"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> NPCs</label>
-          </div>
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_upgrades" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_upgrades"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Upgrades</label>
-            <input type="checkbox" class="btn-check" id="f_estus" data-item-toggle="f_estus" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_estus"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Estus Shards</label>
-            <input type="checkbox" class="btn-check" id="f_bone" data-item-toggle="f_bone" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_bone"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Undead Bone Shards</label>
-            <input type="checkbox" class="btn-check" id="f_tome" data-item-toggle="f_tome" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_tome"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Scrolls/Tomes</label>
-            <input type="checkbox" class="btn-check" id="f_coal" data-item-toggle="f_coal" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_coal"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Coals</label>
-            <input type="checkbox" class="btn-check" id="f_ash" data-item-toggle="f_ash" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_ash"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Ashes</label>
-          </div>
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_ach" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_ach"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Achievements</label>
-            <input type="checkbox" class="btn-check" id="f_gest" data-item-toggle="f_gest" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_gest"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Gestures</label>
-            <input type="checkbox" class="btn-check" id="f_sorc" data-item-toggle="f_sorc" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_sorc"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Sorceries</label>
-            <input type="checkbox" class="btn-check" id="f_pyro" data-item-toggle="f_pyro" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_pyro"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Pyromancies</label>
-            <input type="checkbox" class="btn-check" id="f_mirac" data-item-toggle="f_mirac" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_mirac"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Miracles</label>
-            <input type="checkbox" class="btn-check" id="f_ring" data-item-toggle="f_ring" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_ring"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Rings</label>
-          </div>
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_gear" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_gear"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Gear</label>
-            <input type="checkbox" class="btn-check" id="f_weap" data-item-toggle="f_weap" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_weap"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Weapons</label>
-            <input type="checkbox" class="btn-check" id="f_arm" data-item-toggle="f_arm" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_arm"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Armor</label>
-          </div>
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_mat" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_mat"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Materials</label>
-            <input type="checkbox" class="btn-check" id="f_tit" data-item-toggle="f_tit" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_tit"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Titanite</label>
-            <input type="checkbox" class="btn-check" id="f_gem" data-item-toggle="f_gem" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_gem"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Gems</label>
-          </div>
-          <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-            <input type="checkbox" class="btn-check" id="cat_other" data-category-toggle autocomplete="off">
-            <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_other"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Others</label>
-            <input type="checkbox" class="btn-check" id="f_cov" data-item-toggle="f_cov" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_cov"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Covenants</label>
-            <input type="checkbox" class="btn-check" id="f_misc" data-item-toggle="f_misc" autocomplete="off">
-            <label class="btn btn-outline-secondary filter-btn" for="f_misc"><span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span> Misc. items</label>
-          </div>
+        <div class="collapse navbar-collapse" id="nav-collapse">
+          <ul class="navbar-nav nav-pills me-auto" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                data-bs-toggle="tab"
+                data-bs-target="#tabPlaythrough"
+                type="button"
+                role="tab"
+                aria-selected="true"
+              >
+                Playthrough
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabChecklists"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Achievements
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabWeaponsShields"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Weapons/Shields
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabArmors"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Armor
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabMisc"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Misc
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabFAQ"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                <i class="bi bi-question-circle" aria-hidden="true"></i> FAQ
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#tabOptions"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                <i class="bi bi-gear" aria-hidden="true"></i> Options
+              </button>
+            </li>
+          </ul>
+          <button
+            type="button"
+            id="themeToggle"
+            class="btn btn-outline-secondary btn-sm"
+            title="Toggle light/dark theme"
+            aria-label="Toggle theme"
+          >
+            <i class="bi bi-brightness-high theme-icon-light" aria-hidden="true"></i
+            ><i class="bi bi-moon-stars theme-icon-dark" aria-hidden="true"></i>
+          </button>
         </div>
-        <div class="checklist-content"></div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="text-center">
+        <h1>Dark&nbsp;Souls&nbsp;3 Cheat&nbsp;Sheet</h1>
+        <p class="lead">
+          Contribute to the guide at the
+          <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet">GitHub Page</a>
+        </p>
       </div>
 
-      <div class="tab-pane fade" id="tabChecklists" role="tabpanel"><div class="checklist-content"></div></div>
-      <div class="tab-pane fade" id="tabWeaponsShields" role="tabpanel"><div class="checklist-content"></div></div>
-      <div class="tab-pane fade" id="tabArmors" role="tabpanel"><div class="checklist-content"></div></div>
-      <div class="tab-pane fade" id="tabMisc" role="tabpanel"><div class="checklist-content"></div></div>
-
-      <div class="tab-pane fade" id="tabFAQ" role="tabpanel">
-        <h2>FAQ</h2>
-        <p>The foundation of this guide was based on <a href="https://github.com/smcnabb">Stephen McNabb</a>'s <a href="https://github.com/smcnabb/dark-souls-2-cheat-sheet">Dark Soul 2 Cheat Sheet</a> source code and <a href="http://www.gamefaqs.com/boards/168566-dark-souls-iii/73599466">DeathGodGarra's NPC Side Quests Guide V2</a> walkthrough guide</p>
-        <p>This guide has evolved thanks to the many <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet/graphs/contributors">GitHub contributors</a> with many great suggestions, fixes and improvements!</p>
-
-        <h3>I have feedback, how can I contribute?</h3>
-        <p>You can visit the <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet">GitHub repository</a> and <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet/issues">report Issues</a> or create a fork and submit a Pull Request.</p>
-
-        <h3>Is this a guide?</h3>
-        <p>Nope, not really. This is a set of checklists and information that you can use while playing Dark Souls to make sure you don't miss an item, action, conversation, or boss. If you need playthroughs then you can click on the zone titles to read the wiki walkthrough.</p>
-
-        <h3>Do I need to follow the playthrough in this exact order?</h3>
-        <p>Dark Souls 3 is not a linear game and has multiple ways of progressing. This guide highlights zones as they become available, so feel free to follow however you please. You can always check things off in a different order.</p>
-
-        <h3>Can I use this for multiple characters?</h3>
-        <p>Yup, use the profile selector and buttons in the options tab at the top of the page to setup multiple profiles.</p>
-
-        <h3>How does the checklist status get saved?</h3>
-        <p>The checklist is saved to your browser's local storage. Be careful when clearing your browser's cache as it will also destroy your saved progress.</p>
+      <!-- Hide Completed toggle (shown on checklist tabs only) -->
+      <div id="btnHideCompleted" class="mb-3">
+        <input type="checkbox" class="btn-check" id="toggleHideCompleted" autocomplete="off" />
+        <label class="btn btn-outline-secondary" for="toggleHideCompleted">
+          <span class="filter-eye" aria-hidden="true"
+            ><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i
+          ></span>
+          Hide Completed
+        </label>
       </div>
 
-      <div class="tab-pane fade" id="tabOptions" role="tabpanel">
-        <h2>Options</h2>
-
-        <!-- Theme Selection -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-6"><h4>Theme selection:</h4></div>
-          <div class="col-12 col-md-6">
-            <select class="form-select" id="themes">
-              <option value="auto">Auto (match system)</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
+      <div class="tab-content">
+        <!-- PLAYTHROUGH -->
+        <div class="tab-pane fade show active" id="tabPlaythrough" role="tabpanel">
+          <h2 class="d-flex flex-wrap align-items-center gap-2">
+            Filter Checklist
+            <span class="btn-group btn-group-sm" role="group" aria-label="Journey">
+              <input
+                type="radio"
+                class="btn-check"
+                name="journey"
+                id="ng1"
+                data-ng-toggle="1"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary" for="ng1">NG</label>
+              <input
+                type="radio"
+                class="btn-check"
+                name="journey"
+                id="ng2"
+                data-ng-toggle="2"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary" for="ng2">NG+</label>
+              <input
+                type="radio"
+                class="btn-check"
+                name="journey"
+                id="ng3"
+                data-ng-toggle="3"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary" for="ng3">NG++</label>
+            </span>
+          </h2>
+          <div
+            class="btn-toolbar filter-toolbar mb-3"
+            role="group"
+            aria-label="Filter checklist categories"
+          >
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_quests"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_quests"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Quests</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_boss"
+                data-item-toggle="f_boss"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_boss"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Bosses</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_miss"
+                data-item-toggle="f_miss"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_miss"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Missable</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_npc"
+                data-item-toggle="f_npc"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_npc"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                NPCs</label
+              >
+            </div>
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_upgrades"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_upgrades"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Upgrades</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_estus"
+                data-item-toggle="f_estus"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_estus"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Estus Shards</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_bone"
+                data-item-toggle="f_bone"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_bone"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Undead Bone Shards</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_tome"
+                data-item-toggle="f_tome"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_tome"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Scrolls/Tomes</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_coal"
+                data-item-toggle="f_coal"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_coal"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Coals</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_ash"
+                data-item-toggle="f_ash"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_ash"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Ashes</label
+              >
+            </div>
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_ach"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_ach"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Achievements</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_gest"
+                data-item-toggle="f_gest"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_gest"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Gestures</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_sorc"
+                data-item-toggle="f_sorc"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_sorc"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Sorceries</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_pyro"
+                data-item-toggle="f_pyro"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_pyro"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Pyromancies</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_mirac"
+                data-item-toggle="f_mirac"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_mirac"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Miracles</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_ring"
+                data-item-toggle="f_ring"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_ring"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Rings</label
+              >
+            </div>
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_gear"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_gear"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Gear</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_weap"
+                data-item-toggle="f_weap"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_weap"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Weapons</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_arm"
+                data-item-toggle="f_arm"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_arm"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Armor</label
+              >
+            </div>
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_mat"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_mat"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Materials</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_tit"
+                data-item-toggle="f_tit"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_tit"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Titanite</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_gem"
+                data-item-toggle="f_gem"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_gem"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Gems</label
+              >
+            </div>
+            <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="cat_other"
+                data-category-toggle
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_other"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Others</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_cov"
+                data-item-toggle="f_cov"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_cov"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Covenants</label
+              >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="f_misc"
+                data-item-toggle="f_misc"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-secondary filter-btn" for="f_misc"
+                ><span class="filter-eye" aria-hidden="true"
+                  ><i class="bi bi-eye icon-eye-open"></i
+                  ><i class="bi bi-eye-slash icon-eye-close"></i
+                ></span>
+                Misc. items</label
+              >
+            </div>
           </div>
+          <div class="checklist-content"></div>
         </div>
-        <!-- Profile Selection -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-6"><h4>Profile management:</h4></div>
-          <div class="col-12 col-md-6">
-            <div class="input-group">
-              <select class="form-select" id="profiles"></select>
-              <button class="btn btn-outline-secondary" type="button" id="profileAdd">Add</button>
-              <button class="btn btn-outline-secondary" type="button" id="profileEdit">Edit</button>
-              <button class="btn btn-outline-secondary" type="button" id="profileNG+">NG+</button>
+
+        <div class="tab-pane fade" id="tabChecklists" role="tabpanel">
+          <div class="checklist-content"></div>
+        </div>
+        <div class="tab-pane fade" id="tabWeaponsShields" role="tabpanel">
+          <div class="checklist-content"></div>
+        </div>
+        <div class="tab-pane fade" id="tabArmors" role="tabpanel">
+          <div class="checklist-content"></div>
+        </div>
+        <div class="tab-pane fade" id="tabMisc" role="tabpanel">
+          <div class="checklist-content"></div>
+        </div>
+
+        <div class="tab-pane fade" id="tabFAQ" role="tabpanel">
+          <h2>FAQ</h2>
+          <p>
+            The foundation of this guide was based on
+            <a href="https://github.com/smcnabb">Stephen McNabb</a>'s
+            <a href="https://github.com/smcnabb/dark-souls-2-cheat-sheet"
+              >Dark Soul 2 Cheat Sheet</a
+            >
+            source code and
+            <a href="https://www.gamefaqs.com/boards/168566-dark-souls-iii/73599466"
+              >DeathGodGarra's NPC Side Quests Guide V2</a
+            >
+            walkthrough guide
+          </p>
+          <p>
+            This guide has evolved thanks to the many
+            <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet/graphs/contributors"
+              >GitHub contributors</a
+            >
+            with many great suggestions, fixes and improvements!
+          </p>
+
+          <h3>I have feedback, how can I contribute?</h3>
+          <p>
+            You can visit the
+            <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet">GitHub repository</a>
+            and
+            <a href="https://github.com/ZKjellberg/dark-souls-3-cheat-sheet/issues"
+              >report Issues</a
+            >
+            or create a fork and submit a Pull Request.
+          </p>
+
+          <h3>Is this a guide?</h3>
+          <p>
+            Nope, not really. This is a set of checklists and information that you can use while
+            playing Dark Souls to make sure you don't miss an item, action, conversation, or boss.
+            If you need playthroughs then you can click on the zone titles to read the wiki
+            walkthrough.
+          </p>
+
+          <h3>Do I need to follow the playthrough in this exact order?</h3>
+          <p>
+            Dark Souls 3 is not a linear game and has multiple ways of progressing. This guide
+            highlights zones as they become available, so feel free to follow however you please.
+            You can always check things off in a different order.
+          </p>
+
+          <h3>Can I use this for multiple characters?</h3>
+          <p>
+            Yup, use the profile selector and buttons in the options tab at the top of the page to
+            setup multiple profiles.
+          </p>
+
+          <h3>How does the checklist status get saved?</h3>
+          <p>
+            The checklist is saved to your browser's local storage. Be careful when clearing your
+            browser's cache as it will also destroy your saved progress.
+          </p>
+        </div>
+
+        <div class="tab-pane fade" id="tabOptions" role="tabpanel">
+          <h2>Options</h2>
+
+          <!-- Theme Selection -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-6"><h4>Theme selection:</h4></div>
+            <div class="col-12 col-md-6">
+              <select class="form-select" id="themes">
+                <option value="auto">Auto (match system)</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
+          </div>
+          <!-- Profile Selection -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-6"><h4>Profile management:</h4></div>
+            <div class="col-12 col-md-6">
+              <div class="input-group">
+                <select class="form-select" id="profiles"></select>
+                <button class="btn btn-outline-secondary" type="button" id="profileAdd">Add</button>
+                <button class="btn btn-outline-secondary" type="button" id="profileEdit">
+                  Edit
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="profileNG+">NG+</button>
+              </div>
+            </div>
+          </div>
+          <!-- Import/Export -->
+          <div class="row mb-3">
+            <div class="col-12 col-md-6"><h4>Data import/export:</h4></div>
+            <div class="col-12 col-md-6">
+              <div class="btn-group mb-2 w-100" role="group">
+                <button class="btn btn-outline-secondary" type="button" id="profileImport">
+                  Import file
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="profileExport">
+                  Export file
+                </button>
+              </div>
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-outline-secondary" type="button" id="profileImportText">
+                  Import textbox
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="profileExportText">
+                  Export clipboard
+                </button>
+              </div>
+            </div>
+            <div class="col-12">
+              <textarea id="profileText" class="form-control mt-2"></textarea>
             </div>
           </div>
         </div>
-        <!-- Import/Export -->
-        <div class="row mb-3">
-          <div class="col-12 col-md-6"><h4>Data import/export:</h4></div>
-          <div class="col-12 col-md-6">
-            <div class="btn-group mb-2 w-100" role="group">
-              <button class="btn btn-outline-secondary" type="button" id="profileImport">Import file</button>
-              <button class="btn btn-outline-secondary" type="button" id="profileExport">Export file</button>
-            </div>
-            <div class="btn-group w-100" role="group">
-              <button class="btn btn-outline-secondary" type="button" id="profileImportText">Import textbox</button>
-              <button class="btn btn-outline-secondary" type="button" id="profileExportText">Export clipboard</button>
-            </div>
+      </div>
+      <!-- tab-content -->
+    </div>
+    <!-- container -->
+
+    <!-- Profile modal -->
+    <div id="profileModal" class="modal fade" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="profileModalTitle" class="modal-title">Profile</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="col-12">
-            <textarea id="profileText" class="form-control mt-2"></textarea>
+          <div class="modal-body">
+            <label class="form-label" for="profileModalName">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="profileModalName"
+              placeholder="Enter profile name"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="profileModalClose"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" id="profileModalAdd" class="btn btn-primary">Add</button>
+            <button type="button" id="profileModalUpdate" class="btn btn-primary">Update</button>
+            <button type="button" id="profileModalDelete" class="btn btn-danger">Delete</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- tab-content -->
-  </div>
-  <!-- container -->
 
-  <!-- Profile modal -->
-  <div id="profileModal" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 id="profileModalTitle" class="modal-title">Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <label class="form-label" for="profileModalName">Name</label>
-          <input type="text" class="form-control" id="profileModalName" placeholder="Enter profile name">
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="profileModalClose" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" id="profileModalAdd" class="btn btn-primary">Add</button>
-          <button type="button" id="profileModalUpdate" class="btn btn-primary">Update</button>
-          <button type="button" id="profileModalDelete" class="btn btn-danger">Delete</button>
+    <!-- NG+ modal -->
+    <div id="NG+Modal" class="modal fade" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Begin next journey?</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            If you begin the next journey, all progress on the "Playthrough" and "Misc" tabs of this
+            profile will be reset, while achievement and collection checklists will be kept.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="button" id="NG+ModalYes" class="btn btn-danger">Yes</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- NG+ modal -->
-  <div id="NG+Modal" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Begin next journey?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          If you begin the next journey, all progress on the "Playthrough" and "Misc" tabs of this profile will be reset, while achievement and collection checklists will be kept.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" id="NG+ModalYes" class="btn btn-danger">Yes</button>
-        </div>
-      </div>
+    <div class="hiddenfile">
+      <input name="upload" type="file" id="fileInput" accept=".json" />
     </div>
-  </div>
 
-  <div class="hiddenfile">
-    <input name="upload" type="file" id="fileInput" accept=".json" />
-  </div>
+    <button
+      type="button"
+      class="btn btn-outline-secondary btn-sm fadingbutton togglehide"
+      id="fadingToggleHide"
+    >
+      <span class="filter-eye" aria-hidden="true"
+        ><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i
+      ></span>
+      Hide Completed
+    </button>
+    <a class="btn btn-outline-secondary btn-sm fadingbutton back-to-top" role="button" href="#"
+      >Back to Top&thinsp;<i class="bi bi-arrow-up" aria-hidden="true"></i
+    ></a>
 
-  <button type="button" class="btn btn-outline-secondary btn-sm fadingbutton togglehide" id="fadingToggleHide">
-    <span class="filter-eye"><i class="bi bi-eye icon-eye-open"></i><i class="bi bi-eye-slash icon-eye-close"></i></span>
-    Hide Completed
-  </button>
-  <a class="btn btn-outline-secondary btn-sm fadingbutton back-to-top" role="button">Back to Top&thinsp;<i class="bi bi-arrow-up"></i></a>
-
-  <script src="vendor/bootstrap.bundle.min.js"></script>
-  <script src="js/render.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    renderChecklists()
-      .then(function () { if (window.initApp) window.initApp(); })
-      .catch(function (err) {
-        document.querySelectorAll('.checklist-content').forEach(function (c) {
-          c.innerHTML = '<div class="alert alert-danger">Failed to load checklist data (' +
-            err.message + '). If you opened this file directly from disk, run it from a local ' +
-            'web server (e.g. <code>python -m http.server</code>) or use the hosted site.</div>';
+    <script src="vendor/bootstrap.bundle.min.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      renderChecklists()
+        .then(function () {
+          if (window.initApp) window.initApp();
+        })
+        .catch(function (err) {
+          document.querySelectorAll('.checklist-content').forEach(function (c) {
+            c.innerHTML =
+              '<div class="alert alert-danger">Failed to load checklist data (' +
+              err.message +
+              '). If you opened this file directly from disk, run it from a local ' +
+              'web server (e.g. <code>python -m http.server</code>) or use the hosted site.</div>';
+          });
         });
-      });
-  </script>
-</body>
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').catch(function () {
+            /* offline support optional */
+          });
+        });
+      }
+    </script>
+  </body>
 </html>

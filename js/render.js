@@ -8,24 +8,42 @@
 
   function itemHtml(item) {
     var cls = item.cls ? ' class="' + item.cls + '"' : '';
-    return '<li data-id="' + item.id + '"' + cls + '>' +
+    return (
+      '<li data-id="' +
+      item.id +
+      '"' +
+      cls +
+      '>' +
       '<div class="checkbox"><label>' +
-        '<input type="checkbox" id="' + item.id + '">' +
-        '<span class="item_content">' + item.html + '</span>' +
+      '<input type="checkbox" id="' +
+      item.id +
+      '">' +
+      '<span class="item_content">' +
+      item.html +
+      '</span>' +
       '</label></div>' +
-    '</li>';
+      '</li>'
+    );
   }
 
   function collapseToggle(colId) {
-    return '<a href="#' + colId + '" data-bs-toggle="collapse" data-bs-target="#' + colId + '"' +
-      ' role="button" aria-expanded="true" aria-controls="' + colId + '"' +
-      ' class="btn btn-primary btn-collapse btn-sm"><i class="bi bi-caret-right-fill"></i></a>';
+    return (
+      '<a href="#' +
+      colId +
+      '" data-bs-toggle="collapse" data-bs-target="#' +
+      colId +
+      '"' +
+      ' role="button" aria-expanded="true" aria-controls="' +
+      colId +
+      '" aria-label="Toggle section"' +
+      ' class="btn btn-primary btn-collapse btn-sm"><i class="bi bi-caret-right-fill" aria-hidden="true"></i></a>'
+    );
   }
 
   var SECTION_BTNS =
     '<div class="btn-group section_btn-group" role="group" aria-label="Section Checklist">' +
-      '<button type="button" class="btn btn-primary btn-section-toggle">Toggle</button>' +
-      '<button type="button" class="btn btn-primary btn-section-clear">Clear</button>' +
+    '<button type="button" class="btn btn-primary btn-section-toggle">Toggle</button>' +
+    '<button type="button" class="btn btn-primary btn-section-clear">Clear</button>' +
     '</div>';
 
   function sectionHtml(section) {
@@ -33,22 +51,42 @@
     var hasChecks = section.type === 'items' || section.type === 'groups';
     var totals = section.totalsId ? ' <span id="' + section.totalsId + '"></span>' : '';
 
-    var header = '<h3 id="' + section.id + '"' + (hasChecks ? ' class="section_header"' : '') + '>' +
-      collapseToggle(colId) + section.titleHtml + totals + (hasChecks ? SECTION_BTNS : '') +
-    '</h3>';
+    var header =
+      '<h3 id="' +
+      section.id +
+      '"' +
+      (hasChecks ? ' class="section_header"' : '') +
+      '>' +
+      collapseToggle(colId) +
+      section.titleHtml +
+      totals +
+      (hasChecks ? SECTION_BTNS : '') +
+      '</h3>';
 
     var body;
     if (section.type === 'items') {
-      body = '<ul id="' + colId + '" class="collapse show">' +
-        section.items.map(itemHtml).join('') + '</ul>';
+      body =
+        '<ul id="' +
+        colId +
+        '" class="collapse show">' +
+        section.items.map(itemHtml).join('') +
+        '</ul>';
     } else if (section.type === 'groups') {
-      body = '<div id="' + colId + '" class="collapse show">' +
-        section.groups.map(function (g) {
-          var attrs = g.attrs ? ' ' + g.attrs : '';
-          return '<h4' + attrs + '>' + g.h4 + '</h4><ul>' +
-            g.items.map(itemHtml).join('') + '</ul>';
-        }).join('') + '</div>';
-    } else { // raw
+      body =
+        '<div id="' +
+        colId +
+        '" class="collapse show">' +
+        section.groups
+          .map(function (g) {
+            var attrs = g.attrs ? ' ' + g.attrs : '';
+            return (
+              '<h4' + attrs + '>' + g.h4 + '</h4><ul>' + g.items.map(itemHtml).join('') + '</ul>'
+            );
+          })
+          .join('') +
+        '</div>';
+    } else {
+      // raw
       body = '<div id="' + colId + '" class="collapse show">' + section.raw + '</div>';
     }
     return header + body;
@@ -56,11 +94,21 @@
 
   function tabHtml(tab) {
     var html = '<h2>' + tab.title + ' <span id="' + tab.overallTotalId + '"></span></h2>';
-    html += '<ul class="table_of_contents">' +
-      tab.nav.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>';
+    html +=
+      '<ul class="table_of_contents">' +
+      tab.nav
+        .map(function (n) {
+          return '<li>' + n + '</li>';
+        })
+        .join('') +
+      '</ul>';
     if (tab.searchId) {
-      html += '<div class="mb-3"><input type="search" id="' + tab.searchId +
-        '" class="form-control" placeholder="Start typing to filter results..."></div>';
+      html +=
+        '<div class="mb-3"><input type="search" id="' +
+        tab.searchId +
+        '" class="form-control" aria-label="Search ' +
+        tab.title +
+        '" placeholder="Start typing to filter results..."></div>';
     }
     var sections = tab.sections.map(sectionHtml).join('\n');
     html += tab.listId ? '<div id="' + tab.listId + '">' + sections + '</div>' : sections;

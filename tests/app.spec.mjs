@@ -2,8 +2,10 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   const errors = [];
-  page.on('pageerror', e => errors.push(e.message));
-  page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => {
+    if (m.type() === 'error') errors.push(m.text());
+  });
   page._errors = errors;
   await page.goto('/index.html', { waitUntil: 'networkidle' });
   await page.waitForTimeout(200);
@@ -21,10 +23,10 @@ test('checking an item updates totals, styles it, and persists across reload', a
   expect(before).toMatch(/^\d+\/\d+$|^DONE$/);
 
   await page.locator('#playthrough_17_1').check();
-  await expect(page.locator('#playthrough_17_1'))
-    .toHaveJSProperty('checked', true);
-  const completed = await page.locator('#playthrough_17_1')
-    .evaluate(cb => cb.closest('label').classList.contains('completed'));
+  await expect(page.locator('#playthrough_17_1')).toHaveJSProperty('checked', true);
+  const completed = await page
+    .locator('#playthrough_17_1')
+    .evaluate((cb) => cb.closest('label').classList.contains('completed'));
   expect(completed).toBe(true);
   expect(await overall()).not.toBe(before);
 
@@ -56,14 +58,15 @@ test('category filter reduces visible items and reflects partial state', async (
   await expect(page.locator('#f_boss')).toBeChecked();
   expect(await visible()).toBeLessThan(before);
 
-  const pureBossHidden = await page.$$eval('#tabPlaythrough li', els => {
-    const pure = els.find(e => e.className.trim() === 'f_boss');
+  const pureBossHidden = await page.$$eval('#tabPlaythrough li', (els) => {
+    const pure = els.find((e) => e.className.trim() === 'f_boss');
     return pure ? getComputedStyle(pure).display === 'none' : true;
   });
   expect(pureBossHidden).toBe(true);
 
-  const partial = await page.locator('#cat_quests')
-    .evaluate(el => el.closest('.filter-cat').classList.contains('partial'));
+  const partial = await page
+    .locator('#cat_quests')
+    .evaluate((el) => el.closest('.filter-cat').classList.contains('partial'));
   expect(partial).toBe(true);
 });
 
@@ -79,21 +82,25 @@ test('collapse toggle hides a section body', async ({ page }) => {
 test('search filters and highlights, and clears', async ({ page }) => {
   await page.locator('#playthrough_search').fill('Uchigatana');
   await page.waitForTimeout(200);
-  const visible = await page.$$eval('#playthrough_list li[data-id]',
-    els => els.filter(e => e.style.display !== 'none').length);
+  const visible = await page.$$eval(
+    '#playthrough_list li[data-id]',
+    (els) => els.filter((e) => e.style.display !== 'none').length
+  );
   expect(visible).toBeGreaterThan(0);
   expect(visible).toBeLessThan(50);
   expect(await page.locator('#playthrough_list .highlight').count()).toBeGreaterThan(0);
 
   await page.locator('#playthrough_search').fill('');
   await page.waitForTimeout(150);
-  const restored = await page.$$eval('#playthrough_list li[data-id]',
-    els => els.filter(e => e.style.display !== 'none').length);
+  const restored = await page.$$eval(
+    '#playthrough_list li[data-id]',
+    (els) => els.filter((e) => e.style.display !== 'none').length
+  );
   expect(restored).toBeGreaterThan(900);
 });
 
 test('section Toggle checks all, Clear unchecks all', async ({ page }) => {
-  await page.locator('#Cemetery_of_Ash_col').evaluate(el => el.classList.add('show'));
+  await page.locator('#Cemetery_of_Ash_col').evaluate((el) => el.classList.add('show'));
   const toggle = page.locator('#Cemetery_of_Ash .btn-section-toggle');
   const clear = page.locator('#Cemetery_of_Ash .btn-section-clear');
   await toggle.scrollIntoViewIfNeeded();
@@ -125,7 +132,7 @@ test('totals are robust to non-contiguous / missing ids', async ({ page }) => {
   expect(start).toBeGreaterThan(2);
 
   // Remove a middle item from the DOM to create a gap, then trigger a recalc.
-  await page.locator('#playthrough_17_5').evaluate(cb => cb.closest('li').remove());
+  await page.locator('#playthrough_17_5').evaluate((cb) => cb.closest('li').remove());
   await page.locator('#playthrough_17_1').check(); // triggers calculateTotals
   const after = await denom();
   // numerator now 1; denominator should be exactly one less than before.

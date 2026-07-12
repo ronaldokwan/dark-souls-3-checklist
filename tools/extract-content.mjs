@@ -12,19 +12,52 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const srcArg = process.argv[2];
-const src = srcArg
-  ? srcArg
-  : existsSync('index.legacy.html') ? 'index.legacy.html' : 'index.html';
+const src = srcArg ? srcArg : existsSync('index.legacy.html') ? 'index.legacy.html' : 'index.html';
 
 const lines = readFileSync(src, 'utf8').split('\n');
 
 // Tabs that hold checklist content, in document order, with their id prefix.
 const TABS = [
-  { id: 'tabPlaythrough',    key: 'playthrough', title: 'Playthrough Checklist',            overall: 'playthrough_overall_total', listId: 'playthrough_list', search: 'playthrough_search' },
-  { id: 'tabChecklists',     key: 'checklist',   title: 'Achievement Checklists',            overall: 'checklist_overall_total',   listId: 'item_list',        search: 'item_search' },
-  { id: 'tabWeaponsShields', key: 'weapons',     title: 'Weapons and Shields Checklists',    overall: 'weapons_overall_total',     listId: 'weapons_list',     search: 'weapons_search' },
-  { id: 'tabArmors',         key: 'armors',      title: 'Armor Checklists',                  overall: 'armors_overall_total',      listId: 'armors_list',      search: 'armors_search' },
-  { id: 'tabMisc',           key: 'crow',        title: 'Misc',                              overall: 'crow_overall_total',        listId: null,               search: null },
+  {
+    id: 'tabPlaythrough',
+    key: 'playthrough',
+    title: 'Playthrough Checklist',
+    overall: 'playthrough_overall_total',
+    listId: 'playthrough_list',
+    search: 'playthrough_search',
+  },
+  {
+    id: 'tabChecklists',
+    key: 'checklist',
+    title: 'Achievement Checklists',
+    overall: 'checklist_overall_total',
+    listId: 'item_list',
+    search: 'item_search',
+  },
+  {
+    id: 'tabWeaponsShields',
+    key: 'weapons',
+    title: 'Weapons and Shields Checklists',
+    overall: 'weapons_overall_total',
+    listId: 'weapons_list',
+    search: 'weapons_search',
+  },
+  {
+    id: 'tabArmors',
+    key: 'armors',
+    title: 'Armor Checklists',
+    overall: 'armors_overall_total',
+    listId: 'armors_list',
+    search: 'armors_search',
+  },
+  {
+    id: 'tabMisc',
+    key: 'crow',
+    title: 'Misc',
+    overall: 'crow_overall_total',
+    listId: null,
+    search: null,
+  },
 ];
 
 // Locate every tab-pane opening line so we can slice each tab's region.
@@ -34,7 +67,7 @@ lines.forEach((line, i) => {
   if (m) paneOpen.push({ id: m[1], line: i });
 });
 function regionFor(tabId) {
-  const idx = paneOpen.findIndex(p => p.id === tabId);
+  const idx = paneOpen.findIndex((p) => p.id === tabId);
   const start = paneOpen[idx].line + 1;
   const end = idx + 1 < paneOpen.length ? paneOpen[idx + 1].line : lines.length;
   return { start, end };
@@ -61,7 +94,7 @@ for (const tab of TABS) {
   // --- table of contents / nav ------------------------------------------
   const nav = [];
   {
-    const navStart = region.findIndex(l => /<ul class="table_of_contents">/.test(l));
+    const navStart = region.findIndex((l) => /<ul class="table_of_contents">/.test(l));
     if (navStart !== -1) {
       for (let i = navStart + 1; i < region.length; i++) {
         if (/<\/ul>/.test(region[i])) break;
@@ -111,13 +144,17 @@ for (const tab of TABS) {
     if (isUl) {
       section.type = 'items';
       section.items = parseItems(bodyLines);
-    } else if (bodyLines.some(l => /^\s*<h4\b/.test(l))) {
+    } else if (bodyLines.some((l) => /^\s*<h4\b/.test(l))) {
       section.type = 'groups';
       section.groups = [];
       let group = null;
       for (let x = 0; x < bodyLines.length; x++) {
         const hm = bodyLines[x].match(/^\s*<h4\b([^>]*)>(.*)<\/h4>\s*$/);
-        if (hm) { group = { attrs: hm[1].trim(), h4: hm[2], items: [] }; section.groups.push(group); continue; }
+        if (hm) {
+          group = { attrs: hm[1].trim(), h4: hm[2], items: [] };
+          section.groups.push(group);
+          continue;
+        }
         const im = bodyLines[x].match(LI_RE);
         if (im && group) group.items.push({ id: im[1], cls: im[2] || '', html: im[3] });
       }
@@ -128,37 +165,54 @@ for (const tab of TABS) {
 
     // running total of checklist items
     if (section.type === 'items') grandTotal += section.items.length;
-    if (section.type === 'groups') grandTotal += section.groups.reduce((a, g) => a + g.items.length, 0);
+    if (section.type === 'groups')
+      grandTotal += section.groups.reduce((a, g) => a + g.items.length, 0);
 
     sections.push(section);
   }
 
   out.tabs.push({
-    id: tab.id, key: tab.key, title: tab.title,
-    overallTotalId: tab.overall, listId: tab.listId, searchId: tab.search,
-    nav, sections,
+    id: tab.id,
+    key: tab.key,
+    title: tab.title,
+    overallTotalId: tab.overall,
+    listId: tab.listId,
+    searchId: tab.search,
+    nav,
+    sections,
   });
 }
 
-writeFileSync('data/checklist.json',
-  JSON.stringify({ $schema: './checklist.schema.json', tabs: out.tabs }, null, 1) + '\n');
+writeFileSync(
+  'data/checklist.json',
+  JSON.stringify({ $schema: './checklist.schema.json', tabs: out.tabs }, null, 1) + '\n'
+);
 
 // --- report ---------------------------------------------------------------
 const allIds = [];
 for (const t of out.tabs)
   for (const s of t.sections) {
-    if (s.type === 'items') s.items.forEach(it => allIds.push(it.id));
-    if (s.type === 'groups') s.groups.forEach(g => g.items.forEach(it => allIds.push(it.id)));
+    if (s.type === 'items') s.items.forEach((it) => allIds.push(it.id));
+    if (s.type === 'groups') s.groups.forEach((g) => g.items.forEach((it) => allIds.push(it.id)));
   }
 const dupes = allIds.filter((id, i) => allIds.indexOf(id) !== i);
 
 console.log(`source: ${src}`);
 console.log(`tabs: ${out.tabs.length}`);
-out.tabs.forEach(t => {
-  const secItems = t.sections.reduce((a, s) =>
-    a + (s.type === 'items' ? s.items.length
-      : s.type === 'groups' ? s.groups.reduce((b, g) => b + g.items.length, 0) : 0), 0);
-  console.log(`  ${t.key.padEnd(12)} sections=${String(t.sections.length).padStart(3)} nav=${String(t.nav.length).padStart(3)} items=${secItems}`);
+out.tabs.forEach((t) => {
+  const secItems = t.sections.reduce(
+    (a, s) =>
+      a +
+      (s.type === 'items'
+        ? s.items.length
+        : s.type === 'groups'
+          ? s.groups.reduce((b, g) => b + g.items.length, 0)
+          : 0),
+    0
+  );
+  console.log(
+    `  ${t.key.padEnd(12)} sections=${String(t.sections.length).padStart(3)} nav=${String(t.nav.length).padStart(3)} items=${secItems}`
+  );
 });
 console.log(`total items parsed: ${grandTotal}`);
 console.log(`duplicate data-ids: ${dupes.length ? dupes.join(', ') : 'none'}`);

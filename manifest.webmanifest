@@ -1,0 +1,25 @@
+{
+  "name": "Dark Souls 3 Cheat Sheet",
+  "short_name": "DS3 Checklist",
+  "description": "Checklist of things to do, items to get, and bosses to beat in Dark Souls 3.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#17110b",
+  "theme_color": "#17110b",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

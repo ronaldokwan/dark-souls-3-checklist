@@ -7,7 +7,13 @@
   'use strict';
 
   var profilesKey = 'darksouls3_profiles';
-  var CHECKLIST_TABS = ['tabPlaythrough', 'tabChecklists', 'tabWeaponsShields', 'tabArmors', 'tabMisc'];
+  var CHECKLIST_TABS = [
+    'tabPlaythrough',
+    'tabChecklists',
+    'tabWeaponsShields',
+    'tabArmors',
+    'tabMisc',
+  ];
 
   /* ----------------------------------------------------------------------
    * Storage (replaces jStorage) with a one-time migration from the old
@@ -17,11 +23,19 @@
     get: function (key, def) {
       var raw = localStorage.getItem(key);
       if (raw === null) return def;
-      try { return JSON.parse(raw); } catch (e) { return def; }
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        return def;
+      }
     },
     set: function (key, val) {
-      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* quota */ }
-    }
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {
+        /* quota */
+      }
+    },
   };
 
   (function migrateFromJStorage() {
@@ -35,7 +49,9 @@
             localStorage.setItem(k, JSON.stringify(data[k]));
           }
         });
-      } catch (e) { /* ignore malformed legacy data */ }
+      } catch (e) {
+        /* ignore malformed legacy data */
+      }
     }
     localStorage.setItem('__ds3_migrated', '1');
   })();
@@ -47,12 +63,34 @@
   if (!('current' in profiles)) profiles.current = 'Default Profile';
   if (!(profilesKey in profiles)) profiles[profilesKey] = {};
 
-  function save() { Storage.set(profilesKey, profiles); }
-  function cur() { return profiles[profilesKey][profiles.current]; }
+  function save() {
+    Storage.set(profilesKey, profiles);
+  }
+  function cur() {
+    return profiles[profilesKey][profiles.current];
+  }
 
-  var FILTER_KEYS = ['f_boss', 'f_miss', 'f_npc', 'f_estus', 'f_bone', 'f_tome', 'f_coal',
-    'f_ash', 'f_gest', 'f_sorc', 'f_pyro', 'f_mirac', 'f_ring', 'f_weap', 'f_arm',
-    'f_tit', 'f_gem', 'f_cov', 'f_misc'];
+  var FILTER_KEYS = [
+    'f_boss',
+    'f_miss',
+    'f_npc',
+    'f_estus',
+    'f_bone',
+    'f_tome',
+    'f_coal',
+    'f_ash',
+    'f_gest',
+    'f_sorc',
+    'f_pyro',
+    'f_mirac',
+    'f_ring',
+    'f_weap',
+    'f_arm',
+    'f_tit',
+    'f_gem',
+    'f_cov',
+    'f_misc',
+  ];
 
   function initializeProfile(name) {
     var store = profiles[profilesKey];
@@ -65,20 +103,32 @@
     if (!('journey' in p)) p.journey = 1;
     if (!('hidden_categories' in p)) {
       p.hidden_categories = {};
-      FILTER_KEYS.forEach(function (k) { p.hidden_categories[k] = false; });
+      FILTER_KEYS.forEach(function (k) {
+        p.hidden_categories[k] = false;
+      });
     }
   }
   initializeProfile(profiles.current);
 
-  function canDelete() { return Object.keys(profiles[profilesKey]).length > 1; }
-  function getFirstProfile() { return Object.keys(profiles[profilesKey])[0]; }
+  function canDelete() {
+    return Object.keys(profiles[profilesKey]).length > 1;
+  }
+  function getFirstProfile() {
+    return Object.keys(profiles[profilesKey])[0];
+  }
 
   /* ----------------------------------------------------------------------
    * Small DOM helpers
    * -------------------------------------------------------------------- */
-  function $(sel, root) { return (root || document).querySelector(sel); }
-  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-  function fire(el, type) { el.dispatchEvent(new Event(type, { bubbles: true })); }
+  function $(sel, root) {
+    return (root || document).querySelector(sel);
+  }
+  function $all(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+  function fire(el, type) {
+    el.dispatchEvent(new Event(type, { bubbles: true }));
+  }
 
   /* ----------------------------------------------------------------------
    * Filtering
@@ -88,7 +138,9 @@
     if (!classAttr) return false;
     var hidden = cur().hidden_categories;
     if (classAttr === 'f_none') {
-      return Object.keys(hidden).some(function (k) { return hidden[k]; });
+      return Object.keys(hidden).some(function (k) {
+        return hidden[k];
+      });
     }
     var classList = classAttr.split(/\s+/);
     var journey = cur().journey;
@@ -127,7 +179,8 @@
   function calculateTotals() {
     $all('[id$="_overall_total"]').forEach(function (overallEl) {
       var type = overallEl.id.replace(/_overall_total$/, '');
-      var overallCount = 0, overallChecked = 0;
+      var overallCount = 0,
+        overallChecked = 0;
 
       $all('[id^="' + type + '_totals_"]').forEach(function (totEl) {
         var i = parseInt(totEl.id.slice((type + '_totals_').length), 10);
@@ -137,18 +190,23 @@
 
         // Count the section's actual checkboxes so that gaps or out-of-order
         // ids can never cause a silent undercount.
-        var count = 0, checked = 0;
+        var count = 0,
+          checked = 0;
         if (container) {
           $all('.checkbox input[type="checkbox"]', container).forEach(function (cb) {
             var li = cb.closest('li');
             if (/^playthrough_/.test(cb.id) && li && canFilter(li)) return;
-            count++; overallCount++;
-            if (cb.checked) { checked++; overallChecked++; }
+            count++;
+            overallCount++;
+            if (cb.checked) {
+              checked++;
+              overallChecked++;
+            }
           });
         }
 
-        var done = (checked === count);
-        var label = done ? 'DONE' : (checked + '/' + count);
+        var done = checked === count;
+        var label = done ? 'DONE' : checked + '/' + count;
         setBadge(totEl, label, done);
         setBadge(navEl, label, done);
 
@@ -156,7 +214,9 @@
 
         // Sub-heading (h4) visibility: hide fully-completed groups.
         if (container && container.tagName === 'DIV') {
-          $all(':scope > h4', container).forEach(function (h) { h.classList.add('completed'); });
+          $all(':scope > h4', container).forEach(function (h) {
+            h.classList.add('completed');
+          });
           $all(':scope > ul', container).forEach(function (ul) {
             if (ul.querySelector('li > div > label:not(.completed)')) {
               var prev = ul.previousElementSibling;
@@ -167,12 +227,16 @@
         }
       });
 
-      var oDone = (overallChecked === overallCount);
-      setBadge(overallEl, oDone ? 'DONE' : (overallChecked + '/' + overallCount), oDone);
+      var oDone = overallChecked === overallCount;
+      setBadge(overallEl, oDone ? 'DONE' : overallChecked + '/' + overallCount, oDone);
     });
+  }
 
-    var textArea = document.getElementById('profileText');
-    if (textArea) textArea.value = JSON.stringify(profiles);
+  // The export textarea holds the whole profile blob; only refresh it when the
+  // Options tab is shown (not on every checkbox toggle).
+  function refreshExportText() {
+    var ta = document.getElementById('profileText');
+    if (ta) ta.value = JSON.stringify(profiles);
   }
 
   /* ----------------------------------------------------------------------
@@ -217,7 +281,10 @@
       setLabelCompleted(cb, want);
       changed = true;
     });
-    if (changed) { save(); calculateTotals(); }
+    if (changed) {
+      save();
+      calculateTotals();
+    }
   }
 
   /* ----------------------------------------------------------------------
@@ -228,7 +295,8 @@
     sel.innerHTML = '';
     Object.keys(profiles[profilesKey]).forEach(function (name) {
       var opt = document.createElement('option');
-      opt.value = name; opt.textContent = name;
+      opt.value = name;
+      opt.textContent = name;
       sel.appendChild(opt);
     });
     sel.value = profiles.current;
@@ -262,7 +330,10 @@
 
     // Journey radio -> triggers NG filter application.
     var ng = document.querySelector('[data-ng-toggle="' + p.journey + '"]');
-    if (ng) { ng.checked = true; fire(ng, 'change'); }
+    if (ng) {
+      ng.checked = true;
+      fire(ng, 'change');
+    }
 
     // Category filters.
     Object.keys(p.hidden_categories).forEach(function (key) {
@@ -290,7 +361,7 @@
   var mql = window.matchMedia('(prefers-color-scheme: dark)');
   function themePref() {
     var p = Storage.get('style', 'auto');
-    return (p === 'light' || p === 'dark' || p === 'auto') ? p : 'auto';
+    return p === 'light' || p === 'dark' || p === 'auto' ? p : 'auto';
   }
   function resolveTheme(pref) {
     if (pref === 'dark' || pref === 'light') return pref;
@@ -322,7 +393,9 @@
     nodes.forEach(function (node) {
       var parent = node.parentNode;
       if (!parent || (parent.classList && parent.classList.contains('highlight'))) return;
-      var text = node.nodeValue, lower = text.toLowerCase(), idx = lower.indexOf(t);
+      var text = node.nodeValue,
+        lower = text.toLowerCase(),
+        idx = lower.indexOf(t);
       if (idx === -1) return;
       var frag = document.createDocumentFragment();
       var last = 0;
@@ -347,10 +420,12 @@
     input.addEventListener('input', function () {
       var q = input.value.trim();
       var lower = q.toLowerCase();
-      $all('h4', container).forEach(function (h) { h.style.display = q ? 'none' : ''; });
+      $all('h4', container).forEach(function (h) {
+        h.style.display = q ? 'none' : '';
+      });
       $all('li[data-id]', container).forEach(function (li) {
         var match = li.textContent.toLowerCase().indexOf(lower) !== -1;
-        li.style.display = (q === '' || match) ? '' : 'none';
+        li.style.display = q === '' || match ? '' : 'none';
       });
       unhighlight(container);
       highlight(container, q);
@@ -373,7 +448,9 @@
       var a = document.createElement('a');
       a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
       a.download = 'profiles.json';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     });
 
     document.getElementById('profileImport').addEventListener('click', function () {
@@ -381,11 +458,17 @@
     });
     document.getElementById('fileInput').addEventListener('change', function () {
       var f = this.files && this.files[0];
-      if (!f || !/\.json$/.test(f.name)) { alert('Bad input file. File should end in .json'); return; }
+      if (!f || !/\.json$/.test(f.name)) {
+        alert('Bad input file. File should end in .json');
+        return;
+      }
       var fr = new FileReader();
       fr.onload = function (e) {
-        try { reloadFromImportedProfiles(JSON.parse(e.target.result)); }
-        catch (err) { alert(err); }
+        try {
+          reloadFromImportedProfiles(JSON.parse(e.target.result));
+        } catch (err) {
+          alert(err);
+        }
       };
       fr.readAsText(f);
     });
@@ -397,21 +480,28 @@
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(ta.value).catch(function () {});
       } else {
-        try { document.execCommand('copy'); } catch (e) {}
+        try {
+          document.execCommand('copy');
+        } catch (e) {}
       }
     });
 
     document.getElementById('profileImportText').addEventListener('click', function () {
       if (!confirm('Are you sure you want to import profile data?')) return;
-      try { reloadFromImportedProfiles(JSON.parse(document.getElementById('profileText').value)); }
-      catch (e) { alert(e); }
+      try {
+        reloadFromImportedProfiles(JSON.parse(document.getElementById('profileText').value));
+      } catch (e) {
+        alert(e);
+      }
     });
   }
 
   /* ----------------------------------------------------------------------
    * Modals
    * -------------------------------------------------------------------- */
-  function modal(id) { return bootstrap.Modal.getOrCreateInstance(document.getElementById(id)); }
+  function modal(id) {
+    return bootstrap.Modal.getOrCreateInstance(document.getElementById(id));
+  }
 
   function wireProfiles() {
     document.getElementById('profiles').addEventListener('change', function () {
@@ -487,7 +577,9 @@
           data[cb.id] = false;
         }
       });
-      Object.keys(cur().hidden_categories).forEach(function (k) { cur().hidden_categories[k] = false; });
+      Object.keys(cur().hidden_categories).forEach(function (k) {
+        cur().hidden_categories[k] = false;
+      });
       if (cur().journey < 3) cur().journey++;
       save();
       populateChecklists();
@@ -501,9 +593,11 @@
    * -------------------------------------------------------------------- */
   function syncCategory(cat) {
     var items = $all('[data-item-toggle]', cat);
-    var checkedCount = items.filter(function (i) { return i.checked; }).length;
+    var checkedCount = items.filter(function (i) {
+      return i.checked;
+    }).length;
     var catInput = $('[data-category-toggle]', cat);
-    if (catInput) catInput.checked = (items.length > 0 && checkedCount === items.length);
+    if (catInput) catInput.checked = items.length > 0 && checkedCount === items.length;
     cat.classList.toggle('partial', checkedCount > 0 && checkedCount < items.length);
   }
 
@@ -525,7 +619,10 @@
         var cat = input.closest('.filter-cat');
         var toHide = input.checked;
         $all('[data-item-toggle]', cat).forEach(function (it) {
-          if (it.checked !== toHide) { it.checked = toHide; fire(it, 'change'); }
+          if (it.checked !== toHide) {
+            it.checked = toHide;
+            fire(it, 'change');
+          }
         });
       });
     });
@@ -564,10 +661,11 @@
     });
 
     var fab = document.getElementById('fadingToggleHide');
-    if (fab) fab.addEventListener('click', function () {
-      toggle.checked = !toggle.checked;
-      fire(toggle, 'change');
-    });
+    if (fab)
+      fab.addEventListener('click', function () {
+        toggle.checked = !toggle.checked;
+        fire(toggle, 'change');
+      });
   }
 
   /* ----------------------------------------------------------------------
@@ -576,12 +674,14 @@
   function wireCollapseAndTabs() {
     document.addEventListener('shown.bs.collapse', function (e) {
       if (e.target.id && /_col$/.test(e.target.id)) {
-        cur().collapsed['#' + e.target.id] = false; save();
+        cur().collapsed['#' + e.target.id] = false;
+        save();
       }
     });
     document.addEventListener('hidden.bs.collapse', function (e) {
       if (e.target.id && /_col$/.test(e.target.id)) {
-        cur().collapsed['#' + e.target.id] = true; save();
+        cur().collapsed['#' + e.target.id] = true;
+        save();
       }
     });
 
@@ -591,6 +691,7 @@
         cur().current_tab = target;
         save();
         updateHideCompletedVisibility(target.replace('#', ''));
+        if (target === '#tabOptions') refreshExportText();
       });
     });
   }
@@ -602,13 +703,16 @@
     var offset = 220;
     window.addEventListener('scroll', function () {
       var show = window.scrollY > offset;
-      $all('.fadingbutton').forEach(function (b) { b.classList.toggle('show-fab', show); });
+      $all('.fadingbutton').forEach(function (b) {
+        b.classList.toggle('show-fab', show);
+      });
     });
     var top = document.querySelector('.back-to-top');
-    if (top) top.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (top)
+      top.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
   }
 
   /* ----------------------------------------------------------------------
@@ -627,9 +731,13 @@
       if (!container) return;
       var boxes = $all('.checkbox input[type="checkbox"]', container);
       if (btn.classList.contains('btn-section-toggle')) {
-        setBoxes(boxes, function (cb) { return !cb.checked; });
+        setBoxes(boxes, function (cb) {
+          return !cb.checked;
+        });
       } else {
-        setBoxes(boxes, function () { return false; });
+        setBoxes(boxes, function () {
+          return false;
+        });
       }
     });
   }
@@ -644,17 +752,23 @@
     });
 
     // Open external links in a new tab.
-    $all("a[href^='http']").forEach(function (a) { a.setAttribute('target', '_blank'); });
+    $all("a[href^='http']").forEach(function (a) {
+      a.setAttribute('target', '_blank');
+    });
 
     applyTheme();
     document.getElementById('themes').addEventListener('change', function () {
-      Storage.set('style', this.value); applyTheme();
+      Storage.set('style', this.value);
+      applyTheme();
     });
     document.getElementById('themeToggle').addEventListener('click', function () {
       var next = resolveTheme(themePref()) === 'dark' ? 'light' : 'dark';
-      Storage.set('style', next); applyTheme();
+      Storage.set('style', next);
+      applyTheme();
     });
-    mql.addEventListener('change', function () { if (themePref() === 'auto') applyTheme(); });
+    mql.addEventListener('change', function () {
+      if (themePref() === 'auto') applyTheme();
+    });
 
     wireProfiles();
     wireImportExport();
@@ -675,7 +789,9 @@
 
     // Restore the saved tab.
     var tabTarget = cur().current_tab || '#tabPlaythrough';
-    var tabBtn = document.querySelector('[data-bs-toggle="tab"][data-bs-target="' + tabTarget + '"]');
+    var tabBtn = document.querySelector(
+      '[data-bs-toggle="tab"][data-bs-target="' + tabTarget + '"]'
+    );
     if (tabBtn) {
       bootstrap.Tab.getOrCreateInstance(tabBtn).show();
       updateHideCompletedVisibility(tabTarget.replace('#', ''));
