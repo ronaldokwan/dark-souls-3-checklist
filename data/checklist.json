@@ -78,6 +78,7 @@
       {
        "id": "playthrough_17_7",
        "cls": "f_boss f_misc",
+       "item": "iudex-gundyr",
        "html": "Back on the main path head through the archway and take the sword embedded in the statue. Kill <a href=\"https://darksouls3.wiki.fextralife.com/Iudex+Gundyr\">Iudex Gundyr</a> to receive the <a href=\"https://darksouls3.wiki.fextralife.com/Coiled+Sword\">Coiled Sword</a>"
       },
       {
@@ -814,6 +815,7 @@
       {
        "id": "playthrough_3_50",
        "cls": "f_boss f_misc",
+       "item": "curse-rotted-greatwood",
        "html": "Kill the <a href=\"https://darksouls3.wiki.fextralife.com/Curse-rotted+Greatwood\">Curse-rotted Greatwood</a> to get <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+the+Rotted+Greatwood\">Soul of the Rotted Greatwood</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Transposing+Kiln\">Transposing Kiln</a>. Give the Transposing Kiln to <a href=\"https://darksouls3.wiki.fextralife.com/Ludleth+of+Courland\">Ludleth of Courland</a> so he can turn boss souls into weapons, rings, and spells"
       },
       {
@@ -1798,6 +1800,7 @@
       {
        "id": "playthrough_6_73",
        "cls": "f_boss f_misc",
+       "item": "abyss-watchers",
        "html": "Defeat the <a href=\"https://darksouls3.wiki.fextralife.com/Abyss+Watchers\">Abyss Watchers</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Cinders+of+a+Lord\">Cinders of a Lord</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+the+Blood+of+the+Wolf\">Soul of the Blood of the Wolf</a>"
       },
       {
@@ -1988,6 +1991,7 @@
       {
        "id": "playthrough_7_31",
        "cls": "f_boss f_misc",
+       "item": "high-lord-wolnir",
        "html": "Defeat <a href=\"https://darksouls3.wiki.fextralife.com/High+Lord+Wolnir\">High Lord Wolnir</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+High+Lord+Wolnir\">Soul of High Lord Wolnir</a>"
       },
       {
@@ -2212,7 +2216,10 @@
       {
        "id": "playthrough_14_36",
        "cls": "f_boss f_misc",
-       "item": "soul-of-the-old-demon-king",
+       "item": [
+        "old-demon-king",
+        "soul-of-the-old-demon-king"
+       ],
        "html": "Defeat the <a href=\"https://darksouls3.wiki.fextralife.com/Old+Demon+King\">Old Demon King</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+the+Old+Demon+King\">Soul of the Old Demon King</a>"
       }
      ]
@@ -2500,6 +2507,7 @@
       {
        "id": "playthrough_15_49",
        "cls": "f_boss f_misc",
+       "item": "pontiff-sulyvahn",
        "html": "Defeat <a href=\"https://darksouls3.wiki.fextralife.com/Pontiff+Sulyvahn\">Pontiff Sulyvahn</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+Pontiff+Sulyvahn\">Soul of Pontiff Sulyvahn</a>"
       },
       {
@@ -3108,7 +3116,10 @@
       {
        "id": "playthrough_10_1",
        "cls": "f_boss f_misc",
-       "item": "soul-of-the-dancer",
+       "item": [
+        "dancer-of-the-boreal-valley",
+        "soul-of-the-dancer"
+       ],
        "html": "Defeat the <a href=\"https://darksouls3.wiki.fextralife.com/Dancer+of+the+Boreal+Valley\">Dancer of the Boreal Valley</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+the+Dancer\">Soul of the Dancer</a>"
       },
       {
@@ -3189,7 +3200,10 @@
       {
        "id": "playthrough_10_14",
        "cls": "f_boss f_misc",
-       "item": "soul-of-consumed-oceiros",
+       "item": [
+        "oceiros,-the-consumed-king",
+        "soul-of-consumed-oceiros"
+       ],
        "html": "Defeat <a href=\"https://darksouls3.wiki.fextralife.com/Oceiros,+the+Consumed+King\">Oceiros, the Consumed King</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+Consumed+Oceiros\">Soul of Consumed Oceiros</a>"
       },
       {
@@ -3837,6 +3851,7 @@
       {
        "id": "playthrough_13_42",
        "cls": "f_boss f_misc",
+       "item": "dragonslayer-armour",
        "html": "Defeat the <a href=\"https://darksouls3.wiki.fextralife.com/Dragonslayer+Armour\">Dragonslayer Armour</a>; receive <a href=\"https://darksouls3.wiki.fextralife.com/Soul+of+Dragonslayer+Armour\">Soul of Dragonslayer Armour</a>"
       },
       {
@@ -7068,6 +7083,7 @@
       {
        "id": "checklist_8_1",
        "cls": "",
+       "item": "iudex-gundyr",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Iudex+Gundyr\">Iudex Gundyr</a>: Defeat \"Heir of Fire\" Iudex Gundyr"
       },
       {
@@ -7079,6 +7095,7 @@
       {
        "id": "checklist_8_3",
        "cls": "",
+       "item": "curse-rotted-greatwood",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Curse-Rotted+Greatwood\">Curse-rotted Greatwood</a>: Defeat the Curse-rotted Greatwood"
       },
       {
@@ -7090,6 +7107,7 @@
       {
        "id": "checklist_8_5",
        "cls": "",
+       "item": "abyss-watchers",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Abyss+Watchers\">Lords of Cinder: Abyss Watchers</a>: Defeat the Abyss Watchers, Lords of Cinder"
       },
       {
@@ -7101,16 +7119,19 @@
       {
        "id": "checklist_8_7",
        "cls": "",
+       "item": "high-lord-wolnir",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/High+Lord+Wolnir\">High Lord Wolnir</a>: Defeat High Lord Wolnir"
       },
       {
        "id": "checklist_8_8",
        "cls": "",
+       "item": "old-demon-king",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Old+Demon+King\">Old Demon King</a>: Defeat Old Demon King"
       },
       {
        "id": "checklist_8_9",
        "cls": "",
+       "item": "pontiff-sulyvahn",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Pontiff+Sulyvahn\">Pontiff Sulyvahn</a>: Defeat Pontiff Sulyvahn"
       },
       {
@@ -7128,16 +7149,19 @@
       {
        "id": "checklist_8_12",
        "cls": "",
+       "item": "dancer-of-the-boreal-valley",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Dancer+of+the+Boreal+Valley\">Dancer of the Boreal Valley</a>: Defeat Dancer of the Boreal Valley"
       },
       {
        "id": "checklist_8_13",
        "cls": "",
+       "item": "dragonslayer-armour",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Dragonslayer+Armour\">Dragonslayer Armour</a>: Defeat Dragonslayer Armour"
       },
       {
        "id": "checklist_8_14",
        "cls": "",
+       "item": "oceiros,-the-consumed-king",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Oceiros,+the+Consumed+King\">Oceiros, the Consumed King</a>: Defeat Oceiros, the Consumed King"
       },
       {

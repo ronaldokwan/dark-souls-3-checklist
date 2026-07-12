@@ -275,6 +275,21 @@ test('NG+/NG++ upgrade variants sync to their matching Achievements entry', asyn
   await expect(page.locator('#checklist_5_79')).toBeChecked();
 });
 
+test('defeating a boss syncs to its Achievements entry', async ({ page }) => {
+  // Every Boss Achievements entry is linked to its Playthrough defeat by an
+  // item key. Spot-check a few, including tricky cases.
+  const pairs = [
+    ['#playthrough_6_73', '#checklist_8_5'], // Abyss Watchers
+    ['#playthrough_14_36', '#checklist_8_8'], // Old Demon King (also carries its soul key)
+    ['#playthrough_3_50', '#checklist_8_3'], // Curse-rotted Greatwood (URL-casing mismatch)
+    ['#playthrough_12_45', '#checklist_8_18'], // Nameless King
+  ];
+  for (const [play, ach] of pairs) {
+    await page.locator(play).check();
+    await expect(page.locator(ach)).toBeChecked();
+  }
+});
+
 test('profile modal opens', async ({ page }) => {
   await page.locator('[data-bs-target="#tabOptions"]').click();
   await page.locator('#profileAdd').click();
