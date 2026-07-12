@@ -6,24 +6,37 @@ This checklist was created by adopting the source code from the [Dark Souls 2 Ch
 
 The walkthrough is thanks to [DeathGodGarra's NPC Side Quests Guide V2](https://www.gamefaqs.com/boards/168566-dark-souls-iii/73599466).
 
+## Features
+
+- **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items.
+- **Progress saved** in your browser, with multiple **profiles** for different characters.
+- **Filters** by category (bosses, missables, rings, …) and by journey (NG / NG+ / NG++).
+- **Per-section search** with match highlighting, collapsible sections, and a "hide completed" mode.
+- **Light / dark / auto** theme.
+- **Import/export** your progress as a file or via the clipboard.
+- **Installable and offline** — it's a Progressive Web App, so once loaded it works with no network connection.
+
 ## Project structure
 
 The site is a static, no-build page (works on GitHub Pages) with **no external
 dependencies** — Bootstrap 5, Bootstrap Icons, and everything else are vendored
-under `vendor/`. There is no jQuery.
+under `vendor/`. There is no jQuery. It is an installable PWA that works offline
+once loaded.
 
-| Path                         | Purpose                                                    |
-| ---------------------------- | ---------------------------------------------------------- |
-| `index.html`                 | Page shell (nav, filter toolbar, tabs, modals, options)    |
-| `data/checklist.json`        | **All checklist content** — this is what contributors edit |
-| `js/render.js`               | Renders `data/checklist.json` into the page                |
-| `js/main.js`                 | App logic (progress, profiles, filters, search, themes)    |
-| `css/main.css`               | Custom styles                                              |
-| `vendor/`                    | Self-hosted Bootstrap 5 + Bootstrap Icons                  |
-| `tools/validate.mjs`         | Validates `checklist.json` (run in CI)                     |
-| `tools/extract-content.mjs`  | One-off script that generated the JSON from the old HTML   |
-| `data/checklist.schema.json` | JSON Schema for editor validation of the data              |
-| `tests/`                     | Playwright end-to-end tests                                |
+| Path                            | Purpose                                                    |
+| ------------------------------- | ---------------------------------------------------------- |
+| `index.html`                    | Page shell (nav, filter toolbar, tabs, modals, options)    |
+| `data/checklist.json`           | **All checklist content** — this is what contributors edit |
+| `js/render.js`                  | Renders `data/checklist.json` into the page                |
+| `js/main.js`                    | App logic (progress, profiles, filters, search, themes)    |
+| `css/main.css`                  | Custom styles                                              |
+| `vendor/`                       | Self-hosted Bootstrap 5 + Bootstrap Icons                  |
+| `tools/validate.mjs`            | Validates `checklist.json` (run in CI)                     |
+| `tools/extract-content.mjs`     | One-off script that generated the JSON from the old HTML   |
+| `data/checklist.schema.json`    | JSON Schema for editor validation of the data              |
+| `tests/`                        | Playwright end-to-end tests                                |
+| `manifest.webmanifest`, `sw.js` | PWA manifest + service worker (offline / installable)      |
+| `CONTRIBUTING.md`               | How to contribute                                          |
 
 To run locally, serve the folder over HTTP (the page fetches the JSON), e.g.
 `npm run serve` (or `python -m http.server`) and open the printed URL. Opening
@@ -35,13 +48,19 @@ block `fetch` on `file://`.
 The site itself has no build step. The `package.json` is only dev tooling:
 
 ```
-npm install                 # once, for the test tooling
+npm install                 # once — installs tooling and the git pre-commit hook
 npm run validate            # check data/checklist.json is well-formed
 npm test                    # run the Playwright end-to-end tests
+npm run format              # format the source with Prettier
+npm run serve               # preview locally at the printed URL
 ```
 
-CI (`.github/workflows/ci.yml`) runs both the validator and the tests on every
-push and pull request, so a bad data edit or a broken behaviour fails the build.
+A pre-commit hook (husky + lint-staged) automatically formats staged files and
+validates `data/checklist.json`, so bad data or unformatted code can't be
+committed. CI (`.github/workflows/ci.yml`) runs formatting, validation, and the
+Playwright tests on every push and pull request.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor workflow.
 
 ## Contribution Guide
 
