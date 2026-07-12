@@ -63,7 +63,8 @@
       {
        "id": "playthrough_17_4",
        "cls": "f_gest",
-       "html": "Head back to the fountain and take the path straight ahead. Climb the cliff and rest at the Cemetery of Ash bonfire to receive the Rest gesture"
+       "html": "Head back to the fountain and take the path straight ahead. Climb the cliff and rest at the Cemetery of Ash bonfire to receive the Rest gesture",
+       "item": "enkindle"
       },
       {
        "id": "playthrough_17_5",
@@ -78,7 +79,10 @@
       {
        "id": "playthrough_17_7",
        "cls": "f_boss f_misc",
-       "item": "iudex-gundyr",
+       "item": [
+        "iudex-gundyr",
+        "embrace-the-flame"
+       ],
        "html": "Back on the main path head through the archway and take the sword embedded in the statue. Kill <a href=\"https://darksouls3.wiki.fextralife.com/Iudex+Gundyr\">Iudex Gundyr</a> to receive the <a href=\"https://darksouls3.wiki.fextralife.com/Coiled+Sword\">Coiled Sword</a>"
       },
       {
@@ -542,7 +546,8 @@
       {
        "id": "playthrough_3_32",
        "cls": "f_cov f_misc",
-       "html": "Walk through a large archway of the house, open a door, and walk into the room. Grab <a href=\"https://darksouls3.wiki.fextralife.com/Charcoal+Pine+Resin\">Charcoal Pine Resin&nbsp;x2</a> from a corpse near the wall. Cut down the bodies hanging over the staircase to get a <a href=\"https://darksouls3.wiki.fextralife.com/Large+Soul+of+a+Deserted+Corpse\">Large Soul of a Deserted Corpse</a>. Drop down from a hole in the room. In this hidden room, discover the <a href=\"https://darksouls3.wiki.fextralife.com/Warrior+of+Sunlight\">Warrior of Sunlight</a> covenant and consume <a href=\"https://darksouls3.wiki.fextralife.com/Estus+Soup\">Estus Soup</a>"
+       "html": "Walk through a large archway of the house, open a door, and walk into the room. Grab <a href=\"https://darksouls3.wiki.fextralife.com/Charcoal+Pine+Resin\">Charcoal Pine Resin&nbsp;x2</a> from a corpse near the wall. Cut down the bodies hanging over the staircase to get a <a href=\"https://darksouls3.wiki.fextralife.com/Large+Soul+of+a+Deserted+Corpse\">Large Soul of a Deserted Corpse</a>. Drop down from a hole in the room. In this hidden room, discover the <a href=\"https://darksouls3.wiki.fextralife.com/Warrior+of+Sunlight\">Warrior of Sunlight</a> covenant and consume <a href=\"https://darksouls3.wiki.fextralife.com/Estus+Soup\">Estus Soup</a>",
+       "item": "warrior-of-sunlight"
       },
       {
        "id": "playthrough_3_33",
@@ -595,7 +600,10 @@
       {
        "id": "playthrough_3_15",
        "cls": "f_cov f_misc f_weap f_miss",
-       "item": "wargod-wooden-shield",
+       "item": [
+        "wargod-wooden-shield",
+        "mound-makers"
+       ],
        "html": "Examine the Cage Carrier from behind. After you get out of your cage, walk towards the light. Grab the <a href=\"https://darksouls3.wiki.fextralife.com/Wargod+Wooden+Shield\">Wargod Wooden Shield</a>. Talk to <a href=\"https://darksouls3.wiki.fextralife.com/Holy+Knight+Hodrick\">Holy Knight Hodrick</a> to receive the <a href=\"https://darksouls3.wiki.fextralife.com/Mound-Maker\">Mound-makers</a> covenant and a <a href=\"https://darksouls3.wiki.fextralife.com/Homeward+Bone\">Homeward Bone</a>. (If you have reached the Curse-rotted Greatwood before reaching the Cage Carrier, Hodrick dies and the Cage Carrier becomes hostile. Thus, you cannot acquire the covenant until later through Sirris' sidequest.) Quit and reload to reappear near the Cage Carrier. Retrieve the ring if you missed it before"
       },
       {
@@ -2574,7 +2582,8 @@
        "cls": "f_cov f_gem f_misc f_ring",
        "item": [
         "archdeacon-mcdonnell",
-        "ring-of-favor"
+        "ring-of-favor",
+        "aldrich-faithful"
        ],
        "html": "Once you enter the building after the giant courtyard, there will be an illusory wall on the left side that reveals a long ladder down. Head down and defeat two of <a href=\"https://darksouls3.wiki.fextralife.com/Sulyvahn's+Beast\">Sulyvahn's Beasts</a> (killing them grants you the <a href=\"https://darksouls3.wiki.fextralife.com/Ring+of+Favor\">Ring of Favor</a>) and interact with <a href=\"https://darksouls3.wiki.fextralife.com/Archdeacon+McDonnell\">Archdeacon McDonnell</a> to gain the <a href=\"https://darksouls3.wiki.fextralife.com/Aldrich+Faithful\">Aldrich Faithful</a> covenant. You can also find <a href=\"https://darksouls3.wiki.fextralife.com/Human+Dregs\">Human Dregs</a>, a <a href=\"https://darksouls3.wiki.fextralife.com/Deep+Gem\">Deep Gem</a>, and the Water Reserve bonfire in this room"
       },
@@ -2635,7 +2644,8 @@
       {
        "id": "playthrough_8_1",
        "cls": "f_cov",
-       "html": "Use the lift to reach the Anor Londo bonfire. Run back down the stairs and you'll be able to see a tower in the distance. Walk across the sky on an invisible floor (don't worry, you can't fall off at the sides) and continue walking straight until lined up with the tower, then walk towards it. You'll find <a href=\"https://darksouls3.wiki.fextralife.com/Company+Captain+Yorshka\">Company Captain Yorshka</a> who will allow you into the <a href=\"https://darksouls3.wiki.fextralife.com/Blades+of+the+Darkmoon\">Blade of the Darkmoon</a> covenant if you perform the Darkmoon Loyalty gesture"
+       "html": "Use the lift to reach the Anor Londo bonfire. Run back down the stairs and you'll be able to see a tower in the distance. Walk across the sky on an invisible floor (don't worry, you can't fall off at the sides) and continue walking straight until lined up with the tower, then walk towards it. You'll find <a href=\"https://darksouls3.wiki.fextralife.com/Company+Captain+Yorshka\">Company Captain Yorshka</a> who will allow you into the <a href=\"https://darksouls3.wiki.fextralife.com/Blades+of+the+Darkmoon\">Blade of the Darkmoon</a> covenant if you perform the Darkmoon Loyalty gesture",
+       "item": "blade-of-the-darkmoon"
       },
       {
        "id": "playthrough_8_2",
@@ -3214,7 +3224,8 @@
       {
        "id": "playthrough_10_16",
        "cls": "f_tit",
-       "html": "To the left of the gesture is a chest containing a <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Scale\">Titanite Scale</a>. Further on is a second chest holding another <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Scale\">Titanite Scale</a>. Advance through the illusory wall behind this chest to enter the Untended Graves"
+       "html": "To the left of the gesture is a chest containing a <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Scale\">Titanite Scale</a>. Further on is a second chest holding another <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Scale\">Titanite Scale</a>. Advance through the illusory wall behind this chest to enter the Untended Graves",
+       "item": "untended-graves"
       }
      ]
     },
@@ -3346,7 +3357,8 @@
       {
        "id": "playthrough_12_1",
        "cls": "f_none",
-       "html": "Return to the area in the Irithyll Dungeon with the dragon statue and perform the Path of the Dragon gesture to be teleported to Archdragon Peak"
+       "html": "Return to the area in the Irithyll Dungeon with the dragon statue and perform the Path of the Dragon gesture to be teleported to Archdragon Peak",
+       "item": "archdragon-peak"
       },
       {
        "id": "playthrough_12_2",
@@ -4258,12 +4270,14 @@
       {
        "id": "playthrough_19_3",
        "cls": "f_none",
-       "html": "Ending 1: If you did not follow the Yoel/Yuria quest line, simply interacting with the First Flame results in the standard \"To Link the First Flame\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">To Link the First Flame</a> achievement (Note: If you did follow the quest line and still want Ending 1, let the Fire Keeper heal the Dark Sigil first)"
+       "html": "Ending 1: If you did not follow the Yoel/Yuria quest line, simply interacting with the First Flame results in the standard \"To Link the First Flame\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">To Link the First Flame</a> achievement (Note: If you did follow the quest line and still want Ending 1, let the Fire Keeper heal the Dark Sigil first)",
+       "item": "to-link-the-first-flame"
       },
       {
        "id": "playthrough_19_4",
        "cls": "f_miss",
-       "html": "Ending 2: If you obtained the Eyes of a Fire Keeper from the Untended Graves area and gave them to the Fire Keeper, you can use a summon sign next to the bonfire to trigger the \"The End of Fire\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">The End of Fire</a> achievement"
+       "html": "Ending 2: If you obtained the Eyes of a Fire Keeper from the Untended Graves area and gave them to the Fire Keeper, you can use a summon sign next to the bonfire to trigger the \"The End of Fire\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">The End of Fire</a> achievement",
+       "item": "the-end-of-fire"
       },
       {
        "id": "playthrough_19_5",
@@ -4273,7 +4287,8 @@
       {
        "id": "playthrough_19_6",
        "cls": "f_miss",
-       "html": "Ending 4: If you followed the Yoel/Yuria quest line to this point and have all 8 Dark Sigils (5 from Yoel and 3 from \"marrying\" Anri), interacting with the First Flame will wrest it from its mantle, triggering the \"The Usurpation of Fire\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">The Usurpation of Fire</a> achievement"
+       "html": "Ending 4: If you followed the Yoel/Yuria quest line to this point and have all 8 Dark Sigils (5 from Yoel and 3 from \"marrying\" Anri), interacting with the First Flame will wrest it from its mantle, triggering the \"The Usurpation of Fire\" ending. You will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Trophy+&+Achievement+Guide\">The Usurpation of Fire</a> achievement",
+       "item": "the-usurpation-of-fire"
       }
      ]
     },
@@ -7060,17 +7075,20 @@
       {
        "id": "checklist_7_1",
        "cls": "",
-       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">To Link the First Flame</a>: Reach \"To Link the First Flame\" ending"
+       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">To Link the First Flame</a>: Reach \"To Link the First Flame\" ending",
+       "item": "to-link-the-first-flame"
       },
       {
        "id": "checklist_7_2",
        "cls": "",
-       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">The End of Fire</a>: Reach \"The End of Fire\" ending"
+       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">The End of Fire</a>: Reach \"The End of Fire\" ending",
+       "item": "the-end-of-fire"
       },
       {
        "id": "checklist_7_3",
        "cls": "",
-       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">The Usurpation of Fire</a>: Reach \"The Usurpation of Fire\" ending"
+       "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Endings\">The Usurpation of Fire</a>: Reach \"The Usurpation of Fire\" ending",
+       "item": "the-usurpation-of-fire"
       }
      ]
     },
@@ -7214,22 +7232,26 @@
       {
        "id": "checklist_9_4",
        "cls": "",
-       "html": "<b>Untended Graves</b>: Reach the Untended Graves"
+       "html": "<b>Untended Graves</b>: Reach the Untended Graves",
+       "item": "untended-graves"
       },
       {
        "id": "checklist_9_5",
        "cls": "",
-       "html": "<b>Archdragon Peak</b>: Reach Archdragon Peak"
+       "html": "<b>Archdragon Peak</b>: Reach Archdragon Peak",
+       "item": "archdragon-peak"
       },
       {
        "id": "checklist_9_6",
        "cls": "",
-       "html": "<b>Enkindle</b>: Light a bonfire flame for the first time"
+       "html": "<b>Enkindle</b>: Light a bonfire flame for the first time",
+       "item": "enkindle"
       },
       {
        "id": "checklist_9_7",
        "cls": "",
-       "html": "<b>Embrace the Flame</b>: Become a Host of Embers for the first time"
+       "html": "<b>Embrace the Flame</b>: Become a Host of Embers for the first time",
+       "item": "embrace-the-flame"
       }
      ]
     },
@@ -7242,7 +7264,8 @@
       {
        "id": "checklist_10_1",
        "cls": "",
-       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Warrior+of+Sunlight\">Warrior of Sunlight</a>: Discover Warrior of Sunlight covenant"
+       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Warrior+of+Sunlight\">Warrior of Sunlight</a>: Discover Warrior of Sunlight covenant",
+       "item": "warrior-of-sunlight"
       },
       {
        "id": "checklist_10_2",
@@ -7259,7 +7282,8 @@
       {
        "id": "checklist_10_4",
        "cls": "",
-       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Blades+of+the+Darkmoon\">Blade of the Darkmoon</a>: Discover Blade of the Darkmoon covenant"
+       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Blades+of+the+Darkmoon\">Blade of the Darkmoon</a>: Discover Blade of the Darkmoon covenant",
+       "item": "blade-of-the-darkmoon"
       },
       {
        "id": "checklist_10_5",
@@ -7270,7 +7294,8 @@
       {
        "id": "checklist_10_6",
        "cls": "",
-       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Mound-Makers\">Mound-makers </a>: Discover Mound-makers covenant"
+       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Mound-Makers\">Mound-makers </a>: Discover Mound-makers covenant",
+       "item": "mound-makers"
       },
       {
        "id": "checklist_10_7",
@@ -7281,7 +7306,8 @@
       {
        "id": "checklist_10_8",
        "cls": "",
-       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Aldrich+Faithful\">Aldrich Faithful</a>: Discover Aldrich Faithful covenant"
+       "html": "Covenant: <a href=\"https://darksouls3.wiki.fextralife.com/Aldrich+Faithful\">Aldrich Faithful</a>: Discover Aldrich Faithful covenant",
+       "item": "aldrich-faithful"
       },
       {
        "id": "checklist_10_9",
