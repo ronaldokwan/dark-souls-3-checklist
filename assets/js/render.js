@@ -5,11 +5,16 @@
  */
 function itemHtml(item) {
   const cls = item.cls ? ' class="' + item.cls + '"' : '';
+  // Cross-tab link key(s): entries sharing a key mirror their checked state.
+  const link = item.item
+    ? ' data-item="' + (Array.isArray(item.item) ? item.item.join(' ') : item.item) + '"'
+    : '';
   return (
     '<li data-id="' +
     item.id +
     '"' +
     cls +
+    link +
     '>' +
     '<div class="checkbox"><label>' +
     '<input type="checkbox" id="' +

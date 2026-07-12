@@ -30,8 +30,17 @@ Each item looks like:
   Use the next unused number in ascending order.
 - **`cls`** — space-separated filter/journey classes. The full list of filter
   classes and the NG+ visibility classes is documented in the
-  [README](README.md#contribution-guide).
+  [README](README.md#contributing).
 - **`html`** — the entry text; inline HTML such as `<a href="...">` is allowed.
+- **`item`** _(optional)_ — a cross-tab link key. Entries in different tabs that
+  represent the **same real item** (e.g. a weapon in the Playthrough and in the
+  Weapons/Shields list) share the same key and mirror their checked state. Use a
+  kebab-case slug, with a `+N` suffix for upgrade tiers (e.g. `"uchigatana"`,
+  `"ring-of-favor+1"`). A key may be an array when one entry grants several
+  items (`"item": ["claymore", "club"]`). A key must resolve to **at most one
+  entry per tab**; `npm run validate` enforces this and warns about keys used in
+  only one tab (which link nothing). Leave `item` off for standalone entries —
+  stackables (e.g. Homeward Bone) and Misc/Crow trades deliberately have none.
 
 `data/checklist.json` references a JSON Schema
 ([`data/checklist.schema.json`](data/checklist.schema.json)), so editors like

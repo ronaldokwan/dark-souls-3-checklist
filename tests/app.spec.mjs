@@ -104,7 +104,9 @@ test('section Toggle checks all, Clear unchecks all', async ({ page }) => {
   const toggle = page.locator('#Cemetery_of_Ash .btn-section-toggle');
   const clear = page.locator('#Cemetery_of_Ash .btn-section-clear');
   await toggle.scrollIntoViewIfNeeded();
-  const total = await page.locator('#Cemetery_of_Ash_col .checkbox input').count();
+  // Toggle/Clear only act on items visible under the current journey filter, so
+  // count the visible checkboxes (NG+/NG++ entries are hidden on NG).
+  const total = await page.locator('#Cemetery_of_Ash_col .checkbox input:visible').count();
 
   await clear.click();
   await toggle.click();
@@ -112,6 +114,165 @@ test('section Toggle checks all, Clear unchecks all', async ({ page }) => {
 
   await clear.click();
   await expect(page.locator('#Cemetery_of_Ash_col .checkbox input:checked')).toHaveCount(0);
+});
+
+test('checking a unique item mirrors to its twin in another tab (bidirectional)', async ({
+  page,
+}) => {
+  // Estus Ring: playthrough_1_16 (Playthrough) <-> checklist_5_3 (Achievements).
+  const play = page.locator('#playthrough_1_16');
+  const ach = page.locator('#checklist_5_3');
+
+  await play.check();
+  await expect(ach).toBeChecked(); // Playthrough -> Achievements
+
+  await play.uncheck();
+  await expect(ach).not.toBeChecked();
+
+  // Reverse direction: check it from the Achievements tab.
+  await page.locator('[data-bs-target="#tabChecklists"]').click();
+  await ach.check();
+  await expect(play).toBeChecked(); // Achievements -> Playthrough
+
+  // Persists across reload for both.
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(200);
+  await expect(page.locator('#playthrough_1_16')).toBeChecked();
+  await expect(page.locator('#checklist_5_3')).toBeChecked();
+});
+
+test('stackable items are not chained together', async ({ page }) => {
+  // Homeward Bone appears 24x in the Playthrough alone, so its wiki URL resolves
+  // to many ids per tab and must never be linked. Checking one must not cascade
+  // into a pile of other boxes across the page.
+  const before = await page.locator('.checkbox input:checked').count();
+  const bones = page.locator('#tabPlaythrough li.f_misc input[type="checkbox"]');
+  // Find a Homeward Bone row and check exactly one box.
+  const bone = page
+    .locator('#tabPlaythrough li', { hasText: 'Homeward Bone' })
+    .locator('input[type="checkbox"]')
+    .first();
+  await bone.check();
+  const after = await page.locator('.checkbox input:checked').count();
+  expect(after).toBe(before + 1); // only the one we clicked
+  void bones;
+});
+
+test('section Clear propagates to linked twins in other tabs', async ({ page }) => {
+  const play = page.locator('#playthrough_1_16'); // Estus Ring
+  const ach = page.locator('#checklist_5_3');
+
+  await play.check();
+  await expect(ach).toBeChecked();
+
+  // Clear the whole Playthrough section that contains the Estus Ring.
+  await page.locator('#playthrough_1_16').evaluate((cb) => {
+    const container = cb.closest('[id$="_col"]');
+    container.previousElementSibling.querySelector('.btn-section-clear').click();
+  });
+
+  await expect(play).not.toBeChecked();
+  await expect(ach).not.toBeChecked(); // propagated across the tab boundary
+});
+
+test('section Toggle on NG does not check hidden NG+/NG++ items', async ({ page }) => {
+  // Cemetery of Ash contains f_ring s_ng+ (playthrough_17_16) and s_ng++
+  // (playthrough_17_17) entries that are hidden while on NG. Toggling the
+  // section must not check them.
+  await page.locator('#Cemetery_of_Ash_col').evaluate((el) => el.classList.add('show'));
+  const toggle = page.locator('#Cemetery_of_Ash .btn-section-toggle');
+  await toggle.scrollIntoViewIfNeeded();
+  await toggle.click();
+
+  // A normal, visible NG item in the section is checked...
+  await expect(page.locator('#playthrough_17_1')).toBeChecked();
+  // ...but the journey-only entries (hidden on NG) are left alone.
+  await expect(page.locator('#playthrough_17_16')).not.toBeChecked();
+  await expect(page.locator('#playthrough_17_17')).not.toBeChecked();
+
+  // They only become visible on NG++, still unchecked.
+  await page.locator('label[for="ng3"]').click();
+  await expect(page.locator('#playthrough_17_16')).not.toBeChecked();
+  await expect(page.locator('#playthrough_17_17')).not.toBeChecked();
+});
+
+test('section Toggle on NG+ checks NG+ items but not hidden NG++ items', async ({ page }) => {
+  // On NG+ (journey 2): s_ng+ entries are visible, s_ng++ entries are still
+  // hidden. Toggling the section should check the former but not the latter.
+  await page.locator('label[for="ng2"]').click();
+  await page.locator('#Cemetery_of_Ash_col').evaluate((el) => el.classList.add('show'));
+  const toggle = page.locator('#Cemetery_of_Ash .btn-section-toggle');
+  await toggle.scrollIntoViewIfNeeded();
+  await toggle.click();
+
+  await expect(page.locator('#playthrough_17_16')).toBeChecked(); // s_ng+ (visible on NG+)
+  await expect(page.locator('#playthrough_17_17')).not.toBeChecked(); // s_ng++ (still hidden)
+
+  // Reveal NG++ items; the s_ng++ entry is still unchecked.
+  await page.locator('label[for="ng3"]').click();
+  await expect(page.locator('#playthrough_17_17')).not.toBeChecked();
+});
+
+test('Collapse/Expand All toggles every section in the active tab and persists', async ({
+  page,
+}) => {
+  const btn = page.locator('#collapseAllToggle');
+  const openCount = () => page.locator('#tabPlaythrough [id$="_col"].show').count();
+
+  expect(await openCount()).toBeGreaterThan(0);
+  await expect(btn).toContainText('Collapse All');
+
+  await btn.click();
+  expect(await openCount()).toBe(0);
+  await expect(btn).toContainText('Expand All');
+
+  await btn.click();
+  expect(await openCount()).toBeGreaterThan(0);
+  await expect(btn).toContainText('Collapse All');
+
+  // Collapse all, then reload — sections stay collapsed (state persisted).
+  await btn.click();
+  expect(await openCount()).toBe(0);
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(200);
+  expect(await page.locator('#tabPlaythrough [id$="_col"].show').count()).toBe(0);
+  await expect(page.locator('#collapseAllToggle')).toContainText('Expand All');
+});
+
+test('Misc/Crow (Pickle Pee) trades are never linked to other tabs', async ({ page }) => {
+  // Loretta's Bone shares a wiki URL between playthrough_3_8 (found) and
+  // crow_1_4 (crow trade), but trading is a separate acquisition — no sync.
+  const play = page.locator('#playthrough_3_8');
+  const crow = page.locator('#crow_1_4');
+
+  await play.check();
+  await expect(crow).not.toBeChecked();
+  await play.uncheck();
+
+  await page.locator('[data-bs-target="#tabMisc"]').click();
+  await crow.check();
+  await expect(play).not.toBeChecked();
+
+  // Excluding Crow must not break other links that happen to share a crow URL:
+  // Eleonora still syncs playthrough_9_6 <-> weapons_1_87.
+  await page.locator('[data-bs-target="#tabPlaythrough"]').click();
+  await page.locator('#playthrough_9_6').check();
+  await expect(page.locator('#weapons_1_87')).toBeChecked();
+});
+
+test('NG+/NG++ upgrade variants sync to their matching Achievements entry', async ({ page }) => {
+  // Ring of Favor+1 (s_ng+, visible on NG+) must sync to the Achievements "+1"
+  // entry only — not the base or +2, which share the same wiki page.
+  await page.locator('label[for="ng2"]').click();
+  await page.locator('#playthrough_15_72').check();
+  await expect(page.locator('#checklist_5_78')).toBeChecked(); // Ring of Favor+1
+  await expect(page.locator('#checklist_5_7')).not.toBeChecked(); // base
+  await expect(page.locator('#checklist_5_79')).not.toBeChecked(); // +2
+
+  // Ring of Favor+2 (s_ng++, visible on NG++) syncs to the "+2" entry.
+  await page.locator('label[for="ng3"]').click();
+  await page.locator('#playthrough_5_56').check();
+  await expect(page.locator('#checklist_5_79')).toBeChecked();
 });
 
 test('profile modal opens', async ({ page }) => {

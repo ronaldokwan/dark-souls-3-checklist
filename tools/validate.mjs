@@ -31,9 +31,15 @@ const JOURNEY_CLASS = /^(h_ng\++|s_ng\++)$/;
 const SECTION_TYPES = new Set(['items', 'groups', 'raw']);
 
 const errors = [];
+const warnings = [];
 function err(where, msg) {
   errors.push(`${where}: ${msg}`);
 }
+
+// Cross-tab link keys: key -> Map(tabKey -> [ids]). A key must resolve to at
+// most one entry per tab (else toggling would chain the wrong boxes), and links
+// nothing unless it appears in two or more tabs.
+const itemKeys = new Map();
 
 let data;
 try {
@@ -62,6 +68,19 @@ function validateItem(item, where, key) {
 
   if (typeof item.html !== 'string' || item.html.trim() === '') {
     err(where + ' [' + item.id + ']', 'html must be a non-empty string');
+  }
+  if (item.item !== undefined) {
+    const keys = Array.isArray(item.item) ? item.item : [item.item];
+    if (keys.length === 0 || keys.some((k) => typeof k !== 'string' || k === '')) {
+      err(where + ' [' + item.id + ']', 'item must be a non-empty string or array of strings');
+    } else {
+      keys.forEach((k) => {
+        if (!itemKeys.has(k)) itemKeys.set(k, new Map());
+        const perTab = itemKeys.get(k);
+        if (!perTab.has(key)) perTab.set(key, []);
+        perTab.get(key).push(item.id);
+      });
+    }
   }
   if (item.cls !== undefined && item.cls !== '') {
     if (typeof item.cls !== 'string')
@@ -123,6 +142,21 @@ data.tabs.forEach(function (tab, ti) {
   });
 });
 
+// Cross-tab link keys: at most one entry per tab; must span >= 2 tabs to link.
+itemKeys.forEach((perTab, k) => {
+  perTab.forEach((ids, tabKey) => {
+    if (ids.length > 1) {
+      err(
+        `item key "${k}"`,
+        `resolves to ${ids.length} entries in "${tabKey}" (${ids.join(', ')})`
+      );
+    }
+  });
+  if (perTab.size < 2) {
+    warnings.push(`item key "${k}" is only used in "${[...perTab.keys()][0]}" — it links nothing`);
+  }
+});
+
 if (errors.length) {
   console.error(`✗ checklist.json has ${errors.length} problem(s):\n`);
   errors.forEach(function (e) {
@@ -131,4 +165,12 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`✓ checklist.json OK — ${data.tabs.length} tabs, ${itemCount} items, all ids unique.`);
+if (warnings.length) {
+  console.warn(`⚠ ${warnings.length} warning(s):`);
+  warnings.forEach((w) => console.warn('  - ' + w));
+}
+
+console.log(
+  `✓ checklist.json OK — ${data.tabs.length} tabs, ${itemCount} items, ` +
+    `${itemKeys.size} link keys, all ids unique.`
+);

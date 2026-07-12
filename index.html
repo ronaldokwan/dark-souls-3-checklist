@@ -144,8 +144,8 @@
         </p>
       </div>
 
-      <!-- Hide Completed toggle (shown on checklist tabs only) -->
-      <div id="btnHideCompleted" class="mb-3">
+      <!-- Checklist controls (shown on checklist tabs only) -->
+      <div id="btnHideCompleted" class="d-flex flex-wrap gap-2 mb-3">
         <input type="checkbox" class="btn-check" id="toggleHideCompleted" autocomplete="off" />
         <label class="btn btn-outline-secondary" for="toggleHideCompleted">
           <span class="filter-eye" aria-hidden="true"
@@ -153,6 +153,9 @@
           ></span>
           Hide Completed
         </label>
+        <button type="button" id="collapseAllToggle" class="btn btn-outline-secondary">
+          <i class="bi bi-arrows-collapse" aria-hidden="true"></i> Collapse All
+        </button>
       </div>
 
       <div class="tab-content">

@@ -71,6 +71,14 @@ function toggleFilteredClasses(rawClass) {
   });
 }
 
+// A playthrough checkbox that the current journey/category filters hide. Bulk
+// section actions and totals ignore these so they only ever touch the items
+// actually visible in the current view (e.g. NG+/NG++ entries while on NG).
+function isFilteredOut(cb) {
+  const li = cb.closest('li');
+  return /^playthrough_/.test(cb.id) && !!li && canFilter(li);
+}
+
 /* ----------------------------------------------------------------------
  * Totals (ported from the original jQuery implementation)
  * -------------------------------------------------------------------- */
@@ -99,8 +107,7 @@ function calculateTotals() {
       let checked = 0;
       if (container) {
         $all('.checkbox input[type="checkbox"]', container).forEach((cb) => {
-          const li = cb.closest('li');
-          if (/^playthrough_/.test(cb.id) && li && canFilter(li)) return;
+          if (isFilteredOut(cb)) return;
           count++;
           overallCount++;
           if (cb.checked) {
@@ -145,6 +152,53 @@ function refreshExportText() {
 }
 
 /* ----------------------------------------------------------------------
+ * Cross-tab item links
+ * ----------------------------------------------------------------------
+ * The same real item often appears in more than one tab (e.g. a weapon in the
+ * Playthrough walkthrough and again in the Weapons/Shields collection). Those
+ * are separate checkboxes with separate ids, but they represent one thing, so
+ * checking one should check the other.
+ *
+ * The link is declared in the data: entries that represent the same item carry
+ * the same `item` key(s), emitted here as the `data-item` attribute (a single
+ * key, or several space-separated when one entry grants multiple items). We just
+ * group ids by shared key and mirror them. `tools/validate.mjs` guarantees a key
+ * never resolves to more than one entry per tab, so no runtime guardrail (for
+ * stackables, Crow trades, or upgrade variants) is needed here — those are
+ * simply left without an `item` key in the data.
+ * -------------------------------------------------------------------- */
+let linkGroups = new Map(); // id -> Set(linked ids in other tabs)
+
+function buildLinkGroups() {
+  const byKey = new Map(); // item key -> [ids]
+  $all('li[data-item]').forEach((li) => {
+    const id = li.getAttribute('data-id');
+    const cb = document.getElementById(id);
+    if (!cb || !cb.matches('.checkbox input[type="checkbox"]')) return;
+    li.getAttribute('data-item')
+      .split(/\s+/)
+      .forEach((slug) => {
+        if (!slug) return;
+        if (!byKey.has(slug)) byKey.set(slug, []);
+        byKey.get(slug).push(id);
+      });
+  });
+
+  const links = new Map();
+  byKey.forEach((ids) => {
+    if (ids.length < 2) return;
+    ids.forEach((id) => {
+      const set = links.get(id) || new Set();
+      ids.forEach((other) => {
+        if (other !== id) set.add(other);
+      });
+      links.set(id, set);
+    });
+  });
+  return links;
+}
+
+/* ----------------------------------------------------------------------
  * Checkbox state
  * -------------------------------------------------------------------- */
 function setLabelCompleted(cb, on) {
@@ -152,10 +206,32 @@ function setLabelCompleted(cb, on) {
   if (label) label.classList.toggle('completed', on);
 }
 
-function onCheckboxChange(cb) {
-  const checked = cb.checked;
+function applyCheckState(cb, checked) {
+  cb.checked = checked;
   cur().checklistData[cb.id] = checked;
   setLabelCompleted(cb, checked);
+}
+
+// Set a checkbox to `checked` and mirror the state onto its cross-tab twins
+// (unique 1:1 links only). Returns true if anything actually changed.
+function setWithLinks(cb, checked) {
+  let changed = cb.checked !== checked || cur().checklistData[cb.id] !== checked;
+  applyCheckState(cb, checked);
+  const linked = linkGroups.get(cb.id);
+  if (linked) {
+    linked.forEach((id) => {
+      const twin = document.getElementById(id);
+      if (twin && twin.checked !== checked) {
+        applyCheckState(twin, checked);
+        changed = true;
+      }
+    });
+  }
+  return changed;
+}
+
+function onCheckboxChange(cb) {
+  setWithLinks(cb, cb.checked);
   save();
   calculateTotals();
 }
@@ -175,16 +251,13 @@ function setCheckboxesFromProfile() {
   });
 }
 
-// Batch update used by section Toggle/Clear buttons and NG+.
+// Batch update used by the section Toggle/Clear buttons. Also mirrors each
+// change onto cross-tab twins, so clearing/toggling a section keeps linked
+// items in other tabs in sync.
 function setBoxes(boxes, wantFn) {
   let changed = false;
   boxes.forEach((cb) => {
-    const want = wantFn(cb);
-    if (want === cb.checked) return;
-    cb.checked = want;
-    cur().checklistData[cb.id] = want;
-    setLabelCompleted(cb, want);
-    changed = true;
+    if (setWithLinks(cb, wantFn(cb))) changed = true;
   });
   if (changed) {
     save();
@@ -248,6 +321,8 @@ function restoreState(name) {
       fire(el, 'change');
     }
   });
+
+  updateCollapseAllBtn();
 }
 
 function populateChecklists() {
@@ -257,7 +332,7 @@ function populateChecklists() {
 
 function updateHideCompletedVisibility(activeTabId) {
   const btn = document.getElementById('btnHideCompleted');
-  if (btn) btn.style.display = CHECKLIST_TABS.indexOf(activeTabId) !== -1 ? '' : 'none';
+  if (btn) btn.classList.toggle('d-none', CHECKLIST_TABS.indexOf(activeTabId) === -1);
 }
 
 /* ----------------------------------------------------------------------
@@ -572,6 +647,63 @@ function wireHideCompleted() {
 }
 
 /* ----------------------------------------------------------------------
+ * Collapse / expand all sections in the active tab
+ * -------------------------------------------------------------------- */
+function sectionTriggers(scope) {
+  return $all('[data-bs-toggle="collapse"]', scope).filter((t) => {
+    const sel = t.getAttribute('data-bs-target') || t.getAttribute('href');
+    return sel && /_col$/.test(sel);
+  });
+}
+
+function anySectionOpen(scope) {
+  return sectionTriggers(scope).some((t) => {
+    const target = document.querySelector(
+      t.getAttribute('data-bs-target') || t.getAttribute('href')
+    );
+    return target && target.classList.contains('show');
+  });
+}
+
+// Set every section in `scope` open/closed at once (no animation), mirroring the
+// direct class manipulation restoreState uses, and persist the collapsed state.
+function setAllSectionsCollapsed(scope, collapsed) {
+  sectionTriggers(scope).forEach((trigger) => {
+    const sel = trigger.getAttribute('data-bs-target') || trigger.getAttribute('href');
+    const target = document.querySelector(sel);
+    if (!target) return;
+    target.classList.toggle('show', !collapsed);
+    trigger.classList.toggle('collapsed', collapsed);
+    trigger.setAttribute('aria-expanded', String(!collapsed));
+    cur().collapsed[sel] = collapsed;
+  });
+  save();
+}
+
+// Label the button with the action it will perform next.
+function updateCollapseAllBtn() {
+  const btn = document.getElementById('collapseAllToggle');
+  if (!btn) return;
+  const pane = document.querySelector('.tab-pane.active');
+  const open = pane ? anySectionOpen(pane) : false;
+  btn.innerHTML = open
+    ? '<i class="bi bi-arrows-collapse" aria-hidden="true"></i> Collapse All'
+    : '<i class="bi bi-arrows-expand" aria-hidden="true"></i> Expand All';
+}
+
+function wireCollapseAll() {
+  const btn = document.getElementById('collapseAllToggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const pane = document.querySelector('.tab-pane.active');
+    if (!pane) return;
+    // If any section is open, collapse them all; otherwise expand them all.
+    setAllSectionsCollapsed(pane, anySectionOpen(pane));
+    updateCollapseAllBtn();
+  });
+}
+
+/* ----------------------------------------------------------------------
  * Collapse / tab persistence (event delegation)
  * -------------------------------------------------------------------- */
 function wireCollapseAndTabs() {
@@ -579,12 +711,14 @@ function wireCollapseAndTabs() {
     if (e.target.id && /_col$/.test(e.target.id)) {
       cur().collapsed['#' + e.target.id] = false;
       save();
+      updateCollapseAllBtn();
     }
   });
   document.addEventListener('hidden.bs.collapse', (e) => {
     if (e.target.id && /_col$/.test(e.target.id)) {
       cur().collapsed['#' + e.target.id] = true;
       save();
+      updateCollapseAllBtn();
     }
   });
 
@@ -594,6 +728,7 @@ function wireCollapseAndTabs() {
       cur().current_tab = target;
       save();
       updateHideCompletedVisibility(target.replace('#', ''));
+      updateCollapseAllBtn();
       if (target === '#tabOptions') refreshExportText();
     });
   });
@@ -632,7 +767,11 @@ function wireChecklistDelegation() {
     const h3 = btn.closest('h3');
     const container = h3 ? h3.nextElementSibling : null;
     if (!container) return;
-    const boxes = $all('.checkbox input[type="checkbox"]', container);
+    // Only act on items visible under the current filters, so a Toggle/Clear on
+    // NG never touches hidden NG+/NG++ entries (they'd reappear pre-checked).
+    const boxes = $all('.checkbox input[type="checkbox"]', container).filter(
+      (cb) => !isFilteredOut(cb)
+    );
     if (btn.classList.contains('btn-section-toggle')) {
       setBoxes(boxes, (cb) => !cb.checked);
     } else {
@@ -669,11 +808,14 @@ export function initApp() {
     if (themePref() === 'auto') applyTheme();
   });
 
+  linkGroups = buildLinkGroups();
+
   wireProfiles();
   wireImportExport();
   wireFilters();
   wireHideCompleted();
   wireCollapseAndTabs();
+  wireCollapseAll();
   wireScroll();
   wireChecklistDelegation();
 

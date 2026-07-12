@@ -14,8 +14,9 @@ the browser.
 
 - **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items.
 - **Progress saved** in your browser, with multiple **profiles** for different characters.
+- **Cross-tab sync** — check an item once (a weapon, ring, spell, …) and it's ticked everywhere it appears, across the Playthrough and the collection tabs.
 - **Filters** by category (bosses, missables, rings, …) and by journey (NG / NG+ / NG++).
-- **Per-section search** with match highlighting, collapsible sections, and a "hide completed" mode.
+- **Per-section search** with match highlighting, collapsible sections (with expand/collapse all), and a "hide completed" mode.
 - **Light / dark / auto** theme.
 - **Import/export** your progress as a file or via the clipboard.
 - **Installable and offline** — it's a Progressive Web App, so once loaded it works with no network connection.
@@ -85,7 +86,9 @@ being hand-written HTML. Here is a sample item:
 The **id** is a unique ID used to store the user's progress. For example,
 _**playthrough_13_20**_ is the 20th task in zone 13. New ids must be used in
 ascending order, but you can place the new entries anywhere within a zone. The
-**html** field may contain links and other inline markup.
+**html** field may contain links and other inline markup. An optional **item**
+field links the same real item across tabs — see
+[Linking the same item](#linking-the-same-item-across-tabs) below.
 
 The **cls** field is used for the filtering system. This task provides the user
 with a gem and a consumable, so we use **f_gem** and **f_misc**. The full list of
@@ -122,6 +125,26 @@ In addition to the filter classes, there is a second type of classes used to con
 | h_ng+  | items hidden on NG+ and beyond, e.g., Ashen Estus Flask |
 | s_ng+  | items shown on NG+ and beyond, e.g., +1 rings           |
 | s_ng++ | items shown on NG++ and beyond, e.g., +2 rings          |
+
+### Linking the same item across tabs
+
+Many items appear in more than one tab — a weapon shows up in the Playthrough
+walkthrough and again in the Weapons/Shields list. Give both entries the same
+optional **`item`** key and the app mirrors their checked state (tick it in one
+place and it ticks in the other):
+
+```json
+{ "id": "weapons_1_69", "item": "uchigatana", "html": "<a href=\"...\">Uchigatana</a>" }
+```
+
+- Use a kebab-case slug, adding a `+N` suffix for upgrade tiers
+  (e.g. `"ring-of-favor+1"`).
+- Use an array when one entry grants several items:
+  `"item": ["claymore", "club"]`.
+- A key must resolve to **at most one entry per tab** — `npm run validate`
+  enforces this and warns about keys used in only one tab (which link nothing).
+- Leave `item` off for standalone entries; stackables (e.g. Homeward Bone) and
+  Misc/Crow trades deliberately have none.
 
 ## Acknowledgments
 

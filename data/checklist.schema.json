@@ -20,9 +20,17 @@
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z]+_\\d+_\\d+$" },
         "cls": { "$ref": "#/definitions/className" },
+        "item": { "$ref": "#/definitions/itemLink" },
         "html": { "type": "string", "minLength": 1 }
       },
       "additionalProperties": false
+    },
+    "itemLink": {
+      "description": "Cross-tab link key(s). Entries that share a key represent the same real item across tabs and mirror their checked state. Each key must resolve to at most one entry per tab.",
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 2 }
+      ]
     },
     "group": {
       "type": "object",
