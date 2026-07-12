@@ -200,10 +200,50 @@ textarea#profileText {
   resize: vertical;
 }
 
+/* Mobile / touch refinements -------------------------------------------- */
+/* Bottom clearance so the fixed "Back to Top" / "Hide Completed" buttons
+   never sit on top of the last checklist rows. */
+body {
+  padding-bottom: 3.5rem;
+}
+
+/* Comfortable tap targets on touch devices: larger checkboxes and roomier
+   rows so items and the table-of-contents links are easy to hit with a thumb. */
+@media (pointer: coarse) {
+  .checkbox {
+    margin: 4px 0;
+  }
+  .checkbox input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    top: 0.2em;
+  }
+  .checkbox label {
+    padding-left: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .table_of_contents {
+    line-height: 2.2;
+  }
+}
+
+/* Narrow phones: let long section headers (title + totals + Toggle/Clear)
+   breathe, and keep the filter category columns from feeling cramped. */
+@media (max-width: 575.98px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .filter-cat > .btn {
+    white-space: normal;
+  }
+}
+
 /* Print ----------------------------------------------------------------- */
 @media print {
   body {
     color: #000;
+    padding-bottom: 0;
   }
   .navbar,
   input[type='checkbox'],

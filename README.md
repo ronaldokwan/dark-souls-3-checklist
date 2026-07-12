@@ -24,19 +24,21 @@ the browser.
 
 The site is a static, no-build page (works on GitHub Pages) with **no external
 dependencies** — Bootstrap 5, Bootstrap Icons, and everything else are vendored
-under `vendor/`. There is no jQuery. It is an installable PWA that works offline
-once loaded.
+under `assets/vendor/`. There is no jQuery. The browser loads the app as native
+ES modules (no bundler). It is an installable PWA that works offline once loaded.
 
 | Path                            | Purpose                                                    |
 | ------------------------------- | ---------------------------------------------------------- |
 | `index.html`                    | Page shell (nav, filter toolbar, tabs, modals, options)    |
 | `data/checklist.json`           | **All checklist content** — this is what contributors edit |
-| `js/render.js`                  | Renders `data/checklist.json` into the page                |
-| `js/main.js`                    | App logic (progress, profiles, filters, search, themes)    |
-| `css/main.css`                  | Custom styles                                              |
-| `vendor/`                       | Self-hosted Bootstrap 5 + Bootstrap Icons                  |
+| `assets/js/render.js`           | Renders `data/checklist.json` into the page                |
+| `assets/js/main.js`             | App logic (progress, filters, search, themes, wiring)      |
+| `assets/js/profiles.js`         | Profile state model (persisted to localStorage)            |
+| `assets/js/storage.js`          | localStorage wrapper + one-time legacy migration           |
+| `assets/css/main.css`           | Custom styles                                              |
+| `assets/vendor/`                | Self-hosted Bootstrap 5 + Bootstrap Icons                  |
+| `assets/img/`                   | Icons and favicons                                         |
 | `tools/validate.mjs`            | Validates `checklist.json` (run in CI)                     |
-| `tools/extract-content.mjs`     | One-off script that generated the JSON from the old HTML   |
 | `data/checklist.schema.json`    | JSON Schema for editor validation of the data              |
 | `tests/`                        | Playwright end-to-end tests                                |
 | `manifest.webmanifest`, `sw.js` | PWA manifest + service worker (offline / installable)      |

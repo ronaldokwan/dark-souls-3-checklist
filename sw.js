@@ -4,21 +4,23 @@
  * every same-origin GET (serve from cache instantly, refresh in the background).
  * Bump CACHE to force clients onto a new set of assets.
  */
-const CACHE = 'ds3-cheatsheet-v1';
+const CACHE = 'ds3-cheatsheet-v2';
 const CORE = [
   './',
   './index.html',
-  './css/main.css',
-  './js/render.js',
-  './js/main.js',
+  './assets/css/main.css',
+  './assets/js/render.js',
+  './assets/js/main.js',
+  './assets/js/storage.js',
+  './assets/js/profiles.js',
   './data/checklist.json',
   './manifest.webmanifest',
-  './vendor/bootstrap.min.css',
-  './vendor/bootstrap.bundle.min.js',
-  './vendor/bootstrap-icons/bootstrap-icons.min.css',
-  './vendor/bootstrap-icons/fonts/bootstrap-icons.woff2',
-  './img/icon-192.png',
-  './img/icon-512.png',
+  './assets/vendor/bootstrap.min.css',
+  './assets/vendor/bootstrap.bundle.min.js',
+  './assets/vendor/bootstrap-icons/bootstrap-icons.min.css',
+  './assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2',
+  './assets/img/icon-192.png',
+  './assets/img/icon-512.png',
 ];
 
 self.addEventListener('install', (event) => {

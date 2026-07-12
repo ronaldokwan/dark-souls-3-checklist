@@ -28,5 +28,5 @@
     "weap",
     "ZKjellberg"
   ],
-  "ignorePaths": ["node_modules/**", "vendor/**", "package-lock.json", "data/checklist.json"]
+  "ignorePaths": ["node_modules/**", "assets/vendor/**", "package-lock.json", "data/checklist.json"]
 }

@@ -1,6 +1,6 @@
 node_modules/
-vendor/
-img/
+assets/vendor/
+assets/img/
 data/checklist.json
 package-lock.json
 playwright-report/
