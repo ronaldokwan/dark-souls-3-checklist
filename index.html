@@ -156,6 +156,45 @@
         <button type="button" id="collapseAllToggle" class="btn btn-outline-secondary">
           <i class="bi bi-arrows-collapse" aria-hidden="true"></i> Collapse All
         </button>
+        <div
+          id="buildHighlightGroup"
+          class="btn-group d-none"
+          role="group"
+          aria-label="Highlight a build's related steps"
+        >
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="highlight_sorc"
+            data-build-highlight="f_sorc_build"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-primary build-highlight-btn build-sorc" for="highlight_sorc"
+            >Sorcery</label
+          >
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="highlight_pyro"
+            data-build-highlight="f_pyro_build"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-primary build-highlight-btn build-pyro" for="highlight_pyro"
+            >Pyromancy</label
+          >
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="highlight_mirac"
+            data-build-highlight="f_mirac_build"
+            autocomplete="off"
+          />
+          <label
+            class="btn btn-outline-primary build-highlight-btn build-mirac"
+            for="highlight_mirac"
+            >Miracle</label
+          >
+        </div>
       </div>
 
       <div class="tab-content">
@@ -564,6 +603,64 @@
                   Misc. items</label
                 >
               </div>
+              <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="cat_builds"
+                  data-category-toggle
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_builds"
+                  ><span class="filter-eye" aria-hidden="true"
+                    ><i class="bi bi-eye icon-eye-open"></i
+                    ><i class="bi bi-eye-slash icon-eye-close"></i
+                  ></span>
+                  Builds</label
+                >
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="f_sorc_build"
+                  data-item-toggle="f_sorc_build"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-secondary filter-btn" for="f_sorc_build"
+                  ><span class="filter-eye" aria-hidden="true"
+                    ><i class="bi bi-eye icon-eye-open"></i
+                    ><i class="bi bi-eye-slash icon-eye-close"></i
+                  ></span>
+                  Sorcery Build</label
+                >
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="f_pyro_build"
+                  data-item-toggle="f_pyro_build"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-secondary filter-btn" for="f_pyro_build"
+                  ><span class="filter-eye" aria-hidden="true"
+                    ><i class="bi bi-eye icon-eye-open"></i
+                    ><i class="bi bi-eye-slash icon-eye-close"></i
+                  ></span>
+                  Pyromancy Build</label
+                >
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="f_mirac_build"
+                  data-item-toggle="f_mirac_build"
+                  autocomplete="off"
+                />
+                <label class="btn btn-outline-secondary filter-btn" for="f_mirac_build"
+                  ><span class="filter-eye" aria-hidden="true"
+                    ><i class="bi bi-eye icon-eye-open"></i
+                    ><i class="bi bi-eye-slash icon-eye-close"></i
+                  ></span>
+                  Miracle Build</label
+                >
+              </div>
             </div>
           </details>
           <div class="checklist-content"></div>
@@ -628,10 +725,24 @@
             On the Playthrough tab, the filter toolbar lets you hide whole categories of entries
             (bosses, missables, rings, spells, gear, materials, and more) so you can focus on just
             what you care about — click a category or item type to toggle it. The
+            <strong>Builds</strong> group hides everything tied to a caster build you're not playing
+            — its catalysts (staves, pyromancy flames, talismans and chimes), rings, trainers, and
+            spells. Filters only affect the Playthrough: the Achievements and Weapons/Shields tabs
+            are 100% completion lists, so nothing is ever hidden there. The
             <strong>NG / NG+ / NG++</strong> buttons switch which journey you're on: some entries
             only show up on NG+ and beyond (such as +1 and +2 rings), while a few disappear on NG+
             (such as the Ashen Estus Flask), so the list always reflects the journey you selected.
             The <strong>Hide Completed</strong> toggle hides everything you've already checked off.
+          </p>
+
+          <h3>What do the Sorcery / Pyromancy / Miracle buttons do?</h3>
+          <p>
+            They highlight, rather than hide: toggle one (or several) on any checklist tab and every
+            entry connected to that caster build gets a colored tint — the spells, the catalysts
+            that cast them (staves, pyromancy flames, talismans and sacred chimes), build-related
+            rings, and the merchants who teach the spells. An entry shared by more than one active
+            build (Karla, for example) shows a blend of the colors. The highlight is a scratch view
+            for planning a build — it isn't saved and resets on reload.
           </p>
 
           <h3>Can I use this for multiple characters?</h3>

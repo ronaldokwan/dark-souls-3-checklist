@@ -15,7 +15,8 @@ the browser.
 - **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items.
 - **Progress saved** in your browser, with multiple **profiles** for different characters.
 - **Cross-tab sync** — check an item once (a weapon, ring, spell, …) and it's ticked everywhere it appears, across the Playthrough and the collection tabs.
-- **Filters** by category (bosses, missables, rings, …) and by journey (NG / NG+ / NG++).
+- **Filters** by category (bosses, missables, rings, …), by caster build (sorcery / pyromancy / miracle), and by journey (NG / NG+ / NG++).
+- **Build highlighting** — tint everything tied to a sorcery, pyromancy, or miracle build (catalysts, rings, trainers, spells) across all tabs, with blended colors for steps shared by several builds.
 - **Per-section search** with match highlighting, collapsible sections (with expand/collapse all), and a "hide completed" mode.
 - **Light / dark / auto** theme.
 - **Import/export** your progress as a file or via the clipboard.
@@ -117,6 +118,29 @@ filter classes is:
 | f_misc  | _any other items_                                  |
 
 If none of these filter classes match, use **"cls": "f_none"**.
+
+There are also three **build classes** that mark everything connected to a
+caster build — its catalysts (staves, pyromancy flames, talismans and sacred
+chimes), build-related rings, trainer/merchant steps, and spells:
+
+| Class         | Description                                   |
+| ------------- | --------------------------------------------- |
+| f_sorc_build  | Part of a Sorcery (Intelligence) caster build |
+| f_pyro_build  | Part of a Pyromancy (Int/Faith) caster build  |
+| f_mirac_build | Part of a Miracle (Faith) caster build        |
+
+They power the Builds group in the filter panel and the
+Sorcery/Pyromancy/Miracle highlight buttons shown on the checklist tabs. Unlike
+the regular filter classes, build classes are **exclusionary**: hiding a build
+hides an entry tagged with it even when the entry also carries an otherwise
+visible category (recruiting Orbeck is both "an NPC" and "part of the sorcery
+build"). An entry may carry several build classes when it serves more than one
+school (e.g. the Crystal Chime casts both sorceries and miracles).
+
+Filtering only ever hides entries in the Playthrough walkthrough. The
+collection tabs (Achievements, Weapons/Shields, …) are 100% completion lists,
+so their entries always stay visible and counted; the build classes they carry
+only drive highlighting.
 
 In addition to the filter classes, there is a second type of classes used to control the visibility of entries based on which playthrough the user is on:
 

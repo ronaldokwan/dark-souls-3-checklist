@@ -11,8 +11,8 @@
   "definitions": {
     "className": {
       "type": "string",
-      "description": "Space-separated filter/journey classes (f_*, f_none, h_ng+, s_ng+, s_ng++).",
-      "pattern": "^\\s*((f_none|f_boss|f_miss|f_npc|f_estus|f_bone|f_tome|f_coal|f_ash|f_gest|f_sorc|f_pyro|f_mirac|f_ring|f_weap|f_arm|f_tit|f_gem|f_cov|f_misc|h_ng\\++|s_ng\\++)(\\s+|$))*$"
+      "description": "Space-separated filter/journey/build classes (f_*, f_none, f_*_build, h_ng+, s_ng+, s_ng++).",
+      "pattern": "^\\s*((f_none|f_boss|f_miss|f_npc|f_estus|f_bone|f_tome|f_coal|f_ash|f_gest|f_sorc|f_pyro|f_mirac|f_sorc_build|f_pyro_build|f_mirac_build|f_ring|f_weap|f_arm|f_tit|f_gem|f_cov|f_misc|h_ng\\++|s_ng\\++)(\\s+|$))*$"
     },
     "item": {
       "type": "object",

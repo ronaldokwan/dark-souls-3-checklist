@@ -276,6 +276,30 @@ body.hide_completed .completed {
   display: none !important;
 }
 
+/* Build highlighting (Sorcery / Pyromancy / Miracle toggles) -------------
+ * --build-tint is set from JS: a flat rgba() when a step belongs to one
+ * active build, or a linear-gradient when it belongs to more than one
+ * (e.g. recruiting Karla, who sells both sorceries and pyromancies). */
+.build-highlight {
+  background: var(--build-tint);
+  border-radius: var(--bs-border-radius-sm);
+  padding: 0.1em 0.4em;
+  margin-left: -0.4em;
+  transition: background 0.3s ease;
+}
+#highlight_sorc:checked + .build-sorc {
+  background-color: rgb(61, 118, 209);
+  border-color: rgb(61, 118, 209);
+}
+#highlight_pyro:checked + .build-pyro {
+  background-color: rgb(196, 94, 33);
+  border-color: rgb(196, 94, 33);
+}
+#highlight_mirac:checked + .build-mirac {
+  background-color: rgb(201, 162, 39);
+  border-color: rgb(201, 162, 39);
+}
+
 /* Collapse caret (replaces the old Glyphicons Halflings caret) ---------- */
 .btn-collapse {
   padding: 2px 8px;

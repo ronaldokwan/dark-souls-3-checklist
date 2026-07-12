@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   const errors = [];
@@ -296,6 +296,48 @@ test('profile modal opens', async ({ page }) => {
   await page.locator('[data-bs-target="#tabOptions"]').click();
   await page.locator('#profileAdd').click();
   await expect(page.locator('#profileModal')).toBeVisible();
+});
+
+test('build filter hides Playthrough entries but never the collection tabs', async ({ page }) => {
+  await page.locator('#tabPlaythrough .filter-panel summary').click();
+
+  // Hide the Sorcery build: the Heretic's Staff pickup disappears from the
+  // Playthrough even though its other category (Weapons) is still visible.
+  await page.locator('label[for="f_sorc_build"]').click();
+  await expect(page.locator('#f_sorc_build')).toBeChecked();
+  await expect(page.locator('#tabPlaythrough li.f_sorc_build').first()).toBeHidden();
+  await expect(page.locator('li[data-id="playthrough_4_33"]')).toBeHidden();
+
+  // The collection tabs are 100% completion lists: the staves in the Weapons
+  // tab and the build rings in the Achievements tab must stay visible.
+  await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
+  await expect(page.locator('li[data-id="weapons_1_168"]')).toBeVisible(); // Sorcerer's Staff
+  await page.locator('[data-bs-target="#tabChecklists"]').click();
+  await expect(page.locator('li[data-id="checklist_5_28"]')).toBeVisible(); // Young Dragon Ring
+
+  // Unhide restores the Playthrough entries.
+  await page.locator('[data-bs-target="#tabPlaythrough"]').click();
+  await page.locator('label[for="f_sorc_build"]').click();
+  await expect(page.locator('li[data-id="playthrough_4_33"]')).toBeVisible();
+});
+
+test('build highlight tints catalysts and rings on every checklist tab', async ({ page }) => {
+  await page.locator('label[for="highlight_sorc"]').click();
+  await expect(page.locator('li[data-id="playthrough_4_33"]')).toHaveClass(/build-highlight/);
+
+  // The toggle group stays visible on other checklist tabs, and the staves
+  // and build rings there are tinted as well.
+  await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
+  await expect(page.locator('#buildHighlightGroup')).toBeVisible();
+  await expect(page.locator('li[data-id="weapons_1_168"]')).toHaveClass(/build-highlight/);
+  await expect(page.locator('li[data-id="weapons_1_179"]')).not.toHaveClass(/build-highlight/);
+
+  await page.locator('[data-bs-target="#tabChecklists"]').click();
+  await expect(page.locator('li[data-id="checklist_5_28"]')).toHaveClass(/build-highlight/); // Young Dragon Ring
+
+  // Switching off clears the tint everywhere.
+  await page.locator('label[for="highlight_sorc"]').click();
+  await expect(page.locator('li[data-id="checklist_5_28"]')).not.toHaveClass(/build-highlight/);
 });
 
 // Regression guard: totals must reflect the actual checkboxes present, not a

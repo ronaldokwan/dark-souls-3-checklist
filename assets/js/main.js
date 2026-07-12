@@ -44,9 +44,6 @@ function canFilter(li) {
   const classAttr = li.getAttribute('class');
   if (!classAttr) return false;
   const hidden = cur().hidden_categories;
-  if (classAttr === 'f_none') {
-    return Object.keys(hidden).some((k) => hidden[k]);
-  }
   const classList = classAttr.split(/\s+/);
   const journey = cur().journey;
   for (let i = 0; i < classList.length; i++) {
@@ -54,9 +51,22 @@ function canFilter(li) {
     const s = classList[i].match(/^s_ng(\+*)$/);
     if ((h && h[1].length < journey) || (s && s[1].length >= journey)) return true;
   }
-  let foundMatch = false;
+  // Build-focus categories (f_*_build) are exclusionary: an entry tagged
+  // f_sorc_build should disappear when the player hides that build, even
+  // though it may also carry an unrelated, still-visible category like
+  // f_npc or f_miss (e.g. recruiting Orbeck is both "an NPC" and "part of
+  // the sorcery build").
+  for (let k = 0; k < classList.length; k++) {
+    if (/^f_.+_build$/.test(classList[k]) && hidden[classList[k]]) return true;
+  }
+  // f_none marks "no specific category" content: it has no checkbox of its
+  // own, so it hides whenever the player is filtering anything at all. This
+  // must key off classList.includes rather than an exact string match,
+  // since f_none can be combined with other classes (e.g. a build tag) that
+  // don't otherwise affect visibility.
+  let foundMatch = classList.includes('f_none') && Object.keys(hidden).some((k) => hidden[k]);
   for (let j = 0; j < classList.length; j++) {
-    if (!/^f_/.test(classList[j])) continue;
+    if (!/^f_/.test(classList[j]) || classList[j] === 'f_none') continue;
     if (classList[j] in hidden) {
       if (!hidden[classList[j]]) return false;
       foundMatch = true;
@@ -65,8 +75,12 @@ function canFilter(li) {
   return foundMatch;
 }
 
+// Filters only ever hide entries in the Playthrough walkthrough. The
+// collection tabs (Achievements, Weapons/Shields, ...) are 100% completion
+// lists, so their entries must stay visible (and counted) no matter what is
+// filtered; the f_* classes they carry only drive build highlighting.
 function toggleFilteredClasses(rawClass) {
-  $all('li.' + CSS.escape(rawClass)).forEach((li) => {
+  $all('#tabPlaythrough li.' + CSS.escape(rawClass)).forEach((li) => {
     li.style.display = canFilter(li) ? 'none' : '';
   });
 }
@@ -336,6 +350,56 @@ function populateChecklists() {
 function updateHideCompletedVisibility(activeTabId) {
   const btn = document.getElementById('btnHideCompleted');
   if (btn) btn.classList.toggle('d-none', CHECKLIST_TABS.indexOf(activeTabId) === -1);
+}
+
+/* ----------------------------------------------------------------------
+ * Build highlighting (Sorcery / Pyromancy / Miracle)
+ * ----------------------------------------------------------------------
+ * Unlike the category filters (which hide items), these buttons tint the
+ * checklist entries connected to a caster build - the spells, catalysts
+ * (staves / pyromancy flames / talismans and chimes), build-related rings and
+ * trainer NPCs (see the f_*_build classes in data/checklist.json) - across
+ * every checklist tab. Multiple builds can be highlighted at once; a step
+ * that belongs to more than one (e.g. recruiting Karla, who sells both
+ * sorceries and pyromancies) gets a gradient blending each active color
+ * instead of a single flat tint. Highlight state is intentionally transient
+ * (not saved to the profile) - it resets on reload like a scratch view.
+ * -------------------------------------------------------------------- */
+const BUILD_HIGHLIGHT_COLORS = {
+  f_sorc_build: '61, 118, 209',
+  f_pyro_build: '196, 94, 33',
+  f_mirac_build: '201, 162, 39',
+};
+
+function updateBuildHighlights() {
+  const active = $all('[data-build-highlight]')
+    .filter((el) => el.checked)
+    .map((el) => el.getAttribute('data-build-highlight'));
+
+  const scope = CHECKLIST_TABS.map((t) => '#' + t + ' li[data-id]').join(', ');
+  $all(scope).forEach((li) => {
+    const matches = active.filter((cls) => li.classList.contains(cls));
+    li.classList.toggle('build-highlight', matches.length > 0);
+    if (matches.length === 0) {
+      li.style.removeProperty('--build-tint');
+    } else if (matches.length === 1) {
+      li.style.setProperty('--build-tint', `rgba(${BUILD_HIGHLIGHT_COLORS[matches[0]]}, 0.35)`);
+    } else {
+      const stops = matches.map((cls) => `rgba(${BUILD_HIGHLIGHT_COLORS[cls]}, 0.35)`);
+      li.style.setProperty('--build-tint', `linear-gradient(90deg, ${stops.join(', ')})`);
+    }
+  });
+}
+
+function updateBuildHighlightVisibility(activeTabId) {
+  const group = document.getElementById('buildHighlightGroup');
+  if (group) group.classList.toggle('d-none', CHECKLIST_TABS.indexOf(activeTabId) === -1);
+}
+
+function wireBuildHighlights() {
+  $all('[data-build-highlight]').forEach((input) => {
+    input.addEventListener('change', updateBuildHighlights);
+  });
 }
 
 /* ----------------------------------------------------------------------
@@ -731,6 +795,7 @@ function wireCollapseAndTabs() {
       cur().current_tab = target;
       save();
       updateHideCompletedVisibility(target.replace('#', ''));
+      updateBuildHighlightVisibility(target.replace('#', ''));
       updateCollapseAllBtn();
       if (target === '#tabOptions') refreshExportText();
     });
@@ -819,6 +884,7 @@ export function initApp() {
   wireHideCompleted();
   wireCollapseAndTabs();
   wireCollapseAll();
+  wireBuildHighlights();
   wireScroll();
   wireChecklistDelegation();
 
@@ -839,8 +905,10 @@ export function initApp() {
   if (tabBtn) {
     bootstrap.Tab.getOrCreateInstance(tabBtn).show();
     updateHideCompletedVisibility(tabTarget.replace('#', ''));
+    updateBuildHighlightVisibility(tabTarget.replace('#', ''));
   } else {
     updateHideCompletedVisibility('tabPlaythrough');
+    updateBuildHighlightVisibility('tabPlaythrough');
   }
 
   calculateTotals();
