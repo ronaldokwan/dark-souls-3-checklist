@@ -1,10 +1,14 @@
 # Dark Souls 3 Cheat Sheet
 
-To view the cheat sheet [click here](https://zkjellberg.github.io/dark-souls-3-cheat-sheet/).
+A fast, installable checklist for a 100% Dark Souls 3 playthrough — bosses,
+missables, rings, spells, weapons, and more — with your progress saved right in
+the browser.
 
-This checklist was created by adopting the source code from the [Dark Souls 2 Cheat Sheet](https://github.com/smcnabb/dark-souls-2-cheat-sheet/tree/gh-pages) created by [Stephen McNabb](https://github.com/smcnabb).
+**▶ [Open the cheat sheet](https://ronaldokwan.github.io/dark-souls-3-cheat-sheet/)**
 
-The walkthrough is thanks to [DeathGodGarra's NPC Side Quests Guide V2](https://www.gamefaqs.com/boards/168566-dark-souls-iii/73599466).
+[![CI](https://github.com/ronaldokwan/dark-souls-3-cheat-sheet/actions/workflows/ci.yml/badge.svg)](https://github.com/ronaldokwan/dark-souls-3-cheat-sheet/actions/workflows/ci.yml)
+![PWA](https://img.shields.io/badge/PWA-installable%20%26%20offline-5a0fc8)
+![No dependencies](https://img.shields.io/badge/runtime%20deps-none-brightgreen)
 
 ## Features
 
@@ -47,7 +51,7 @@ block `fetch` on `file://`.
 
 The site itself has no build step. The `package.json` is only dev tooling:
 
-```
+```bash
 npm install                 # once — installs tooling and the git pre-commit hook
 npm run validate            # check data/checklist.json is well-formed
 npm test                    # run the Playwright end-to-end tests
@@ -60,14 +64,13 @@ validates `data/checklist.json`, so bad data or unformatted code can't be
 committed. CI (`.github/workflows/ci.yml`) runs formatting, validation, and the
 Playwright tests on every push and pull request.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor workflow.
+## Contributing
 
-## Contribution Guide
+Pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full
+workflow; the data format is summarized below.
 
-If you are interested in contributing to this guide, I welcome Pull Requests.
-
-Checklist entries now live in [`data/checklist.json`](data/checklist.json)
-instead of being hand-written HTML. Here is a sample item:
+Checklist entries live in [`data/checklist.json`](data/checklist.json) instead of
+being hand-written HTML. Here is a sample item:
 
 ```json
 {
@@ -117,3 +120,12 @@ In addition to the filter classes, there is a second type of classes used to con
 | h_ng+  | items hidden on NG+ and beyond, e.g., Ashen Estus Flask |
 | s_ng+  | items shown on NG+ and beyond, e.g., +1 rings           |
 | s_ng++ | items shown on NG++ and beyond, e.g., +2 rings          |
+
+## Acknowledgments
+
+- Built on the [Dark Souls 3 Cheat Sheet](https://github.com/ZKjellberg/dark-souls-3-cheat-sheet)
+  by [Zachary Kjellberg](https://github.com/ZKjellberg), which this repository was
+  originally forked from.
+- Original source code adapted from the [Dark Souls 2 Cheat Sheet](https://github.com/smcnabb/dark-souls-2-cheat-sheet/tree/gh-pages)
+  by [Stephen McNabb](https://github.com/smcnabb).
+- Walkthrough based on [DeathGodGarra's NPC Side Quests Guide V2](https://www.gamefaqs.com/boards/168566-dark-souls-iii/73599466).

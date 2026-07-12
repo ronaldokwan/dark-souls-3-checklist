@@ -3,6 +3,20 @@
 Thanks for helping improve the Dark Souls 3 Cheat Sheet! This is a static site
 with no build step — the browser loads the checklist data directly.
 
+## Editor setup
+
+The editor config is checked into the repo, so you get the same setup as everyone
+else with no manual configuration:
+
+- **VS Code** — opening the project prompts you to install the recommended
+  extensions ([`.vscode/extensions.json`](.vscode/extensions.json)): Prettier,
+  EditorConfig, and Code Spell Checker. Formatting on save and the game-term
+  spell-check word list ([`cspell.json`](cspell.json)) then apply automatically.
+- **Other editors** — the same rules are enforced without an editor: run
+  `npm run format` for Prettier, and the pre-commit hook formats and validates
+  staged files anyway. EditorConfig ([`.editorconfig`](.editorconfig)) is
+  supported by most editors natively or via a plugin.
+
 ## Editing checklist content
 
 All checklist entries live in [`data/checklist.json`](data/checklist.json).

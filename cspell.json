@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "checklist",
+    "Covenants",
+    "DeathGodGarra",
+    "Estus",
+    "fadingbutton",
+    "gamefaqs",
+    "Glyphicons",
+    "Halflings",
+    "hiddenfile",
+    "Kjellberg",
+    "McNabb",
+    "mirac",
+    "missables",
+    "playthrough",
+    "pyro",
+    "Pyromancies",
+    "Pyromancy",
+    "ronaldokwan",
+    "sorc",
+    "Titanite",
+    "togglehide",
+    "Umbral",
+    "webmanifest",
+    "weap",
+    "ZKjellberg"
+  ],
+  "ignorePaths": ["node_modules/**", "vendor/**", "package-lock.json", "data/checklist.json"]
+}
