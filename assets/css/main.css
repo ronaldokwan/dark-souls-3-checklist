@@ -80,8 +80,9 @@ html {
   }
 }
 
+/* Kept short: every extra ms here delays perceived first paint. */
 body {
-  animation: page-fade-in 0.35s ease;
+  animation: page-fade-in 0.2s ease;
 }
 @keyframes page-fade-in {
   from {

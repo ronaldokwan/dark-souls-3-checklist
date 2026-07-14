@@ -18,6 +18,29 @@
     <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
     <link href="assets/css/main.css" rel="stylesheet" />
+    <!-- Start the critical requests alongside the stylesheets instead of after
+         the module chain has downloaded and executed: the checklist data is
+         the real page content (and by far the largest file), the icon font is
+         otherwise discovered only after CSS parses, and storage.js/profiles.js
+         are otherwise a second network hop found inside main.js. -->
+    <link
+      rel="preload"
+      href="data/checklist.json"
+      as="fetch"
+      crossorigin="anonymous"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?dd67030699838ea613ee6dbda90effa6"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="modulepreload" href="assets/js/render.js" />
+    <link rel="modulepreload" href="assets/js/main.js" />
+    <link rel="modulepreload" href="assets/js/storage.js" />
+    <link rel="modulepreload" href="assets/js/profiles.js" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
