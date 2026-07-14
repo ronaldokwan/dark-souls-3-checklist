@@ -16,6 +16,7 @@
     "gamefaqs",
     "Glyphicons",
     "Greatshield",
+    "Greatsword",
     "Halflings",
     "hiddenfile",
     "Karla",
@@ -41,6 +42,8 @@
     "undercount",
     "webmanifest",
     "weap",
+    "Yoel",
+    "Yuria",
     "ZKjellberg"
   ],
   "ignorePaths": ["node_modules/**", "assets/vendor/**", "package-lock.json", "data/checklist.json"]

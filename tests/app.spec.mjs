@@ -394,6 +394,30 @@ test('build highlight tints catalysts and rings on every checklist tab', async (
   await expect(page.locator('li[data-id="checklist_5_28"]')).not.toHaveClass(/build-highlight/);
 });
 
+test('build highlight covers caster weapons, tomes, trainers and shared rings', async ({
+  page,
+}) => {
+  await page.locator('label[for="highlight_sorc"]').click();
+
+  // Caster-scaling weapons tint alongside the catalysts, and tome/scroll
+  // pickups and the Yoel/Yuria trainer steps tint on the Playthrough.
+  await expect(page.locator('li[data-id="playthrough_18_2"]')).toHaveClass(/build-highlight/); // Crystal Scroll
+  await expect(page.locator('li[data-id="playthrough_3_3"]')).toHaveClass(/build-highlight/); // Yoel recruit
+  await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
+  await expect(page.locator('li[data-id="weapons_1_38"]')).toHaveClass(/build-highlight/); // Moonlight Greatsword
+  await expect(page.locator('li[data-id="weapons_1_152"]')).not.toHaveClass(/build-highlight/); // Witch's Locks (pyro)
+
+  // Dark Clutch Ring boosts dark spells in all three schools: it stays tinted
+  // whichever single build is active.
+  await page.locator('[data-bs-target="#tabChecklists"]').click();
+  await expect(page.locator('li[data-id="checklist_5_51"]')).toHaveClass(/build-highlight/);
+  await page.locator('label[for="highlight_sorc"]').click();
+  await page.locator('label[for="highlight_mirac"]').click();
+  await expect(page.locator('li[data-id="checklist_5_51"]')).toHaveClass(/build-highlight/);
+  await page.locator('label[for="highlight_mirac"]').click();
+  await expect(page.locator('li[data-id="checklist_5_51"]')).not.toHaveClass(/build-highlight/);
+});
+
 // Regression guard: totals must reflect the actual checkboxes present, not a
 // sequential id scan. Removing a middle item must drop the denominator by
 // exactly one (the old id-scan algorithm broke on such gaps).
