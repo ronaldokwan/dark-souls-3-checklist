@@ -276,6 +276,28 @@ body.hide_completed .completed {
   display: none !important;
 }
 
+/* Unique-passive info buttons (Weapons/Shields and Armor tabs) ------------
+ * A small star button after entries whose equipment has a unique passive
+ * effect; opens the #passiveModal with the description. */
+.passive-info {
+  border: 0;
+  background: none;
+  padding: 0 0.2rem;
+  margin-left: 0.1rem;
+  color: var(--bs-secondary-color);
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.passive-info:hover,
+.passive-info:focus-visible {
+  color: var(--accent);
+}
+/* Don't leave orphan star buttons behind when their completed row is hidden. */
+body.hide_completed label.completed + .passive-info {
+  display: none;
+}
+
 /* Build highlighting (Sorcery / Pyromancy / Miracle toggles) -------------
  * --build-tint is set from JS: a flat rgba() when a step belongs to one
  * active build, or a linear-gradient when it belongs to more than one
@@ -414,13 +436,16 @@ textarea#profileText {
 
 /* Modal accent borders ---------------------------------------------------
  * Every modal gets an icon-led title and a colored top border: red for
- * destructive confirmations, the app's ember accent for the ordinary
- * add/rename profile form. */
+ * destructive confirmations, the app's ember accent for informational ones
+ * (profile add/rename, unique passives). */
 .confirm-modal-content {
   border-top: 3px solid var(--bs-danger);
 }
-.profile-modal-content {
+.accent-modal-content {
   border-top: 3px solid var(--accent);
+}
+.accent-icon {
+  color: var(--accent);
 }
 .ngplus-summary li {
   display: flex;
@@ -488,6 +513,7 @@ body {
   .in_progress,
   .fadingbutton,
   .filter-panel,
+  .passive-info,
   #btnHideCompleted {
     display: none;
   }

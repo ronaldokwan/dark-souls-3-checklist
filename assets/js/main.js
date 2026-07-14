@@ -859,6 +859,17 @@ function wireChecklistDelegation() {
       setBoxes(boxes, () => false);
     }
   });
+
+  // Unique-passive info buttons: show the passive description in a modal,
+  // titled with the entry's own (linked) name.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.passive-info');
+    if (!btn) return;
+    const content = btn.closest('li').querySelector('.item_content');
+    document.getElementById('passiveModalItem').innerHTML = content ? content.innerHTML : '';
+    document.getElementById('passiveModalText').textContent = btn.getAttribute('data-passive');
+    modal('passiveModal').show();
+  });
 }
 
 /* ----------------------------------------------------------------------

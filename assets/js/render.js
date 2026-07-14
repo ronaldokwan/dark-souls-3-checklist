@@ -3,11 +3,24 @@
  * shell. Replaces the ~500 KB of hand-written markup that used to live in
  * index.html. Runs before main.js initialises behaviour.
  */
+function escAttr(text) {
+  return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
 function itemHtml(item) {
   const cls = item.cls ? ' class="' + item.cls + '"' : '';
   // Cross-tab link key(s): entries sharing a key mirror their checked state.
   const link = item.item
     ? ' data-item="' + (Array.isArray(item.item) ? item.item.join(' ') : item.item) + '"'
+    : '';
+  // Unique passive effect: an info button next to the entry opens a modal with
+  // the description. Kept outside the <label> so clicking it never toggles the
+  // checkbox.
+  const passive = item.passive
+    ? '<button type="button" class="passive-info" data-passive="' +
+      escAttr(item.passive) +
+      '" title="Unique passive" aria-label="Show unique passive">' +
+      '<i class="bi bi-stars" aria-hidden="true"></i></button>'
     : '';
   return (
     '<li data-id="' +
@@ -23,7 +36,9 @@ function itemHtml(item) {
     '<span class="item_content">' +
     item.html +
     '</span>' +
-    '</label></div>' +
+    '</label>' +
+    passive +
+    '</div>' +
     '</li>'
   );
 }

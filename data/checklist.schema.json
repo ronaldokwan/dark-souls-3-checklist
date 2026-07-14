@@ -21,7 +21,12 @@
         "id": { "type": "string", "pattern": "^[a-z]+_\\d+_\\d+$" },
         "cls": { "$ref": "#/definitions/className" },
         "item": { "$ref": "#/definitions/itemLink" },
-        "html": { "type": "string", "minLength": 1 }
+        "html": { "type": "string", "minLength": 1 },
+        "passive": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique passive effect of the equipment (shown via an info button next to the entry)."
+        }
       },
       "additionalProperties": false
     },

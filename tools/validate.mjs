@@ -85,6 +85,12 @@ function validateItem(item, where, key) {
       });
     }
   }
+  if (
+    item.passive !== undefined &&
+    (typeof item.passive !== 'string' || item.passive.trim() === '')
+  ) {
+    err(where + ' [' + item.id + ']', 'passive must be a non-empty string');
+  }
   if (item.cls !== undefined && item.cls !== '') {
     if (typeof item.cls !== 'string')
       return err(where + ' [' + item.id + ']', 'cls must be a string');

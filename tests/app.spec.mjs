@@ -401,6 +401,31 @@ test('NG+ modal resets Playthrough/Misc but keeps other checklists, with no extr
   await expect(page.locator('#playthrough_1_16')).not.toBeChecked();
 });
 
+test('unique-passive info button opens the passive modal without touching the checkbox', async ({
+  page,
+}) => {
+  await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
+
+  // Grass Crest Shield has a passive; the button opens the modal with the
+  // entry's name and effect, and must not toggle the checkbox.
+  await page.locator('li[data-id="weapons_2_28"] .passive-info').click();
+  await expect(page.locator('#passiveModal')).toBeVisible();
+  await expect(page.locator('#passiveModalItem')).toContainText('Grass Crest Shield');
+  await expect(page.locator('#passiveModalText')).toContainText('stamina');
+  await expect(page.locator('#weapons_2_28')).not.toBeChecked();
+  await page.locator('#passiveModal .btn-outline-secondary').click();
+  await expect(page.locator('#passiveModal')).toBeHidden();
+
+  // Ordinary equipment without a passive gets no button.
+  await expect(page.locator('li[data-id="weapons_2_2"] .passive-info')).toHaveCount(0);
+
+  // Armor tab has them too (Symbol of Avarice).
+  await page.locator('[data-bs-target="#tabArmors"]').click();
+  await page.locator('li[data-id="armors_1_64"] .passive-info').click();
+  await expect(page.locator('#passiveModalItem')).toContainText('Symbol of Avarice');
+  await expect(page.locator('#passiveModalText')).toContainText('souls');
+});
+
 test('build filter hides Playthrough entries but never the collection tabs', async ({ page }) => {
   await page.locator('#tabPlaythrough .filter-panel summary').click();
 

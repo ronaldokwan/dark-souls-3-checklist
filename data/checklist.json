@@ -7790,6 +7790,7 @@
         },
         {
          "id": "weapons_1_7",
+         "passive": "Restores 1 FP with each successful hit.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Handmaid's+Dagger\">Handmaid's Dagger</a>"
         },
@@ -7878,6 +7879,7 @@
         },
         {
          "id": "weapons_1_22",
+         "passive": "Gradually restores HP, deals 10% bonus damage against reanimated foes, and scales with Luck.",
          "cls": "",
          "item": [
           "anris-straight-sword-a",
@@ -7894,6 +7896,7 @@
         },
         {
          "id": "weapons_1_24",
+         "passive": "Boosts attack by 20% while HP is below 20%.",
          "cls": "",
          "item": "morion-blade",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morion+Blade\">Morion Blade</a>"
@@ -7951,12 +7954,14 @@
         },
         {
          "id": "weapons_1_33",
+         "passive": "Restores 6 FP upon defeating an enemy.",
          "cls": "",
          "item": "executioner's-greatsword",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Executioner's+Greatsword\">Executioner's Greatsword</a>"
         },
         {
          "id": "weapons_1_31",
+         "passive": "Deals 20% bonus damage against demons.",
          "cls": "",
          "item": "black-knight-sword",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Black+Knight+Sword\">Black Knight Sword</a>"
@@ -7969,6 +7974,7 @@
         },
         {
          "id": "weapons_1_29",
+         "passive": "Deals 20% bonus damage against Hollows.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Hollowslayer+Greatsword\">Hollowslayer Greatsword</a>"
         },
@@ -7990,6 +7996,7 @@
         },
         {
          "id": "weapons_1_34",
+         "passive": "Deals 20% bonus damage against abyssal enemies.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Wolf+Knight's+Greatsword\">Wolf Knight's Greatsword</a>"
         },
@@ -8048,6 +8055,7 @@
         },
         {
          "id": "weapons_1_48",
+         "passive": "Deals 20% bonus damage against demons.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Black+Knight+Greatsword\">Black Knight Greatsword</a>"
         },
@@ -8075,6 +8083,7 @@
         },
         {
          "id": "weapons_1_44",
+         "passive": "Deals 20% bonus damage against abyssal enemies.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Farron+Greatsword\">Farron Greatsword</a>"
         }
@@ -8194,6 +8203,7 @@
         },
         {
          "id": "weapons_1_66",
+         "passive": "Consecutive attacks boost attack power and restore HP.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Old+Wolf+Curved+Sword\">Old Wolf Curved Sword</a>"
         }
@@ -8267,6 +8277,7 @@
         },
         {
          "id": "weapons_1_73",
+         "passive": "Damages the wielder with each successful hit.",
          "cls": "",
          "item": "chaos-blade",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Chaos+Blade\">Chaos Blade</a>"
@@ -8336,6 +8347,7 @@
         },
         {
          "id": "weapons_1_85",
+         "passive": "Restores 2 HP with each successful hit.",
          "cls": "",
          "item": "butcher-knife",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Butcher+Knife\">Butcher Knife</a>"
@@ -8370,6 +8382,7 @@
         },
         {
          "id": "weapons_1_94",
+         "passive": "Deals 20% bonus damage against demons.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Black+Knight+Greataxe\">Black Knight Greataxe</a>"
         },
@@ -8501,6 +8514,7 @@
         },
         {
          "id": "weapons_1_110",
+         "passive": "Restores 2 HP with each successful hit.",
          "cls": "",
          "item": "smough's-great-hammer",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Smough's+Great+Hammer\">Smough's Great Hammer</a>"
@@ -8584,6 +8598,7 @@
         },
         {
          "id": "weapons_1_135",
+         "passive": "Struck enemies suffer reduced HP recovery from their Estus Flask.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Soldering+Iron\">Soldering Iron</a>"
         },
@@ -8612,6 +8627,7 @@
         },
         {
          "id": "weapons_1_120",
+         "passive": "Restores 30 HP upon defeating an enemy.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Arstor's+Spear\">Arstor's Spear</a>"
         },
@@ -8705,6 +8721,7 @@
         },
         {
          "id": "weapons_1_145",
+         "passive": "Deals 20% bonus damage against demons.",
          "cls": "",
          "item": "black-knight-glaive",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Black+Knight+Glaive\">Black Knight Glaive</a>"
@@ -8982,6 +8999,7 @@
         },
         {
          "id": "weapons_1_176",
+         "passive": "Increases souls gained from defeating enemies by 20%.",
          "cls": "f_sorc_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Mendicant's+Staff\">Mendicant's Staff</a>"
         },
@@ -9004,6 +9022,7 @@
         },
         {
          "id": "weapons_1_174",
+         "passive": "Sorceries cast with it scale with Luck instead of Intelligence.",
          "cls": "f_sorc_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Man-grub's+Staff\">Man-grub's Staff</a>"
         },
@@ -9095,6 +9114,7 @@
         },
         {
          "id": "weapons_1_189",
+         "passive": "Casts miracles faster than any other catalyst.",
          "cls": "f_mirac_build",
          "item": "saint-tree-bellvine",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Saint-tree+Bellvine\">Saint-tree Bellvine</a>"
@@ -9365,6 +9385,7 @@
         },
         {
          "id": "weapons_2_28",
+         "passive": "Boosts stamina recovery by 4 per second, even when worn on the back.",
          "cls": "",
          "item": "grass-crest-shield",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Grass+Crest+Shield\">Grass Crest Shield</a>"
@@ -9410,12 +9431,14 @@
         },
         {
          "id": "weapons_2_63",
+         "passive": "Gradually restores HP while equipped.",
          "cls": "",
          "item": "ethereal-oak-shield",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Ethereal+Oak+Shield\">Ethereal Oak Shield</a>"
         },
         {
          "id": "weapons_2_21",
+         "passive": "Increases souls gained from defeating enemies by 20%.",
          "cls": "",
          "item": "shield-of-want",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Shield+of+Want\">Shield of Want</a>"
@@ -9460,12 +9483,14 @@
         },
         {
          "id": "weapons_2_56",
+         "passive": "Gradually restores 2 HP per second while equipped.",
          "cls": "",
          "item": "ancient-dragon-greatshield",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Ancient+Dragon+Greatshield\">Ancient Dragon Greatshield</a>"
         },
         {
          "id": "weapons_2_53",
+         "passive": "Reduces stamina recovery by 20% while equipped.",
          "cls": "",
          "item": "greatshield-of-glory",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Greatshield+of+Glory\">Greatshield of Glory</a>"
@@ -9478,6 +9503,7 @@
         },
         {
          "id": "weapons_2_57",
+         "passive": "Grants 50 resistance to all status ailments while equipped.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Wolf+Knight's+Greatshield\">Wolf Knight's Greatshield</a>"
         },
@@ -9500,6 +9526,7 @@
         },
         {
          "id": "weapons_2_52",
+         "passive": "Increases Poise by 15 while equipped.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Yhorm's+Greatshield\">Yhorm's Greatshield</a>"
         },
@@ -9690,6 +9717,7 @@
       },
       {
        "id": "armors_1_72",
+       "passive": "Rolling into enemies deals damage and builds bleed; stacks with each Thorns piece worn.",
        "cls": "",
        "item": "helm-of-thorns",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Helm+of+Thorns\">Helm of Thorns</a>"
@@ -10047,12 +10075,14 @@
       },
       {
        "id": "armors_1_92",
+       "passive": "Boosts dark damage dealt, but increases dark damage taken.",
        "cls": "",
        "item": "blindfold-mask",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Blindfold+Mask\">Blindfold Mask</a>"
       },
       {
        "id": "armors_1_64",
+       "passive": "Increases souls gained by 50% and item discovery by 100, but drains 10 HP per second.",
        "cls": "",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Symbol+of+Avarice\">Symbol of Avarice</a>"
       },
@@ -10227,6 +10257,7 @@
       },
       {
        "id": "armors_2_75",
+       "passive": "Rolling into enemies deals damage and builds bleed; stacks with each Thorns piece worn.",
        "cls": "",
        "item": "armor-of-thorns",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Armor+of+Thorns\">Armor of Thorns</a>"
@@ -10756,6 +10787,7 @@
       },
       {
        "id": "armors_3_64",
+       "passive": "Rolling into enemies deals damage and builds bleed; stacks with each Thorns piece worn.",
        "cls": "",
        "item": "gauntlets-of-thorns",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Gauntlets+of+Thorns\">Gauntlets of Thorns</a>"
@@ -11240,6 +11272,7 @@
       },
       {
        "id": "armors_4_68",
+       "passive": "Rolling into enemies deals damage and builds bleed; stacks with each Thorns piece worn.",
        "cls": "",
        "item": "leggings-of-thorns",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Leggings+of+Thorns\">Leggings of Thorns</a>"
