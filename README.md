@@ -20,7 +20,7 @@ the browser.
 - **Unique passive notes** — equipment with a special effect gets a star info button that opens the effect description in a modal; with build highlights active, descriptions that matter to your build are tinted too.
 - **Per-section search** with match highlighting, collapsible sections (with expand/collapse all), and a "hide completed" mode.
 - **Multi-column collection lists** on wide screens, with weapon/shield categories kept whole per column.
-- **Light / dark / auto** theme.
+- **Light / dark / auto** theme — light by default, with an ember-tinted dark mode; "auto" (match system) is available in Options.
 - **Import/export** your progress as a file or via the clipboard.
 - **Installable and offline** — it's a Progressive Web App, so once loaded it works with no network connection.
 
@@ -30,6 +30,8 @@ The site is a static, no-build page (works on GitHub Pages) with **no external
 dependencies** — Bootstrap 5, Bootstrap Icons, and everything else are vendored
 under `assets/vendor/`. There is no jQuery. The browser loads the app as native
 ES modules (no bundler). It is an installable PWA that works offline once loaded.
+The `<head>` preloads the checklist data, icon font, and JS modules so the first
+paint is not gated on a request waterfall.
 
 | Path                            | Purpose                                                    |
 | ------------------------------- | ---------------------------------------------------------- |
@@ -69,6 +71,14 @@ A pre-commit hook (husky + lint-staged) automatically formats staged files and
 validates `data/checklist.json`, so bad data or unformatted code can't be
 committed. CI (`.github/workflows/ci.yml`) runs formatting, validation, and the
 Playwright tests on every push and pull request.
+
+### Releasing
+
+Pushing to `main` deploys automatically via GitHub Pages (live within a minute
+or two). When shipping user-facing changes, bump the `CACHE` version in
+`sw.js` — the service worker serves cached files first and refreshes in the
+background, so returning visitors may see the previous version for one load;
+the bump makes clients replace the whole cached app shell on their next visit.
 
 ## Contributing
 
