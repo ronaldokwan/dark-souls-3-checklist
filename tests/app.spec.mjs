@@ -535,9 +535,17 @@ test('build highlight tints catalysts and rings on every checklist tab', async (
   await page.locator('[data-bs-target="#tabChecklists"]').click();
   await expect(page.locator('li[data-id="checklist_5_28"]')).toHaveClass(/build-highlight/); // Young Dragon Ring
 
+  // The achievement spell lists tint too: Master of Sorceries entries light
+  // up, other schools (and their DLC spells) stay untinted.
+  await expect(page.locator('li[data-id="checklist_2_1"]')).toHaveClass(/build-highlight/); // Soul Arrow
+  await expect(page.locator('li[data-id="checklist_11_9"]')).toHaveClass(/build-highlight/); // Great Soul Dregs (DLC sorcery)
+  await expect(page.locator('li[data-id="checklist_3_1"]')).not.toHaveClass(/build-highlight/); // pyromancy
+  await expect(page.locator('li[data-id="checklist_11_1"]')).not.toHaveClass(/build-highlight/); // Way of White Corona (DLC miracle)
+
   // Switching off clears the tint everywhere.
   await page.locator('label[for="highlight_sorc"]').click();
   await expect(page.locator('li[data-id="checklist_5_28"]')).not.toHaveClass(/build-highlight/);
+  await expect(page.locator('li[data-id="checklist_2_1"]')).not.toHaveClass(/build-highlight/);
 });
 
 test('build highlight covers caster weapons, tomes, trainers and shared rings', async ({
