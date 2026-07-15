@@ -40,25 +40,32 @@ function fire(el, type) {
 /* ----------------------------------------------------------------------
  * Filtering
  * -------------------------------------------------------------------- */
+// Active build-focus keys (f_*_build). Unlike hidden_categories these are
+// inclusive: while any are active, only entries tagged with one of them stay
+// visible on the Playthrough. `|| {}` guards profiles written before the
+// build_focus field existed (old exports, secondary profiles in the blob).
+function activeFocusBuilds() {
+  const focus = cur().build_focus || {};
+  return Object.keys(focus).filter((k) => focus[k]);
+}
+
 function canFilter(li) {
-  const classAttr = li.getAttribute('class');
-  if (!classAttr) return false;
-  const hidden = cur().hidden_categories;
-  const classList = classAttr.split(/\s+/);
+  const classList = (li.getAttribute('class') || '').split(/\s+/).filter(Boolean);
   const journey = cur().journey;
   for (let i = 0; i < classList.length; i++) {
     const h = classList[i].match(/^h_ng(\+*)$/);
     const s = classList[i].match(/^s_ng(\+*)$/);
     if ((h && h[1].length < journey) || (s && s[1].length >= journey)) return true;
   }
-  // Build-focus categories (f_*_build) are exclusionary: an entry tagged
-  // f_sorc_build should disappear when the player hides that build, even
-  // though it may also carry an unrelated, still-visible category like
-  // f_npc or f_miss (e.g. recruiting Orbeck is both "an NPC" and "part of
-  // the sorcery build").
-  for (let k = 0; k < classList.length; k++) {
-    if (/^f_.+_build$/.test(classList[k]) && hidden[classList[k]]) return true;
-  }
+  // Build focus: while a build is focused, everything not tagged for an
+  // active build hides — including untagged entries, which is why this runs
+  // before the classless early-return below. Entries that survive the focus
+  // still answer to the regular category filters (focusing Sorcery and hiding
+  // Rings hides the sorcery rings too).
+  const focused = activeFocusBuilds();
+  if (focused.length > 0 && !focused.some((k) => classList.includes(k))) return true;
+  if (classList.length === 0) return false;
+  const hidden = cur().hidden_categories;
   // f_none marks "no specific category" content: it has no checkbox of its
   // own, so it hides whenever the player is filtering anything at all. This
   // must key off classList.includes rather than an exact string match,
@@ -67,12 +74,10 @@ function canFilter(li) {
   let foundMatch = classList.includes('f_none') && Object.keys(hidden).some((k) => hidden[k]);
   for (let j = 0; j < classList.length; j++) {
     if (!/^f_/.test(classList[j]) || classList[j] === 'f_none') continue;
-    // Build classes are fully handled by the exclusionary loop above and must
-    // never count as a protective category here. Once a Builds toggle has been
-    // touched, its key sits in hidden_categories as "not hidden" - if it
-    // reached the check below, every build-tagged entry would become immune to
-    // the regular filters (hiding Miracles would stop hiding miracle pickups,
-    // since they all carry f_mirac_build).
+    // Build classes only drive the focus above (their keys are kept out of
+    // hidden_categories); they must never count as a protective category
+    // here, or every build-tagged entry would become immune to the regular
+    // filters if a stale key from an old profile ever slipped through.
     if (/_build$/.test(classList[j])) continue;
     if (classList[j] in hidden) {
       if (!hidden[classList[j]]) return false;
@@ -88,6 +93,16 @@ function canFilter(li) {
 // filtered; the f_* classes they carry only drive build highlighting.
 function toggleFilteredClasses(rawClass) {
   $all('#tabPlaythrough li.' + CSS.escape(rawClass)).forEach((li) => {
+    li.style.display = canFilter(li) ? 'none' : '';
+  });
+}
+
+// Build focus touches every Playthrough entry (untagged ones included), so a
+// change re-evaluates them all rather than one class like the filters above.
+// The body class lets CSS collapse the zones the focus emptied out.
+function applyBuildFocus() {
+  document.body.classList.toggle('build-focus', activeFocusBuilds().length > 0);
+  $all('#tabPlaythrough li[data-id]').forEach((li) => {
     li.style.display = canFilter(li) ? 'none' : '';
   });
 }
@@ -145,7 +160,17 @@ function calculateTotals() {
       setBadge(totEl, label, done, pct);
       setBadge(navEl, label, done, pct);
 
-      if (h3) h3.classList.toggle('completed', done);
+      if (h3) {
+        h3.classList.toggle('completed', done);
+        // A zone the current filters emptied out entirely; while a build
+        // focus is active, CSS hides these headers (and their lists) so the
+        // Playthrough reads as one compact build checklist.
+        h3.classList.toggle('filter-empty', count === 0);
+      }
+      if (navEl) {
+        const navLi = navEl.closest('li');
+        if (navLi) navLi.classList.toggle('filter-empty', count === 0);
+      }
 
       // Sub-heading (h4) visibility: hide fully-completed groups.
       if (container && container.tagName === 'DIV') {
@@ -344,6 +369,14 @@ function restoreState(name) {
     }
   });
 
+  // Build focus toggles.
+  const focus = p.build_focus || {};
+  $all('[data-build-focus]').forEach((el) => {
+    el.checked = !!focus[el.getAttribute('data-build-focus')];
+  });
+  applyBuildFocus();
+  calculateTotals();
+
   updateCollapseAllBtn();
 }
 
@@ -529,9 +562,13 @@ function setupSearch(inputId, containerId) {
     $all('h4', container).forEach((h) => {
       h.style.display = q ? 'none' : '';
     });
+    // Only the Playthrough is ever category/focus-filtered; consult canFilter
+    // there so showing search results (or clearing the search) can't undo the
+    // active filters by resetting every row's display.
+    const filtered = containerId === 'playthrough_list' ? canFilter : () => false;
     $all('li[data-id]', container).forEach((li) => {
       const match = li.textContent.toLowerCase().indexOf(lower) !== -1;
-      li.style.display = q === '' || match ? '' : 'none';
+      li.style.display = (q === '' || match) && !filtered(li) ? '' : 'none';
     });
     unhighlight(container);
     highlight(container, q);
@@ -691,6 +728,9 @@ function wireProfiles() {
     Object.keys(cur().hidden_categories).forEach((k) => {
       cur().hidden_categories[k] = false;
     });
+    Object.keys(cur().build_focus || {}).forEach((k) => {
+      cur().build_focus[k] = false;
+    });
     if (cur().journey < 3) cur().journey++;
     save();
     populateChecklists();
@@ -743,6 +783,20 @@ function wireFilters() {
       toggleFilteredClasses('h_ng+');
       toggleFilteredClasses('s_ng+');
       toggleFilteredClasses('s_ng++');
+      calculateTotals();
+    });
+  });
+
+  // Build focus toggles: inverted semantics compared to the filters above
+  // (checked = show only that build), so they keep their own profile field
+  // and re-evaluate the whole Playthrough on change.
+  $all('[data-build-focus]').forEach((input) => {
+    input.addEventListener('change', () => {
+      const p = cur();
+      if (!p.build_focus) p.build_focus = {};
+      p.build_focus[input.getAttribute('data-build-focus')] = input.checked;
+      save();
+      applyBuildFocus();
       calculateTotals();
     });
   });

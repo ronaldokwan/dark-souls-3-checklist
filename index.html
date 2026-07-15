@@ -626,62 +626,54 @@
                   Misc. items</label
                 >
               </div>
-              <div class="filter-cat btn-group-vertical btn-group-sm me-2 mb-2">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="cat_builds"
-                  data-category-toggle
-                  autocomplete="off"
-                />
-                <label class="btn btn-outline-primary filter-btn filter-cat-label" for="cat_builds"
-                  ><span class="filter-eye" aria-hidden="true"
-                    ><i class="bi bi-eye icon-eye-open"></i
-                    ><i class="bi bi-eye-slash icon-eye-close"></i
-                  ></span>
-                  Builds</label
-                >
+              <!-- Build focus: inverted semantics compared to the eye filters —
+                   checking a build shows ONLY its related steps. Styled in the
+                   build colors with a crosshair so it reads as a different kind
+                   of control. -->
+              <div
+                class="build-focus-group btn-group-vertical btn-group-sm me-2 mb-2"
+                role="group"
+                aria-label="Focus on a build: show only its related steps"
+              >
+                <span class="build-focus-header">Build Focus</span>
                 <input
                   type="checkbox"
                   class="btn-check"
                   id="f_sorc_build"
-                  data-item-toggle="f_sorc_build"
+                  data-build-focus="f_sorc_build"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-secondary filter-btn" for="f_sorc_build"
-                  ><span class="filter-eye" aria-hidden="true"
-                    ><i class="bi bi-eye icon-eye-open"></i
-                    ><i class="bi bi-eye-slash icon-eye-close"></i
-                  ></span>
-                  Sorcery Build</label
+                <label
+                  class="btn filter-btn build-focus-btn focus-sorc"
+                  for="f_sorc_build"
+                  title="Show only Sorcery build steps"
+                  ><i class="bi bi-crosshair" aria-hidden="true"></i> Sorcery Build</label
                 >
                 <input
                   type="checkbox"
                   class="btn-check"
                   id="f_pyro_build"
-                  data-item-toggle="f_pyro_build"
+                  data-build-focus="f_pyro_build"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-secondary filter-btn" for="f_pyro_build"
-                  ><span class="filter-eye" aria-hidden="true"
-                    ><i class="bi bi-eye icon-eye-open"></i
-                    ><i class="bi bi-eye-slash icon-eye-close"></i
-                  ></span>
-                  Pyromancy Build</label
+                <label
+                  class="btn filter-btn build-focus-btn focus-pyro"
+                  for="f_pyro_build"
+                  title="Show only Pyromancy build steps"
+                  ><i class="bi bi-crosshair" aria-hidden="true"></i> Pyromancy Build</label
                 >
                 <input
                   type="checkbox"
                   class="btn-check"
                   id="f_mirac_build"
-                  data-item-toggle="f_mirac_build"
+                  data-build-focus="f_mirac_build"
                   autocomplete="off"
                 />
-                <label class="btn btn-outline-secondary filter-btn" for="f_mirac_build"
-                  ><span class="filter-eye" aria-hidden="true"
-                    ><i class="bi bi-eye icon-eye-open"></i
-                    ><i class="bi bi-eye-slash icon-eye-close"></i
-                  ></span>
-                  Miracle Build</label
+                <label
+                  class="btn filter-btn build-focus-btn focus-mirac"
+                  for="f_mirac_build"
+                  title="Show only Miracle build steps"
+                  ><i class="bi bi-crosshair" aria-hidden="true"></i> Miracle Build</label
                 >
               </div>
             </div>
@@ -748,10 +740,13 @@
             On the Playthrough tab, the filter toolbar lets you hide whole categories of entries
             (bosses, missables, rings, spells, gear, materials, and more) so you can focus on just
             what you care about — click a category or item type to toggle it. The
-            <strong>Builds</strong> group hides everything tied to a caster build you're not playing
-            — its catalysts (staves, pyromancy flames, talismans and chimes), rings, trainers, and
-            spells. Filters only affect the Playthrough: the Achievements and Weapons/Shields tabs
-            are 100% completion lists, so nothing is ever hidden there. The
+            <strong>Build Focus</strong> group works the other way around: check a build and the
+            Playthrough shows <em>only</em> the steps tied to it — its catalysts (staves, pyromancy
+            flames, talismans and chimes), rings, trainers, and spells — hiding everything else,
+            zones with nothing left included. Check several builds to see their combined steps, and
+            note your other filters still apply within the focus (hiding Rings also hides the
+            build's rings). Filters only affect the Playthrough: the Achievements and
+            Weapons/Shields tabs are 100% completion lists, so nothing is ever hidden there. The
             <strong>NG / NG+ / NG++</strong> buttons switch which journey you're on: some entries
             only show up on NG+ and beyond (such as +1 and +2 rings), while a few disappear on NG+
             (such as the Ashen Estus Flask), so the list always reflects the journey you selected.
@@ -767,7 +762,9 @@
             pyromancy flames, talismans and sacred chimes), build-related rings, and the merchants
             who teach the spells. An entry shared by more than one active build (Karla, for example)
             shows a blend of the colors. The highlight is a scratch view for planning a build — it
-            isn't saved and resets on reload.
+            isn't saved and resets on reload. If you'd rather see <em>only</em> your build's steps
+            instead of tinting them in place, use the Build Focus group in the Playthrough filter
+            panel — that one is saved with your profile.
           </p>
 
           <h3>What are the star buttons next to some equipment?</h3>

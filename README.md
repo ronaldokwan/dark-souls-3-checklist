@@ -15,7 +15,8 @@ the browser.
 - **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items — plus a soul-item value reference.
 - **Progress saved** in your browser, with multiple **profiles** for different characters.
 - **Cross-tab sync** — check an item once (a weapon, ring, spell, …) and it's ticked everywhere it appears, across the Playthrough and the collection tabs.
-- **Filters** by category (bosses, missables, rings, …), by caster build (sorcery / pyromancy / miracle), and by journey (NG / NG+ / NG++).
+- **Filters** by category (bosses, missables, rings, …) and by journey (NG / NG+ / NG++).
+- **Build focus** — check a sorcery, pyromancy, or miracle build and the Playthrough shows only that build's steps (catalysts, rings, trainers, spells), hiding everything else — the empty zones included.
 - **Build highlighting** — tint everything tied to a sorcery, pyromancy, or miracle build (catalysts, rings, trainers, spells) across all tabs, with blended colors for steps shared by several builds.
 - **Unique passive notes** — equipment with a special effect gets a star info button that opens the effect description in a modal; with build highlights active, descriptions that matter to your build are tinted too.
 - **Per-section search** with match highlighting, collapsible sections (with expand/collapse all), and a "hide completed" mode.
@@ -141,13 +142,15 @@ chimes), build-related rings, trainer/merchant steps, and spells:
 | f_pyro_build  | Part of a Pyromancy (Int/Faith) caster build  |
 | f_mirac_build | Part of a Miracle (Faith) caster build        |
 
-They power the Builds group in the filter panel and the
+They power the Build Focus group in the filter panel and the
 Sorcery/Pyromancy/Miracle highlight buttons shown on the checklist tabs. Unlike
-the regular filter classes, build classes are **exclusionary**: hiding a build
-hides an entry tagged with it even when the entry also carries an otherwise
-visible category (recruiting Orbeck is both "an NPC" and "part of the sorcery
-build"). An entry may carry several build classes when it serves more than one
-school (e.g. the Crystal Chime casts both sorceries and miracles).
+the regular filter classes (which hide their category), build focus is
+**inclusive**: focusing a build shows only the Playthrough entries tagged with
+an active build class and hides everything else, zones emptied by the focus
+included. Several builds focused at once show their union, and the regular
+category filters still apply within the focus. An entry may carry several
+build classes when it serves more than one school (e.g. the Crystal Chime
+casts both sorceries and miracles).
 
 Filtering only ever hides entries in the Playthrough walkthrough. The
 collection tabs (Achievements, Weapons/Shields, …) are 100% completion lists,

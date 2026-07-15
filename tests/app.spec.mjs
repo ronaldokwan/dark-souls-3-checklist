@@ -473,15 +473,33 @@ test('build toggles tint the passive modal text, including cross-school buffs', 
   await expect(page.locator('#passiveModalText .build-term')).toHaveCount(0);
 });
 
-test('build filter hides Playthrough entries but never the collection tabs', async ({ page }) => {
+test('build focus shows only the focused build on the Playthrough, never touching collection tabs', async ({
+  page,
+}) => {
   await page.locator('#tabPlaythrough .filter-panel summary').click();
 
-  // Hide the Sorcery build: the Heretic's Staff pickup disappears from the
-  // Playthrough even though its other category (Weapons) is still visible.
+  // Focus the Sorcery build: its steps stay, everything else hides — other
+  // schools' pickups and plain walkthrough steps (f_none) included.
   await page.locator('label[for="f_sorc_build"]').click();
   await expect(page.locator('#f_sorc_build')).toBeChecked();
-  await expect(page.locator('#tabPlaythrough li.f_sorc_build').first()).toBeHidden();
-  await expect(page.locator('li[data-id="playthrough_4_33"]')).toBeHidden();
+  await expect(page.locator('li[data-id="playthrough_4_33"]')).toBeVisible(); // sorcery catalyst
+  await expect(page.locator('li[data-id="playthrough_5_27"]')).toBeHidden(); // miracle pickup
+  await expect(page.locator('li[data-id="playthrough_17_8"]')).toBeHidden(); // plain step
+
+  // Zones the focus emptied out disappear entirely, header and ToC row both.
+  expect(await page.locator('#tabPlaythrough h3.filter-empty').count()).toBeGreaterThan(0);
+  await expect(page.locator('#tabPlaythrough h3.filter-empty').first()).toBeHidden();
+  expect(
+    await page.locator('#tabPlaythrough .table_of_contents li.filter-empty').count()
+  ).toBeGreaterThan(0);
+  await expect(
+    page.locator('#tabPlaythrough .table_of_contents li.filter-empty').first()
+  ).toBeHidden();
+
+  // Several focused builds show their union.
+  await page.locator('label[for="f_mirac_build"]').click();
+  await expect(page.locator('li[data-id="playthrough_5_27"]')).toBeVisible();
+  await page.locator('label[for="f_mirac_build"]').click();
 
   // The collection tabs are 100% completion lists: the staves in the Weapons
   // tab and the build rings in the Achievements tab must stay visible.
@@ -490,30 +508,41 @@ test('build filter hides Playthrough entries but never the collection tabs', asy
   await page.locator('[data-bs-target="#tabChecklists"]').click();
   await expect(page.locator('li[data-id="checklist_5_28"]')).toBeVisible(); // Young Dragon Ring
 
-  // Unhide restores the Playthrough entries.
+  // Focus is saved with the profile and survives a reload (which restores
+  // the Achievements tab we were last on, so switch back first).
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(200);
   await page.locator('[data-bs-target="#tabPlaythrough"]').click();
+  await expect(page.locator('#f_sorc_build')).toBeChecked();
+  await expect(page.locator('li[data-id="playthrough_5_27"]')).toBeHidden();
+
+  // Switching the focus off restores everything.
+  await page.locator('#tabPlaythrough .filter-panel summary').click();
   await page.locator('label[for="f_sorc_build"]').click();
-  await expect(page.locator('li[data-id="playthrough_4_33"]')).toBeVisible();
+  await expect(page.locator('li[data-id="playthrough_5_27"]')).toBeVisible();
+  await expect(page.locator('li[data-id="playthrough_17_8"]')).toBeVisible();
 });
 
-// Regression: build classes must never shield an entry from the regular
-// category filters. Toggling a Builds filter on and off leaves its key in the
-// profile as "not hidden"; that key must not make build-tagged entries (every
-// spell pickup carries one) immune to the Sorceries/Pyromancies/Miracles
-// toggles.
-test('spell filters still work after a Builds toggle has been touched', async ({ page }) => {
+// The regular category filters keep working alongside a focus: they apply
+// within the focused set, and still work normally after the focus is gone.
+test('category filters compose with build focus', async ({ page }) => {
   await page.locator('#tabPlaythrough .filter-panel summary').click();
 
-  // Touch every Builds toggle (on, then off) so their keys are persisted.
-  await page.locator('label[for="cat_builds"]').click();
-  await page.locator('label[for="cat_builds"]').click();
-  await expect(page.locator('#f_mirac_build')).not.toBeChecked();
+  // Focus Sorcery, then hide Rings: the sorcery ring pickup hides too.
+  await page.locator('label[for="f_sorc_build"]').click();
+  await expect(page.locator('li[data-id="playthrough_15_42"]')).toBeVisible(); // f_ring f_sorc_build
+  await page.locator('label[for="f_ring"]').click();
+  await expect(page.locator('li[data-id="playthrough_15_42"]')).toBeHidden();
+  await page.locator('label[for="f_ring"]').click();
+  await expect(page.locator('li[data-id="playthrough_15_42"]')).toBeVisible();
 
-  // Hiding Miracles must still hide a pure miracle pickup (f_mirac f_mirac_build).
+  // With the focus off again, the spell filters behave as always: hiding
+  // Miracles hides a pure miracle pickup (f_mirac f_mirac_build), and f_none
+  // steps hide while any filter is active, build-tagged ones included
+  // (e.g. sending Karla to Firelink).
+  await page.locator('label[for="f_sorc_build"]').click();
   await page.locator('label[for="f_mirac"]').click();
   await expect(page.locator('li[data-id="playthrough_5_27"]')).toBeHidden();
-  // And f_none steps hide as usual while a filter is active, including the
-  // ones that also carry build classes (e.g. sending Karla to Firelink).
   await expect(page.locator('li[data-id="playthrough_9_20"]')).toBeHidden();
 
   await page.locator('label[for="f_mirac"]').click();

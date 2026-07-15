@@ -535,6 +535,59 @@ body.hide_completed .togglehide .icon-eye-close {
   text-decoration: underline;
 }
 
+/* Build focus (filter panel) ---------------------------------------------
+ * The inverse of the eye filters: checking a build shows ONLY its related
+ * steps on the Playthrough. Styled apart from the hide-filters — a plain
+ * header instead of a parent eye toggle, crosshair icons, and each button in
+ * its school's color (the same colors as the highlight buttons). */
+.build-focus-group > .filter-btn {
+  text-align: left;
+}
+.build-focus-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bs-secondary-color);
+  padding: 0.25rem 0.5rem 0.35rem;
+}
+.build-focus-btn {
+  --focus-color: var(--bs-secondary-color);
+  color: var(--focus-color);
+  border-color: var(--focus-color);
+}
+.focus-sorc {
+  --focus-color: rgb(61, 118, 209);
+}
+.focus-pyro {
+  --focus-color: rgb(196, 94, 33);
+}
+.focus-mirac {
+  --focus-color: rgb(160, 128, 25);
+}
+[data-bs-theme='dark'] .focus-mirac {
+  --focus-color: rgb(201, 162, 39);
+}
+.build-focus-btn:hover {
+  color: var(--focus-color);
+  border-color: var(--focus-color);
+  background-color: color-mix(in srgb, var(--focus-color) 12%, transparent);
+}
+.btn-check:checked + .build-focus-btn {
+  color: #fff;
+  background-color: var(--focus-color);
+  border-color: var(--focus-color);
+}
+
+/* While a build focus is active, zones (and their table-of-contents rows)
+ * that the focus emptied out disappear entirely, so the Playthrough reads as
+ * one compact build checklist instead of a wall of empty headers. */
+body.build-focus #tabPlaythrough h3.filter-empty,
+body.build-focus #tabPlaythrough h3.filter-empty + *,
+body.build-focus #tabPlaythrough .table_of_contents li.filter-empty {
+  display: none;
+}
+
 /* Theme toggle icon ----------------------------------------------------- */
 #themeToggle .theme-icon-dark {
   display: none;

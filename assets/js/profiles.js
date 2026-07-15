@@ -8,6 +8,11 @@ import { Storage } from './storage.js';
 
 export const profilesKey = 'darksouls3_profiles';
 
+// Build-focus keys (the "show only this build" toggles). Kept separate from
+// FILTER_KEYS because their semantics are inverted: a checked focus key shows
+// only matching entries, while a checked filter key hides its category.
+export const BUILD_KEYS = ['f_sorc_build', 'f_pyro_build', 'f_mirac_build'];
+
 export const FILTER_KEYS = [
   'f_boss',
   'f_miss',
@@ -61,6 +66,18 @@ export function initializeProfile(name) {
       p.hidden_categories[k] = false;
     });
   }
+  if (!('build_focus' in p)) {
+    p.build_focus = {};
+    BUILD_KEYS.forEach((k) => {
+      p.build_focus[k] = false;
+    });
+  }
+  // Build keys used to live in hidden_categories when the Builds toggles were
+  // hide-filters; drop the stale keys so old (or imported) profiles can't
+  // re-trigger the retired exclusionary behaviour.
+  BUILD_KEYS.forEach((k) => {
+    delete p.hidden_categories[k];
+  });
 }
 
 export function canDelete() {
