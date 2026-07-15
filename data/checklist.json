@@ -11653,8 +11653,7 @@
    "listId": null,
    "searchId": null,
    "nav": [
-    "<a href=\"#Pickle_Pee_Pump-a-Rum_Crow\">Pickle Pee, Pump-a-Rum Crow</a> <span id=\"crow_nav_totals_1\"></span>",
-    "<a href=\"#Soul_Types\">Soul Types</a>"
+    "<a href=\"#Pickle_Pee_Pump-a-Rum_Crow\">Pickle Pee, Pump-a-Rum Crow</a> <span id=\"crow_nav_totals_1\"></span>"
    ],
    "sections": [
     {
@@ -11789,6 +11788,35 @@
        "html": "Trade <a href=\"https://darksouls3.wiki.fextralife.com/Eleonora\">Eleonora</a> for <a href=\"https://darksouls3.wiki.fextralife.com/Hollow+Gem\">Hollow Gem</a>"
       }
      ]
+    }
+   ]
+  },
+  {
+   "id": "tabResources",
+   "key": "resources",
+   "title": "Resources",
+   "overallTotalId": "resources_overall",
+   "listId": null,
+   "searchId": null,
+   "nav": [
+    "<a href=\"#Stats_and_Soft_Caps\">Stats &amp; Soft Caps</a>: diminishing returns per stat",
+    "<a href=\"#Caster_Build_Targets\">Caster Build Targets</a>: soft-cap stat spreads for the three schools",
+    "<a href=\"#Soul_Types\">Soul Types</a>: consumable soul values"
+   ],
+   "sections": [
+    {
+     "id": "Stats_and_Soft_Caps",
+     "titleHtml": "Stats &amp; Soft Caps: where <a href=\"https://darksouls3.wiki.fextralife.com/Stats\">stats</a> stop paying off",
+     "totalsId": null,
+     "type": "raw",
+     "raw": "<div class=\"table-responsive\"><table class=\"table table-sm table-striped stat_table\"><thead><tr><th scope=\"col\">Stat</th><th scope=\"col\">Soft caps</th><th scope=\"col\">Notes</th></tr></thead><tbody><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Vigor\">Vigor</a></th><td>27 / 44</td><td>HP. Roughly 1,000 HP at 27 and 1,300 at 44; being embered adds 30% on top.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Attunement\">Attunement</a></th><td>35</td><td>FP gains taper after 35. Attunement slots come at 10 / 14 / 18 / 24 / 30, then 40, 50, 60, 80 and 99.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Endurance\">Endurance</a></th><td>40</td><td>Stamina stops growing entirely at 40 (160 stamina).</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Vitality\">Vitality</a></th><td>40</td><td>Physical defense tapers around 40; equip load itself rises 1 per point all the way to 99. Stay under 70% load to keep the medium roll.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Strength\">Strength</a></th><td>40 / 60</td><td>Weapon scaling. Two-handing counts Strength at 1.5&times;, so 27 two-handed already reaches the 40 cap and 66 reaches the 99 ceiling.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Dexterity\">Dexterity</a></th><td>40 / 60</td><td>Weapon scaling; 35&ndash;45 virtual Dexterity (the Sage Ring counts) also speeds up casting.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Intelligence\">Intelligence</a></th><td>40 / 60</td><td>Sorcery spell buff, with small gains continuing to 99. Dark sorceries scale on Intelligence and Faith up to 30 each.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Faith\">Faith</a></th><td>40 / 60</td><td>Miracle spell buff, with small gains continuing to 99. Dark miracles scale on Intelligence and Faith up to 30 each.</td></tr><tr><th scope=\"row\"><a href=\"https://darksouls3.wiki.fextralife.com/Luck\">Luck</a></th><td>40</td><td>Bleed/poison buildup and Hollow-infusion scaling. Item discovery keeps rising linearly to 99.</td></tr></tbody></table></div>"
+    },
+    {
+     "id": "Caster_Build_Targets",
+     "titleHtml": "Caster Build Soft-Cap Targets",
+     "totalsId": null,
+     "type": "raw",
+     "raw": "<div class=\"build-target-grid\"><div class=\"build-target target-sorc\"><h4><i class=\"bi bi-crosshair\" aria-hidden=\"true\"></i> Sorcery Build</h4><ul class=\"build-target-stats\"><li><span>VIG</span>27</li><li><span>ATT</span>24&ndash;30</li><li><span>DEX</span>12</li><li><span>INT</span>60</li></ul><p>Intelligence 60 is the sorcery spell-buff sweet spot; 24&ndash;30 Attunement gives 4&ndash;5 slots. The <a href=\"https://darksouls3.wiki.fextralife.com/Sage's+Ring\">Sage's Ring</a> covers casting speed so you can leave Dexterity at weapon requirements.</p></div><div class=\"build-target target-pyro\"><h4><i class=\"bi bi-crosshair\" aria-hidden=\"true\"></i> Pyromancy Build</h4><ul class=\"build-target-stats\"><li><span>VIG</span>27</li><li><span>ATT</span>30</li><li><span>INT</span>40</li><li><span>FTH</span>40</li></ul><p>The <a href=\"https://darksouls3.wiki.fextralife.com/Pyromancy+Flame\">Pyromancy Flame</a>'s spell buff caps at Intelligence/Faith 40/40, and chaos/dark weapon infusions scale on the same pair. Dark pyromancies already peak near 30/30.</p></div><div class=\"build-target target-mirac\"><h4><i class=\"bi bi-crosshair\" aria-hidden=\"true\"></i> Miracle Build</h4><ul class=\"build-target-stats\"><li><span>VIG</span>27</li><li><span>ATT</span>24&ndash;30</li><li><span>FTH</span>60</li></ul><p>Faith 60 is the miracle spell-buff sweet spot &mdash; lightning spears hit hardest there. Dark miracles instead peak near Intelligence/Faith 30/30.</p></div></div>"
     },
     {
      "id": "Soul_Types",

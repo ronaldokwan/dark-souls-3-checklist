@@ -44,6 +44,26 @@ test('tab switching works and Hide Completed hides on non-checklist tabs', async
   await expect(page.locator('#profiles option')).not.toHaveCount(0);
 });
 
+test('Resources tab shows soft caps, build targets, and the relocated Soul Types', async ({
+  page,
+}) => {
+  await page.locator('[data-bs-target="#tabResources"]').click();
+  await expect(page.locator('#tabResources')).toHaveClass(/active/);
+
+  // Reference content only: one row per stat, one card per caster build.
+  await expect(page.locator('#tabResources .stat_table tbody tr')).toHaveCount(9);
+  await expect(page.locator('#tabResources .build-target')).toHaveCount(3);
+  await expect(page.locator('#tabResources .build-target.target-sorc')).toContainText('INT');
+
+  // Soul Types moved here from the Misc tab.
+  await expect(page.locator('#tabResources .soul_grid li')).toHaveCount(22);
+  await expect(page.locator('#tabMisc .soul_grid')).toHaveCount(0);
+
+  // No checkboxes on this tab, so the checklist controls stay hidden.
+  await expect(page.locator('#tabResources .checkbox')).toHaveCount(0);
+  await expect(page.locator('#btnHideCompleted')).toBeHidden();
+});
+
 test('theme toggle flips data-bs-theme', async ({ page }) => {
   const theme = () => page.evaluate(() => document.documentElement.getAttribute('data-bs-theme'));
   const before = await theme();

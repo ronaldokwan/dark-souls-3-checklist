@@ -12,7 +12,8 @@ the browser.
 
 ## Features
 
-- **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items — plus a soul-item value reference.
+- **Complete checklists** for the playthrough, achievements, weapons/shields, armor, and Crow trades — over 1,900 tracked items.
+- **Resources tab** — stat soft caps, soft-cap stat spreads for the three caster builds, and a soul-item value reference.
 - **Progress saved** in your browser, with multiple **profiles** for different characters.
 - **Cross-tab sync** — check an item once (a weapon, ring, spell, …) and it's ticked everywhere it appears, across the Playthrough and the collection tabs.
 - **Filters** by category (bosses, missables, rings, …) and by journey (NG / NG+ / NG++).

@@ -4,7 +4,7 @@
  * every same-origin GET (serve from cache instantly, refresh in the background).
  * Bump CACHE to force clients onto a new set of assets.
  */
-const CACHE = 'ds3-cheatsheet-v4';
+const CACHE = 'ds3-cheatsheet-v5';
 const CORE = [
   './',
   './index.html',
