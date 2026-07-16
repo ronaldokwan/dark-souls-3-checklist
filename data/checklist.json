@@ -2530,7 +2530,8 @@
         "dragonslayer's-axe",
         "mirrah-chain-mail",
         "mirrah-chain-gloves",
-        "mirrah-chain-leggings"
+        "mirrah-chain-leggings",
+        "creighton's-steel-mask"
        ],
        "html": "An <a href=\"https://darksouls3.wiki.fextralife.com/Undead+Bone+Shard\">Undead Bone Shard</a> is located behind the grave. If you helped Sirris, <a href=\"https://darksouls3.wiki.fextralife.com/Creighton+the+Wanderer\">Creighton the Wanderer</a> will invade you here if you're embered. Killing him will gain you the <a href=\"https://darksouls3.wiki.fextralife.com/Dragonslayer's+Axe\">Dragonslayer's Axe</a> and allow you to grab Creighton's <a href=\"https://darksouls3.wiki.fextralife.com/Mirrah+Chain+Set\">Mirrah Chain Armor Set</a> on the bridge where you used Sirris' summon sign"
       },
@@ -2620,7 +2621,8 @@
         "manikin-claws-irithyll",
         "pale-shade-robe",
         "pale-shade-gloves",
-        "pale-shade-trousers"
+        "pale-shade-trousers",
+        "sneering-mask"
        ],
        "html": "If you are on bad terms with Yuria (healed the Dark Sigil or attacked her or killed the assassin in the Church of Yorshka) and are embered, dark spirit <a href=\"https://darksouls3.wiki.fextralife.com/Londor+Pale+Shade\">Londor Pale Shade</a> will invade your world after the Silver Knights' room. (Note: If you are currently eligible for the invasion by <a href=\"https://darksouls3.wiki.fextralife.com/Creighton+the+Wanderer\">Creighton the Wanderer</a>, you will have to eliminate that one first to get Londor Pale Shade to spawn.) If this is your first time killing him, you will receive the <a href=\"https://darksouls3.wiki.fextralife.com/Manikin+Claws\">Manikin Claws</a>. If you defeated <a href=\"https://darksouls3.wiki.fextralife.com/Londor+Pale+Shade\">Londor Pale Shade</a> in both of his invasions, then you can pick up the <a href=\"https://darksouls3.wiki.fextralife.com/Pale+Shade+Set\">Pale Shade Set</a> near Yuria's location in Firelink Shrine"
       },
@@ -3480,7 +3482,7 @@
       },
       {
        "id": "playthrough_11_2",
-       "cls": "f_ring",
+       "cls": "f_ring f_sorc_build f_pyro_build f_mirac_build",
        "item": "ashen-estus-ring",
        "html": "Collect the <a href=\"https://darksouls3.wiki.fextralife.com/Ashen+Estus+Ring\">Ashen Estus Ring</a> located to the left from the bonfire"
       },
@@ -4553,7 +4555,8 @@
         "darkdrift",
         "black-dress",
         "black-gauntlets",
-        "black-leggings"
+        "black-leggings",
+        "billed-mask"
        ],
        "html": "If you have 8 Dark Sigils, you can summon <a href=\"https://darksouls3.wiki.fextralife.com/Yuria+of+Londor\">Yuria of Londor</a> and <a href=\"https://darksouls3.wiki.fextralife.com/Londor+Pale+Shade\">Londor Pale Shade</a> for the Soul of Cinder fight. If Yuria survives, you will be able to pick up <a href=\"https://darksouls3.wiki.fextralife.com/Darkdrift\">Darkdrift</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Black+Set\">Black Set</a> at her usual location in Firelink Shrine"
       },
@@ -6683,7 +6686,7 @@
         },
         {
          "id": "checklist_5_4",
-         "cls": "",
+         "cls": "f_sorc_build f_pyro_build f_mirac_build",
          "item": "ashen-estus-ring",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Ashen+Estus+Ring\">Ashen Estus Ring</a>: Proceed from the Untended Graves bonfire and take left path. The ring is on a corpse behind some crow enemies"
         },
@@ -7796,7 +7799,8 @@
         },
         {
          "id": "weapons_1_8",
-         "cls": "",
+         "cls": "f_sorc_build",
+         "passive": "Boosts sorcery damage by 10% while held, even in the off-hand.",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Scholar's+Candlestick\">Scholar's Candlestick</a>"
         },
         {
@@ -8241,6 +8245,7 @@
         {
          "id": "weapons_1_78",
          "cls": "f_sorc_build",
+         "passive": "Increases item discovery by 50 while held.",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Crystal+Sage's+Rapier\">Crystal Sage's Rapier</a>"
         },
         {
@@ -8390,7 +8395,7 @@
         },
         {
          "id": "weapons_1_91",
-         "cls": "",
+         "cls": "f_pyro_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Demon's+Greataxe\">Demon's Greataxe</a>"
         },
         {
@@ -8506,7 +8511,7 @@
         },
         {
          "id": "weapons_1_103",
-         "cls": "",
+         "cls": "f_pyro_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Gargoyle+Flame+Hammer\">Gargoyle Flame Hammer</a>"
         },
         {
@@ -8596,7 +8601,7 @@
         },
         {
          "id": "weapons_1_122",
-         "cls": "",
+         "cls": "f_pyro_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Gargoyle+Flame+Spear\">Gargoyle Flame Spear</a>"
         },
         {
@@ -8824,7 +8829,7 @@
         },
         {
          "id": "weapons_1_116",
-         "cls": "",
+         "cls": "f_pyro_build",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Demon's+Fist\">Demon's Fist</a>"
         },
         {
@@ -9616,6 +9621,7 @@
       {
        "id": "armors_1_70",
        "cls": "",
+       "item": "creighton's-steel-mask",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Creighton's+Steel+Mask\">Creighton's Steel Mask</a>"
       },
       {
@@ -9924,11 +9930,13 @@
       {
        "id": "armors_1_76",
        "cls": "",
+       "item": "sneering-mask",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Sneering+Mask\">Sneering Mask</a>"
       },
       {
        "id": "armors_1_53",
        "cls": "",
+       "item": "billed-mask",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Billed+Mask\">Billed Mask</a>"
       },
       {

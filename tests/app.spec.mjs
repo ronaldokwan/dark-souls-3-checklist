@@ -335,6 +335,14 @@ test('multi-item drops and same-URL variants sync to the right twins', async ({ 
   await expect(page.locator('#weapons_1_119')).not.toBeChecked();
   await page.locator('#playthrough_15_35').check();
   await expect(page.locator('#weapons_1_119')).toBeChecked();
+
+  // Set head pieces named unlike their sets (Sneering/Steel/Billed masks)
+  // spawn with the same pickups and mirror into the Armors tab too.
+  await expect(page.locator('#armors_1_76')).toBeChecked(); // Sneering Mask
+  await page.locator('#playthrough_15_21').check();
+  await expect(page.locator('#armors_1_70')).toBeChecked(); // Creighton's Steel Mask
+  await page.locator('#playthrough_19_1').check();
+  await expect(page.locator('#armors_1_53')).toBeChecked(); // Billed Mask
 });
 
 test('defeating a boss syncs to its Achievements entry', async ({ page }) => {
@@ -451,6 +459,13 @@ test('unique-passive info button opens the passive modal without touching the ch
   await page.locator('li[data-id="weapons_1_172"] .passive-info').click();
   await expect(page.locator('#passiveModalItem')).toContainText('Izalith Staff');
   await expect(page.locator('#passiveModalText')).toContainText('dark sorceries');
+  await page.locator('#passiveModal .btn-outline-secondary').click();
+  await expect(page.locator('#passiveModal')).toBeHidden();
+
+  // Hidden always-on effects count too (Scholar's Candlestick sorcery boost).
+  await page.locator('li[data-id="weapons_1_8"] .passive-info').click();
+  await expect(page.locator('#passiveModalItem')).toContainText("Scholar's Candlestick");
+  await expect(page.locator('#passiveModalText')).toContainText('sorcery');
   await page.locator('#passiveModal .btn-outline-secondary').click();
   await expect(page.locator('#passiveModal')).toBeHidden();
 
@@ -608,6 +623,7 @@ test('build highlight covers caster weapons, tomes, trainers and shared rings', 
   await expect(page.locator('li[data-id="playthrough_3_3"]')).toHaveClass(/build-highlight/); // Yoel recruit
   await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
   await expect(page.locator('li[data-id="weapons_1_38"]')).toHaveClass(/build-highlight/); // Moonlight Greatsword
+  await expect(page.locator('li[data-id="weapons_1_8"]')).toHaveClass(/build-highlight/); // Scholar's Candlestick
   await expect(page.locator('li[data-id="weapons_1_152"]')).not.toHaveClass(/build-highlight/); // Witch's Locks (pyro)
 
   // Dark Clutch Ring boosts dark spells in all three schools: it stays tinted
@@ -619,6 +635,15 @@ test('build highlight covers caster weapons, tomes, trainers and shared rings', 
   await expect(page.locator('li[data-id="checklist_5_51"]')).toHaveClass(/build-highlight/);
   await page.locator('label[for="highlight_mirac"]').click();
   await expect(page.locator('li[data-id="checklist_5_51"]')).not.toHaveClass(/build-highlight/);
+
+  // Int/Fth-scaling fire weapons follow the pyromancer stat pair, and the
+  // Ashen Estus Ring (caster FP recovery) counts for every school.
+  await page.locator('label[for="highlight_pyro"]').click();
+  await expect(page.locator('li[data-id="checklist_5_4"]')).toHaveClass(/build-highlight/); // Ashen Estus Ring
+  await page.locator('[data-bs-target="#tabWeaponsShields"]').click();
+  await expect(page.locator('li[data-id="weapons_1_116"]')).toHaveClass(/build-highlight/); // Demon's Fist
+  await expect(page.locator('li[data-id="weapons_1_91"]')).toHaveClass(/build-highlight/); // Demon's Greataxe
+  await expect(page.locator('li[data-id="weapons_1_38"]')).not.toHaveClass(/build-highlight/); // Moonlight Greatsword
 });
 
 // Regression guard: totals must reflect the actual checkboxes present, not a
