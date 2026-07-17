@@ -310,11 +310,19 @@ test('NG+/NG++ upgrade variants sync to their matching Achievements entry', asyn
 
 test('multi-item drops and same-URL variants sync to the right twins', async ({ page }) => {
   // Havel (playthrough_12_40) drops two items at once: both collection boxes
-  // must mirror. The alternate Havel spawn (playthrough_12_33) is unlinked.
+  // must mirror. The summoned Havel (playthrough_12_33) is an alternate source
+  // of the same drops with its own -b keys: either spot syncs the collection
+  // boxes without chaining to the other spot.
   await page.locator('#playthrough_12_40').check();
   await expect(page.locator('#weapons_1_113')).toBeChecked(); // Dragon Tooth
   await expect(page.locator('#weapons_2_55')).toBeChecked(); // Havel's Greatshield
   await expect(page.locator('#playthrough_12_33')).not.toBeChecked();
+  await page.locator('#playthrough_12_40').uncheck();
+  await expect(page.locator('#weapons_1_113')).not.toBeChecked();
+  await page.locator('#playthrough_12_33').check();
+  await expect(page.locator('#weapons_1_113')).toBeChecked();
+  await expect(page.locator('#weapons_2_55')).toBeChecked();
+  await expect(page.locator('#playthrough_12_40')).not.toBeChecked();
 
   // The two Loincloths share one wiki URL but are distinct items: the Undead
   // Settlement pickup syncs only the base entry, the Dreg Heap pickup only the

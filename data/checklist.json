@@ -440,7 +440,7 @@
       {
        "id": "playthrough_2_17",
        "cls": "f_weap",
-       "item": "mail-breaker",
+       "item": "mail-breaker-a",
        "html": "Continue along the passageway and pick up the <a href=\"https://darksouls3.wiki.fextralife.com/Mail+Breaker\">Mail Breaker</a> opposite the door on a corpse"
       },
       {
@@ -854,7 +854,7 @@
        "id": "playthrough_3_47",
        "cls": "f_weap",
        "item": "red-and-white-round-shield",
-       "html": "Walk through the archway tunnel. Shoot down a hanging corpse to get a <a href=\"https://darksouls3.wiki.fextralife.com/Red+and+White+Shield\">Blessed Red and White Shield+1</a>"
+       "html": "Walk through the archway tunnel. Shoot down a hanging corpse to get a <a href=\"https://darksouls3.wiki.fextralife.com/Red+and+White+Shield\">Blessed Red and White Round Shield+1</a>"
       },
       {
        "id": "playthrough_3_48",
@@ -2412,7 +2412,8 @@
        "cls": "f_npc f_ring f_weap f_miss",
        "item": [
         "pontiff's-right-eye",
-        "silvercat-ring"
+        "silvercat-ring",
+        "mail-breaker-b"
        ],
        "html": "When first arriving in Irithyll, you'll battle one of <a href=\"https://darksouls3.wiki.fextralife.com/Sulyvahn's+Beast\">Sulyvahn's Beasts</a>, which drops <a href=\"https://darksouls3.wiki.fextralife.com/Pontiff's+Right+Eye\">Pontiff's Right Eye</a>, and then move through a force field to the Central Irithyll bonfire. If you run past the beast, it will despawn and you will encounter it later in a more challenging area. Light the bonfire and return to the middle of the bridge and Sirris' summon sign should be there if you've been following her quest. Activate it and you'll enter her world and have to fight <a href=\"https://darksouls3.wiki.fextralife.com/Creighton+the+Wanderer\">Creighton the Wanderer</a>. After defeating the invader, visit Firelink Shrine and she will give you <a href=\"https://darksouls3.wiki.fextralife.com/Mail+Breaker\">Blessed Mail Breaker</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Silvercat+Ring\">Silvercat Ring</a> for the troubles"
       },
@@ -2735,7 +2736,7 @@
       },
       {
        "id": "playthrough_15_55",
-       "cls": "f_weap f_sorc_build",
+       "cls": "f_weap f_sorc_build f_mirac_build",
        "item": "golden-ritual-spear",
        "html": "Enter the cathedral from the top of the dark section, unlock an elevator shortcut back down to Sulyvahn's room, and cross the bridge to the other side to find a Mimic who has the <a href=\"https://darksouls3.wiki.fextralife.com/Golden+Ritual+Spear\">Golden Ritual Spear</a>"
       },
@@ -3778,7 +3779,7 @@
       {
        "id": "playthrough_12_33",
        "cls": "f_weap",
-       "item": "ricard's-rapier",
+       "item": ["ricard's-rapier", "dragon-tooth-b", "havel's-greatshield-b"],
        "html": "In the next building, you should encounter the <a href=\"https://darksouls3.wiki.fextralife.com/Rapier+Champion\">Rapier Champion</a>; slay him for <a href=\"https://darksouls3.wiki.fextralife.com/Ricard's+Rapier\">Ricard's Rapier</a>. (It's also possible to get a <a href=\"https://darksouls3.wiki.fextralife.com/Havel+Knight\">Havel Knight</a>, who drops <a href=\"https://darksouls3.wiki.fextralife.com/Dragon+Tooth\">Dragon Tooth</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Havel's+Greatshield\">Havel's Greatshield</a>)"
       },
       {
@@ -3820,7 +3821,7 @@
       {
        "id": "playthrough_12_40",
        "cls": "f_tit f_weap",
-       "item": ["dragon-tooth", "havel's-greatshield"],
+       "item": ["dragon-tooth-a", "havel's-greatshield-a"],
        "html": "Climb the ladder to discover <a href=\"https://darksouls3.wiki.fextralife.com/Havel+Knight\">Havel</a> standing in front of a dead dragon. Kill him for <a href=\"https://darksouls3.wiki.fextralife.com/Dragon+Tooth\">Dragon Tooth</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Havel's+Greatshield\">Havel's Greatshield</a>. Next to the dragon is a <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Slab\">Titanite Slab</a>"
       },
       {
@@ -4144,12 +4145,12 @@
        "id": "playthrough_13_43",
        "cls": "f_npc f_weap f_miss f_mirac_build",
        "item": [
-        "moaning-shield",
-        "morne's-great-hammer",
-        "morne's-helm",
-        "morne's-armor",
-        "morne's-gauntlets",
-        "morne's-leggings"
+        "moaning-shield-a",
+        "morne's-great-hammer-a",
+        "morne's-helm-a",
+        "morne's-armor-a",
+        "morne's-gauntlets-a",
+        "morne's-leggings-a"
        ],
        "html": "If <a href=\"https://darksouls3.wiki.fextralife.com/Eygon+of+Carim\">Eygon of Carim</a> has left Firelink Shrine, his dead body can now be found in Irina's original cell in the Undead Settlement, containing <a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Great+Hammer\">Morne's Great Hammer</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Moaning+Shield\">Moaning Shield</a>. You can then purchase <a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Set\">Morne's Armor Set</a> from the Shrine Handmaid"
       },
@@ -4165,8 +4166,16 @@
       },
       {
        "id": "playthrough_13_46",
-       "cls": "f_npc f_miss",
-       "html": "Irina B: If you gave Irina the <a href=\"https://darksouls3.wiki.fextralife.com/Londor+Braille+Divine+Tome\">Londor Braille Divine Tome</a> or <a href=\"https://darksouls3.wiki.fextralife.com/Deep+Braille+Divine+Tome\">Deep Braille Divine Tome</a> and bought ANY of these spells (Deep Protection, Gnaw, Dark Blade, Vow of Silence, or Dead Again), she will have disappeared for you sometime in the game from her normal location in Firelink Shrine. She would then be outside near the Iudex Gundyr fight area with Eygon. Eygon will believe you have killed her and is hostile. Upon killing him, you see that Irina is still actually alive, but the corruption has begun for her. This is an alternate way of Morne's Armor Set being available for purchase. After Irina returns to Firelink Shrine, buying all the dark miracles listed above will fully corrupt her and she'll no longer act as a vendor to you. Equipping Morne's Gauntlets allows her to believe you to be Eygon and she'll ask to be killed. Do so and you can give her ashes to the Shrine Handmaid to sell her miracles"
+       "cls": "f_npc f_weap f_miss f_mirac_build",
+       "item": [
+        "moaning-shield-b",
+        "morne's-great-hammer-b",
+        "morne's-helm-b",
+        "morne's-armor-b",
+        "morne's-gauntlets-b",
+        "morne's-leggings-b"
+       ],
+       "html": "Irina B: If you gave Irina the <a href=\"https://darksouls3.wiki.fextralife.com/Londor+Braille+Divine+Tome\">Londor Braille Divine Tome</a> or <a href=\"https://darksouls3.wiki.fextralife.com/Deep+Braille+Divine+Tome\">Deep Braille Divine Tome</a> and bought ANY of these spells (Deep Protection, Gnaw, Dark Blade, Vow of Silence, or Dead Again), she will have disappeared for you sometime in the game from her normal location in Firelink Shrine. She would then be outside near the Iudex Gundyr fight area with Eygon. Eygon will believe you have killed her and is hostile. Upon killing him (he drops <a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Great+Hammer\">Morne's Great Hammer</a><span class=\"p\"> + </span><a href=\"https://darksouls3.wiki.fextralife.com/Moaning+Shield\">Moaning Shield</a>), you see that Irina is still actually alive, but the corruption has begun for her. This is an alternate way of Morne's Armor Set being available for purchase. After Irina returns to Firelink Shrine, buying all the dark miracles listed above will fully corrupt her and she'll no longer act as a vendor to you. Equipping Morne's Gauntlets allows her to believe you to be Eygon and she'll ask to be killed. Do so and you can give her ashes to the Shrine Handmaid to sell her miracles"
       }
      ]
     },
@@ -7762,7 +7771,7 @@
         {
          "id": "weapons_1_3",
          "cls": "",
-         "item": "mail-breaker",
+         "item": ["mail-breaker-a", "mail-breaker-b"],
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Mail+Breaker\">Mail Breaker</a>"
         },
         {
@@ -8517,7 +8526,7 @@
         {
          "id": "weapons_1_107",
          "cls": "f_mirac_build",
-         "item": "morne's-great-hammer",
+         "item": ["morne's-great-hammer-a", "morne's-great-hammer-b"],
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Great+Hammer\">Morne's Great Hammer</a>"
         },
         {
@@ -8553,7 +8562,7 @@
          "id": "weapons_1_113",
          "passive": "Grants 12.5% magic and fire absorption while wielded.",
          "cls": "",
-         "item": "dragon-tooth",
+         "item": ["dragon-tooth-a", "dragon-tooth-b"],
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Dragon+Tooth\">Dragon Tooth</a>"
         }
        ]
@@ -8626,7 +8635,7 @@
         {
          "id": "weapons_1_134",
          "passive": "Can cast sorceries in addition to functioning as a spear; its spell buff scales with Faith.",
-         "cls": "f_sorc_build",
+         "cls": "f_sorc_build f_mirac_build",
          "item": "golden-ritual-spear",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Golden+Ritual+Spear\">Golden Ritual Spear</a>"
         },
@@ -9032,7 +9041,8 @@
         },
         {
          "id": "weapons_1_177",
-         "cls": "f_sorc_build",
+         "cls": "f_sorc_build f_mirac_build",
+         "passive": "Sorceries cast with it scale with Faith instead of Intelligence (dark sorceries excluded).",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Archdeacon's+Great+Staff\">Archdeacon's Great Staff</a>"
         },
         {
@@ -9455,7 +9465,7 @@
         },
         {
          "id": "weapons_2_63",
-         "passive": "Gradually restores HP while equipped.",
+         "passive": "Gradually restores 2 HP per second while equipped.",
          "cls": "",
          "item": "ethereal-oak-shield",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Ethereal+Oak+Shield\">Ethereal Oak Shield</a>"
@@ -9514,7 +9524,7 @@
         },
         {
          "id": "weapons_2_53",
-         "passive": "Reduces stamina recovery by 20% while equipped.",
+         "passive": "Reduces stamina recovery by 20 per second while equipped.",
          "cls": "",
          "item": "greatshield-of-glory",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Greatshield+of+Glory\">Greatshield of Glory</a>"
@@ -9522,7 +9532,7 @@
         {
          "id": "weapons_2_47",
          "cls": "",
-         "item": "moaning-shield",
+         "item": ["moaning-shield-a", "moaning-shield-b"],
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Moaning+Shield\">Moaning Shield</a>"
         },
         {
@@ -9534,7 +9544,7 @@
         {
          "id": "weapons_2_55",
          "cls": "",
-         "item": "havel's-greatshield",
+         "item": ["havel's-greatshield-a", "havel's-greatshield-b"],
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Havel's+Greatshield\">Havel's Greatshield</a>"
         },
         {
@@ -9758,7 +9768,7 @@
       {
        "id": "armors_1_7",
        "cls": "",
-       "item": "morne's-helm",
+       "item": ["morne's-helm-a", "morne's-helm-b"],
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Helm\">Morne's Helm</a>"
       },
       {
@@ -10302,7 +10312,7 @@
       {
        "id": "armors_2_7",
        "cls": "",
-       "item": "morne's-armor",
+       "item": ["morne's-armor-a", "morne's-armor-b"],
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Armor\">Morne's Armor</a>"
       },
       {
@@ -10832,7 +10842,7 @@
       {
        "id": "armors_3_8",
        "cls": "",
-       "item": "morne's-gauntlets",
+       "item": ["morne's-gauntlets-a", "morne's-gauntlets-b"],
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Gauntlets\">Morne's Gauntlets</a>"
       },
       {
@@ -11318,7 +11328,7 @@
       {
        "id": "armors_4_11",
        "cls": "",
-       "item": "morne's-leggings",
+       "item": ["morne's-leggings-a", "morne's-leggings-b"],
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Morne's+Leggings\">Morne's Leggings</a>"
       },
       {
