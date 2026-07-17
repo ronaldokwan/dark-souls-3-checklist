@@ -3750,7 +3750,7 @@
       },
       {
        "id": "playthrough_12_28",
-       "cls": "f_weap",
+       "cls": "f_weap f_mirac_build",
        "item": "dragonslayer-spear",
        "html": "Examine the wooden gate to receive the <a href=\"https://darksouls3.wiki.fextralife.com/Dragonslayer+Spear\">Dragonslayer Spear</a>"
       },
@@ -8354,7 +8354,7 @@
         },
         {
          "id": "weapons_1_85",
-         "passive": "Restores 2 HP with each successful hit.",
+         "passive": "Restores HP with each successful hit; heavier attacks and higher max HP restore more.",
          "cls": "",
          "item": "butcher-knife",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Butcher+Knife\">Butcher Knife</a>"
@@ -8522,7 +8522,7 @@
         },
         {
          "id": "weapons_1_110",
-         "passive": "Restores 2 HP with each successful hit.",
+         "passive": "Restores HP with each successful hit; higher max HP restores slightly more (2 HP at typical health).",
          "cls": "",
          "item": "smough's-great-hammer",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Smough's+Great+Hammer\">Smough's Great Hammer</a>"
@@ -8551,6 +8551,7 @@
         },
         {
          "id": "weapons_1_113",
+         "passive": "Grants 12.5% magic and fire absorption while wielded.",
          "cls": "",
          "item": "dragon-tooth",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Dragon+Tooth\">Dragon Tooth</a>"
@@ -8618,7 +8619,7 @@
         },
         {
          "id": "weapons_1_132",
-         "cls": "",
+         "cls": "f_mirac_build",
          "item": "dragonslayer-spear",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Dragonslayer+Spear\">Dragonslayer Spear</a>"
         },
@@ -9177,6 +9178,7 @@
        "items": [
         {
          "id": "weapons_2_59",
+         "passive": "Destroys leeches clinging to you, preventing further bleed buildup; held aloft, it reveals the invisible Irithyllian slaves of Irithyll and Anor Londo.",
          "cls": "",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Torch\">Torch</a>"
         },
