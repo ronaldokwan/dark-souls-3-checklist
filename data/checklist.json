@@ -4519,7 +4519,7 @@
       },
       {
        "id": "playthrough_18_57",
-       "cls": "f_arm f_misc f_npc f_weap f_miss",
+       "cls": "f_arm f_misc f_npc f_weap f_miss f_sorc_build",
        "item": [
         "crescent-moon-sword",
         "silver-mask",
@@ -5818,7 +5818,7 @@
       },
       {
        "id": "playthrough_22_77",
-       "cls": "f_tit f_weap",
+       "cls": "f_tit f_weap f_mirac_build",
        "item": "crucifix-of-the-mad-king",
        "html": "After entering Filianore's Rest, walk through the broken window and stick to the right to get to a church-like structure. Shira, Knight of Filianore will appear and upon defeating her will drop the <a href=\"https://darksouls3.wiki.fextralife.com/Crucifix+of+the+Mad+King\">Crucifix of the Mad King</a>. She will also drop her <a href=\"https://darksouls3.wiki.fextralife.com/Titanite+Slab\">Titanite Slab</a> if you did not already obtain it"
       },
@@ -8147,7 +8147,7 @@
         },
         {
          "id": "weapons_1_51",
-         "cls": "",
+         "cls": "f_sorc_build",
          "item": "crescent-moon-sword",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Crescent+Moon+Sword\">Crescent Moon Sword</a>"
         },
@@ -8737,7 +8737,7 @@
         },
         {
          "id": "weapons_1_218",
-         "cls": "",
+         "cls": "f_mirac_build",
          "item": "crucifix-of-the-mad-king",
          "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Crucifix+of+the+Mad+King\">Crucifix of the Mad King</a>"
         },
@@ -9984,6 +9984,7 @@
        "id": "armors_1_74",
        "cls": "",
        "item": "crown-of-dusk",
+       "passive": "Boosts magic damage by 10%, but reduces magic absorption.",
        "html": "<a href=\"https://darksouls3.wiki.fextralife.com/Crown+of+Dusk\">Crown of Dusk</a>"
       },
       {
