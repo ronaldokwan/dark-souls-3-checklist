@@ -1,5 +1,5 @@
 /*
- * Dark Souls 3 Cheat Sheet - application logic.
+ * Dark Souls 3 Checklist - application logic.
  * Vanilla JS (no jQuery) + Bootstrap 5 JS API. Progress is stored in
  * localStorage (see storage.js); the profile model lives in profiles.js and
  * content is rendered from data/checklist.json by render.js.

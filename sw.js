@@ -1,10 +1,10 @@
 /*
- * Service worker: makes the cheat sheet installable and fully usable offline.
+ * Service worker: makes the checklist installable and fully usable offline.
  * Strategy: precache the app shell on install, then stale-while-revalidate for
  * every same-origin GET (serve from cache instantly, refresh in the background).
  * Bump CACHE to force clients onto a new set of assets.
  */
-const CACHE = 'ds3-cheatsheet-v5';
+const CACHE = 'ds3-checklist-v6';
 const CORE = [
   './',
   './index.html',

@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve the Dark Souls 3 Cheat Sheet! This is a static site
+Thanks for helping improve the Dark Souls 3 Checklist! This is a static site
 with no build step — the browser loads the checklist data directly.
 
 ## Editor setup

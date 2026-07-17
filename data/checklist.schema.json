@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Dark Souls 3 Cheat Sheet checklist data",
+  "title": "Dark Souls 3 Checklist data",
   "type": "object",
   "required": ["tabs"],
   "properties": {

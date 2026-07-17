@@ -1,12 +1,12 @@
-# Dark Souls 3 Cheat Sheet
+# Dark Souls 3 Checklist
 
 A fast, installable checklist for a 100% Dark Souls 3 playthrough — bosses,
 missables, rings, spells, weapons, and more — with your progress saved right in
 the browser.
 
-**▶ [Open the cheat sheet](https://ronaldokwan.github.io/dark-souls-3-cheat-sheet/)**
+**▶ [Open the checklist](https://ronaldokwan.github.io/dark-souls-3-checklist/)**
 
-[![CI](https://github.com/ronaldokwan/dark-souls-3-cheat-sheet/actions/workflows/ci.yml/badge.svg)](https://github.com/ronaldokwan/dark-souls-3-cheat-sheet/actions/workflows/ci.yml)
+[![CI](https://github.com/ronaldokwan/dark-souls-3-checklist/actions/workflows/ci.yml/badge.svg)](https://github.com/ronaldokwan/dark-souls-3-checklist/actions/workflows/ci.yml)
 ![PWA](https://img.shields.io/badge/PWA-installable%20%26%20offline-5a0fc8)
 ![No dependencies](https://img.shields.io/badge/runtime%20deps-none-brightgreen)
 

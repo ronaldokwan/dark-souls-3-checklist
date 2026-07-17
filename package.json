@@ -1,8 +1,8 @@
 {
-  "name": "dark-souls-3-cheat-sheet",
+  "name": "dark-souls-3-checklist",
   "version": "1.0.0",
   "private": true,
-  "description": "Dev tooling for the DS3 Cheat Sheet. The site itself is static and needs no build step.",
+  "description": "Dev tooling for the DS3 Checklist. The site itself is static and needs no build step.",
   "license": "MIT",
   "type": "module",
   "scripts": {
